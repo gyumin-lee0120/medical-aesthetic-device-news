@@ -13,7 +13,11 @@
 }
 :root.dark{--bg:#171715;--surface:#232320;--surface2:#2b2b27;--text:#f2f2ee;--sub:#aaa;--muted:#777;--border:#383832;--accent-soft:#4a2416;--purple-soft:#302b45;--purple:#c8bdf5;--shadow:none}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;font-size:14px;line-height:1.55}
-.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 36px}
+.wrap{
+  max-width:1440px;
+  margin:0 auto;
+  padding:22px 28px 36px;
+}
 .header{display:flex;justify-content:space-between;gap:20px;align-items:center;border-bottom:1px solid var(--border);padding-bottom:14px}
 .brand{display:flex;gap:16px;align-items:center;cursor:pointer;user-select:none}
 .brand-logo{
@@ -28,13 +32,58 @@
 .period button,.iconbtn{border:0;background:transparent;color:var(--sub);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px}.period button.active{background:var(--bg);color:var(--text);font-weight:700}.iconbtn{border:1px solid var(--border);background:var(--bg);font-size:15px;line-height:1}
 .seg-tabs{display:flex;gap:8px;margin:12px 0 16px}.seg-tab{border:0;background:transparent;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer}.seg-tab.active{background:var(--accent);color:#fff;font-weight:700}
 .top-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 16px}.trend-card{background:var(--surface);border-radius:12px;padding:14px 16px;min-height:118px;box-shadow:var(--shadow)}.trend-card .label{font-size:11px;color:var(--sub)}.trend-card .big{font-size:23px;font-weight:800;margin-top:18px}.trend-card .sub{font-size:11px;color:var(--sub);margin-top:4px}.spark{height:34px;display:flex;align-items:flex-end;gap:3px;margin-top:9px}.spark i{display:block;width:8%;min-width:4px;background:var(--accent);border-radius:2px 2px 0 0;opacity:.86}
-.main-layout{display:grid;grid-template-columns:125px minmax(0,1fr) 235px;gap:16px;align-items:start}.side-title{font-size:11px;color:var(--muted);margin-bottom:8px}.cats{position:sticky;top:14px}.cat{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px;margin:2px 0;border-radius:8px;color:var(--sub);cursor:pointer;font-size:12px}.cat.active{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.main-layout{
+  display:grid;
+  grid-template-columns:145px minmax(0,1fr) 260px;
+  gap:20px;
+  align-items:start;
+}
+.side-title{font-size:11px;color:var(--muted);margin-bottom:8px}.cats{position:sticky;top:14px}.cat{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px;margin:2px 0;border-radius:8px;color:var(--sub);cursor:pointer;font-size:12px}.cat.active{background:var(--accent-soft);color:var(--accent);font-weight:700}
 .mobile-cat{display:none;width:100%;border:1px solid var(--border);background:var(--bg);color:var(--text);padding:10px;border-radius:9px;margin-bottom:10px}
 .brief{background:var(--purple-soft);border-radius:11px;padding:14px 16px;margin-bottom:12px}.brief b{color:var(--purple);font-size:12px}.brief p{margin:5px 0 0;font-size:13px}
 .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:12px}.metric{background:var(--surface);padding:12px;border-radius:10px;min-height:72px;box-shadow:var(--shadow)}.metric.clickable{cursor:pointer;transition:.15s}.metric.clickable:hover{outline:1px solid var(--border);transform:translateY(-1px)}.metric.clickable.selected{outline:2px solid var(--accent);background:var(--accent-soft)}.metric span{font-size:11px;color:var(--sub)}.metric strong{display:block;font-size:20px;margin-top:4px}
 .search{width:100%;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:8px;padding:9px 11px;margin-bottom:8px}.news-list{border-top:1px solid var(--border)}.news{display:block;color:inherit;text-decoration:none;padding:10px 2px;border-bottom:1px solid var(--border)}.news:hover .news-title{color:var(--accent)}.news-title{font-size:13px;margin-bottom:4px}.meta{font-size:10px;color:var(--sub)}.badge{display:inline-block;background:var(--accent-soft);color:var(--accent);padding:1px 6px;border-radius:99px;font-size:9px;margin-right:5px}
 .right-card{background:var(--surface);border-radius:11px;padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}.right-title{font-size:11px;color:var(--sub);margin-bottom:8px}.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.cal-head button{border:0;background:transparent;color:var(--sub);cursor:pointer}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}.cal-grid span{font-size:10px;padding:4px 0;border-radius:4px}.dow{color:var(--muted)}.evt{background:var(--accent-soft);color:var(--accent);font-weight:800;cursor:pointer}.cal-detail{font-size:10px;color:var(--sub);margin-top:8px;min-height:16px}.cal-detail a{color:var(--accent)}.event-row{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid var(--border);padding:6px 0;font-size:10px}.event-row a{color:inherit}
 .comp-list{margin-top:14px}.comp-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.comp-head b{font-size:12px}.comp-head span{font-size:10px;color:var(--sub)}.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}.comp-row{display:grid;grid-template-columns:8px 1fr auto auto;gap:8px;align-items:center;padding:6px 2px;border-bottom:1px solid var(--border);cursor:pointer;font-size:11px}.comp-row:hover{background:var(--surface)}.dot{width:6px;height:6px;background:#ef4444;border-radius:1px}.count{font-weight:800}.share{color:#8c8ca3}.arrow{color:#bbb}
+.comp-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.comp-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:var(--surface);
+  color:var(--sub);
+  font-size:11px;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:.15s;
+}
+
+.comp-pill:hover{
+  border-color:var(--border);
+  background:var(--surface2);
+}
+
+.comp-pill.active{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+}
+
+.comp-pill .pill-count{
+  font-weight:700;
+}
+
+.comp-pill .pill-share{
+  opacity:.72;
+}
 .patent-bars{display:flex;align-items:flex-end;gap:7px;height:78px;padding-top:8px}.patent-col{flex:1;text-align:center}.patent-col i{display:block;background:var(--accent);border-radius:3px 3px 0 0;min-height:3px;opacity:.86}.patent-col span{display:block;font-size:9px;color:var(--sub);margin-top:3px}.patent-note{font-size:10px;color:var(--muted);margin-top:5px}
 .footer{border-top:1px solid var(--border);margin-top:26px;padding:16px 0 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:10px}.footer a{color:var(--sub)}
 .empty{padding:20px;text-align:center;color:var(--muted)}
@@ -64,8 +113,13 @@
   </section>
 
   <section class="comp-list">
-    <div class="comp-head"><b>경쟁제품 노출 현황 · 클릭 상세</b><span id="compPeriod">선택 기간 기준</span></div>
-    <div class="comp-grid" id="competitorExposure"><div class="skel-line skeleton w80"></div><div class="skel-line skeleton w80"></div></div>
+    <div class="comp-head">
+      <b>경쟁제품 바로보기</b>
+      <span id="compPeriod">선택 기간 · 추적 경쟁제품 언급 기준</span>
+    </div>
+    <div class="comp-pills" id="competitorExposure">
+      <span class="comp-pill active">전체</span>
+    </div>
   </section>
 
   <div class="main-layout">
@@ -121,7 +175,38 @@ function pct(n,d){return d?Math.round(n/d*100):0}
 function preferredCats(){return ['전체','RF','HIFU','Laser·Pico','RF Microneedling','Surgical','시장동향','신제품·출시','인허가·규제','학회·임상','글로벌사업','기타']}
 function renderCats(){const present=new Set(allNews.flatMap(i=>A(i.categories)));const list=preferredCats().filter(x=>x==='전체'||present.has(x));categoryList.innerHTML=list.map(c=>`<button class="cat ${state.category===c?'active':''}" data-c="${c}">${c}</button>`).join('');mobileCategory.innerHTML=list.map(c=>`<option value="${c}" ${state.category===c?'selected':''}>${c}</option>`).join('');categoryList.querySelectorAll('.cat').forEach(x=>x.onclick=()=>{state.category=x.dataset.c;state.product='전체';render()})}
 function renderTop(items){const rf=items.filter(i=>A(i.categories).some(c=>['RF','HIFU'].includes(c))).length;const laser=items.filter(i=>A(i.categories).includes('Laser·Pico')).length;const surg=items.filter(i=>A(i.categories).includes('Surgical')||segs(i).includes('써지컬')).length;topRF.classList.remove('skeleton');topLaser.classList.remove('skeleton');topSurg.classList.remove('skeleton');topRF.textContent=rf+'건';topLaser.textContent=laser+'건';topSurg.textContent=surg+'건';[['sparkRF',rf],['sparkLaser',laser],['sparkSurg',surg]].forEach(([id,n])=>{const el=document.getElementById(id);const vals=[3,5,4,7,5,8,6,10].map(x=>Math.max(2,Math.round(x*(n?Math.min(1,n/12):.2))));el.innerHTML=vals.map(v=>`<i style="height:${v*3}px"></i>`).join('')})}
-function renderExposure(){const base=allNews.filter(i=>inDays(i,state.days)&&(state.segment==='전체'||segs(i).includes(state.segment)));const counts=competitorOrder.map(p=>[p,base.filter(i=>prodHit(i,p)).length]);const total=counts.reduce((s,x)=>s+x[1],0);competitorExposure.innerHTML=counts.map(([p,n])=>`<div class="comp-row" data-p="${p}"><i class="dot"></i><span>${p}</span><span class="count">${n}건</span><span class="share">${pct(n,total)}% ›</span></div>`).join('');competitorExposure.querySelectorAll('.comp-row').forEach(x=>x.onclick=()=>{const p=x.dataset.p;state.product=state.product===p?'전체':p;state.category='전체';state.kpi=null;render()})}
+function renderExposure(){
+  const base=allNews.filter(i=>
+    inDays(i,state.days) &&
+    (state.segment==='전체'||segs(i).includes(state.segment))
+  );
+
+  const counts=competitorOrder.map(p=>[
+    p,
+    base.filter(i=>prodHit(i,p)).length
+  ]);
+
+  const total=counts.reduce((s,x)=>s+x[1],0);
+
+  competitorExposure.innerHTML=
+    `<span class="comp-pill ${state.product==='전체'?'active':''}" data-p="전체">전체</span>` +
+    counts.map(([p,n])=>
+      `<span class="comp-pill ${state.product===p?'active':''}" data-p="${p}">
+        <span>${p}</span>
+        <span class="pill-count">${n}건</span>
+        <span class="pill-share">· ${pct(n,total)}%</span>
+      </span>`
+    ).join('');
+
+  competitorExposure.querySelectorAll('.comp-pill').forEach(x=>{
+    x.onclick=()=>{
+      state.product=x.dataset.p;
+      state.category='전체';
+      state.kpi=null;
+      render();
+    };
+  });
+}
 function renderMetrics(items){mTotal.textContent=items.length+'건';mOwn.textContent=items.filter(own).length+'건';mComp.textContent=items.filter(comp).length+'건';const top=countRows(items,i=>A(i.categories))[0];mTop.textContent=top?`${top[0]} ${top[1]}건`:'-';metricOwn.classList.toggle('selected',state.kpi==='own');metricComp.classList.toggle('selected',state.kpi==='comp')}
 function renderBrief(items){if(!items.length){briefText.textContent='선택한 조건에 해당하는 뉴스가 없습니다.';return}const topCat=countRows(items,i=>A(i.categories))[0];const topProd=competitorOrder.map(p=>[p,items.filter(i=>prodHit(i,p)).length]).sort((a,b)=>b[1]-a[1])[0];let s=`이 기간 총 ${items.length}건이 수집되었습니다.`;if(topCat&&topCat[1])s+=` '${topCat[0]}' 관련 이슈가 가장 많았습니다.`;if(topProd&&topProd[1])s+=` 경쟁제품 중 '${topProd[0]}' 노출이 두드러집니다.`;if(state.product!=='전체')s+=` 현재 '${state.product}' 관련 기사만 보고 있습니다.`;if(state.kpi==='own')s+=` WONTECH 관련 기사만 필터링 중입니다.`;if(state.kpi==='comp')s+=` 경쟁사 관련 기사만 필터링 중입니다.`;briefText.textContent=s}
 function renderNews(items){newsList.innerHTML=items.length?items.slice(0,80).map(i=>`<a class="news" href="${i.link}" target="_blank" rel="noopener"><div class="news-title">${own(i)?'<span class="badge">WONTECH</span>':''}${comp(i)?'<span class="badge">경쟁</span>':''}${i.title}</div><div class="meta">${i.source||''} · ${A(i.categories).join(' · ')} · ${D(i.pub_date)?D(i.pub_date).toLocaleDateString('ko-KR'):''}</div></a>`).join(''):'<div class="empty">해당 조건의 기사가 없습니다.</div>'}

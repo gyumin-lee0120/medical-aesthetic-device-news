@@ -5,7 +5,7 @@ import time
 
 import requests
 
-from utils import classify_categories, find_mentions, load_config, save_news, strip_html
+from utils import classify_categories, classify_segments, find_mentions, load_config, save_news, strip_html
 
 API_URL = "https://openapi.naver.com/v1/search/news.json"
 
@@ -69,6 +69,7 @@ def run():
                 "pub_date": raw.get("pubDate", ""),
                 "matched_keyword": kw,
                 "categories": classify_categories(combined, cfg),
+                "segments": classify_segments(combined, cfg),
                 "is_overseas": False,
                 **mentions,
             }

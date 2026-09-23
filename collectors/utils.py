@@ -1,4 +1,4 @@
-"""공용 유틸리티: 설정 로드, 카테고리/회사/제품 분류, 중복 제거, JSON 저장."""
+"""공용 유틸리티: 설정 로드, 카테고리/영역/회사/제품 분류, 중복 제거, JSON 저장."""
 import html
 import json
 import os
@@ -32,6 +32,15 @@ def classify_categories(text, cfg):
         if any(kw.lower() in lowered for kw in keywords):
             matched.append(cat)
     return matched or ["기타"]
+
+
+def classify_segments(text, cfg):
+    lowered = text.lower()
+    matched = []
+    for seg, keywords in cfg.get("segments", {}).items():
+        if any(kw.lower() in lowered for kw in keywords):
+            matched.append(seg)
+    return matched or ["에스테틱"]
 
 
 def _hits(text, values):

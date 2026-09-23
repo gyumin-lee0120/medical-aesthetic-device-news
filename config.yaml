@@ -1,5 +1,5 @@
-# 원텍 Medical Aesthetic Device News Clipping 설정
-# V1: 국내 뉴스 자동수집 + 자사/경쟁사/경쟁제품 분류 + 학회·전시회 + Telegram 브리핑 준비
+# WONTECH Medical Aesthetic Device News Clipping
+# V1.2: 전체 / 에스테틱 / 써지컬 구조 + RF·HIFU 메인, Laser·Pico / Surgical 서브 모니터링
 
 brand:
   own_company:
@@ -28,31 +28,41 @@ brand:
     - "루트로닉"
     - "제이시스메디칼"
     - "Jeisys"
-    - "솔타메디칼"
-    - "Solta Medical"
     - "인모드"
     - "InMode"
-    - "캔델라"
-    - "Candela"
     - "멀츠"
     - "Merz Aesthetics"
+    - "비올"
+    - "VIOL"
+    - "캔델라"
+    - "Candela"
     - "큐테라"
     - "Cutera"
   competitor_products:
-    - "XERF"
-    - "세르프"
-    - "DENSITY"
-    - "덴서티"
-    - "Volnewmer"
-    - "볼뉴머"
-    - "Thermage"
-    - "써마지"
-    - "Ultherapy"
-    - "울쎄라"
-    - "Ultraformer"
+    # 국내영업 요청 기준 RF·HIFU 경쟁제품 (V-RO 제외)
     - "슈링크"
-    - "Morpheus8"
-    - "모피어스8"
+    - "Shurink"
+    - "인모드"
+    - "InMode"
+    - "온다"
+    - "Onda"
+    - "볼뉴머"
+    - "Volnewmer"
+    - "덴서티"
+    - "Density"
+    - "울쎄라"
+    - "Ultherapy"
+    - "써마지"
+    - "Thermage"
+    - "티타늄"
+    - "Titanium"
+    - "세르프"
+    - "XERF"
+    - "리프테라"
+    - "Liftera"
+    - "소프웨이브"
+    - "Sofwave"
+    # Laser·Pico 서브 모니터링
     - "PicoSure"
     - "피코슈어"
     - "PicoWay"
@@ -60,49 +70,86 @@ brand:
     - "Clarity II"
     - "클라리티 II"
 
-# 네이버 뉴스 검색어. 너무 넓은 단일 키워드(RF, 레이저 등)는 노이즈가 커서 조합형으로 사용합니다.
+# 검색 범위: RF/HIFU 중심 + Laser/Pico + Surgical 서브
 search_keywords:
   - "미용의료기기"
   - "피부미용 의료기기"
   - "에스테틱 의료기기"
-  - "에너지 기반 의료기기"
-  - "리프팅 의료기기"
   - "고주파 리프팅"
   - "RF 리프팅"
   - "HIFU 리프팅"
   - "하이푸 리프팅"
-  - "피코 레이저"
-  - "의료용 레이저"
-  - "레이저 의료기기"
-  - "미용성형 의료기기"
-  - "원텍"
+  - "집속초음파 리프팅"
+  - "원텍 올리지오"
   - "올리지오"
-  - "피코케어"
-  - "라비앙"
+  - "올리지오 XM"
   - "타이탄 원텍"
-  - "세르프"
-  - "덴서티"
+  - "슈링크"
+  - "인모드 리프팅"
+  - "온다 리프팅"
   - "볼뉴머"
-  - "써마지"
+  - "덴서티 리프팅"
   - "울쎄라"
-  - "클래시스"
-  - "사이노슈어 루트로닉"
-  - "제이시스메디칼"
-  - "인모드 의료기기"
-  - "캔델라 의료기기"
+  - "써마지"
+  - "티타늄 리프팅"
+  - "세르프 리프팅"
+  - "리프테라"
+  - "소프웨이브"
+  - "피코 레이저"
+  - "피코초 레이저"
+  - "의료용 레이저 피부"
+  - "피코케어"
+  - "라비앙 레이저"
+  - "PicoSure"
+  - "PicoWay"
+  - "Clarity II 레이저"
+  - "써지컬 의료기기"
+  - "수술용 의료기기"
+  - "수술용 레이저"
+  - "surgical medical device"
 
-# 기사 제목+요약 기준 다중 태깅
+# 상단 3개 영역 분류
+segments:
+  에스테틱:
+    - 미용의료
+    - 피부미용
+    - 에스테틱
+    - 리프팅
+    - 고주파
+    - RF
+    - HIFU
+    - 하이푸
+    - 집속초음파
+    - 레이저
+    - 피코
+    - picosecond
+    - 올리지오
+    - 타이탄
+    - 슈링크
+    - 울쎄라
+    - 써마지
+    - 볼뉴머
+    - 세르프
+    - 덴서티
+    - 리프테라
+    - 소프웨이브
+    - 인모드
+    - 온다
+    - 피코케어
+    - 라비앙
+  써지컬:
+    - 써지컬
+    - surgical
+    - 수술용
+    - 수술 장비
+    - 수술기기
+    - 외과
+    - 절개
+    - 지혈
+    - coagulation
+    - ablation
+
 categories:
-  시장동향:
-    - 시장
-    - 수출
-    - 매출
-    - 성장
-    - 점유율
-    - 전망
-    - 투자
-    - 인수
-    - 합병
   RF:
     - 고주파
     - RF 리프팅
@@ -113,6 +160,8 @@ categories:
     - 세르프
     - 덴서티
     - 올리지오
+    - 인모드
+    - 온다
   HIFU:
     - HIFU
     - 하이푸
@@ -120,6 +169,8 @@ categories:
     - 울쎄라
     - 울트라포머
     - 슈링크
+    - 리프테라
+    - 소프웨이브
   Laser·Pico:
     - 레이저
     - 피코
@@ -139,7 +190,20 @@ categories:
     - 써지컬
     - surgical
     - 수술용
-    - surgical laser
+    - 수술 장비
+    - 외과
+    - ablation
+    - coagulation
+  시장동향:
+    - 시장
+    - 수출
+    - 매출
+    - 성장
+    - 점유율
+    - 전망
+    - 투자
+    - 인수
+    - 합병
   신제품·출시:
     - 신제품
     - 출시
@@ -185,19 +249,19 @@ sources:
     max_pages: 2
     sort: date
   overseas_media:
-    enabled: false      # V2: 해외 전문매체/기업 Newsroom 추가
+    enabled: false
   mfds_medical_device:
-    enabled: false      # V2: 식약처 의료기기 인허가 데이터
+    enabled: false
   fda_medical_device:
-    enabled: false      # V2: FDA 공개 데이터
+    enabled: false
   exhibitions:
     enabled: true
 
 telegram:
-  enabled: false        # Bot/Chat ID 설정 완료 후 true로 변경
+  enabled: false
   send_hour_kst: 8
   dashboard_url: "https://gyumin-lee0120.github.io/medical-aesthetic-device-news/"
   max_items: 8
 
 email:
-  enabled: false        # 향후 Weekly / 해외 벤더 발송 단계에서 활용
+  enabled: false

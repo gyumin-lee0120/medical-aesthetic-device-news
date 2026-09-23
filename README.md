@@ -1,19 +1,15 @@
 # WONTECH Medical Aesthetic Device News
 
-기존 Cosmetics News Clipping 구조를 기반으로 만든 원텍 의료장비 시장 뉴스 대시보드입니다.
+## V1.3
+- 전체 / 에스테틱 / 써지컬
+- RF·HIFU 메인, Laser·Pico / Surgical 서브
+- 모바일 카테고리 드롭다운
+- 스켈레톤 로딩
+- WONTECH/경쟁사 KPI 클릭 필터
+- CI형 헤더 및 로고 영역 클릭 새로고침
+- favicon / footer 개선
+- Global Cosmetics News RSS 보조 수집
+- KIPRIS 특허 트렌드 UI 및 collector hook
 
-## V1.2 구조
-- 상단 영역: 전체 / 에스테틱 / 써지컬
-- 에스테틱 메인: RF·HIFU
-- 에스테틱 서브: Laser·Pico / RF Microneedling
-- 써지컬 서브 모니터링
-- 경쟁제품 노출 현황: 슈링크, 인모드, 온다, 볼뉴머, 덴서티, 울쎄라, 써마지, 티타늄, 세르프, 리프테라, 소프웨이브 (V-RO 제외)
-- 왼쪽 카테고리 필터 / 중앙 브리핑·뉴스 / 오른쪽 학회·전시회 캘린더
-- 오늘 / 주간 / 월간 기간 전환
-- 라이트 / 다크 모드 전환
-- 네이버 뉴스 GitHub Actions 자동수집
-
-## 운영 원칙
-1. 디자인/구조를 먼저 완성하고 뉴스 품질은 운영하면서 검색어와 제외조건을 지속 보정합니다.
-2. Telegram은 현재 비활성화 상태입니다.
-3. 데이터가 새 스키마(segments)를 사용하므로 V1.2 적용 후 Actions를 한 번 수동 실행해야 합니다.
+### KIPRIS 주의
+특허 수치는 추정하지 않습니다. KIPRIS Plus API 서비스 신청 및 키/명세서가 확보된 뒤 실제 연동합니다.

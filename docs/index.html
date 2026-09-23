@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화장품 시장 뉴스 클리핑</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface-1: #f4f4f2;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666660;
+    --text-muted: #999990;
+    --border: #e2e2dd;
+    --accent-bg: #e6f1fb;
+    --accent-text: #0c447c;
+    --accent-border: #378add;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #171715;
+      --surface-1: #232320;
+      --text-primary: #f0f0ec;
+      --text-secondary: #a8a89f;
+      --text-muted: #77776e;
+      --border: #33332e;
+      --accent-bg: #0c447c;
+      --accent-text: #b5d4f4;
+      --accent-border: #378add;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px 60px;
+    background: var(--bg); color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+    font-size: 15px; line-height: 1.6;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  h1 { font-size: 18px; font-weight: 600; margin: 0; }
+  .muted { color: var(--text-secondary); font-size: 13px; }
+  button, .btn {
+    font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg); color: var(--text-primary); cursor: pointer;
+  }
+  button:hover { background: var(--surface-1); }
+  .tabs { display: flex; gap: 8px; margin: 16px 0 12px; }
+  .tab { font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 8px; cursor: pointer; color: var(--text-secondary); }
+  .tab.active { background: var(--surface-1); color: var(--text-primary); border-bottom: 2px solid var(--accent-border); }
+  .period-toggle { display: flex; gap: 4px; background: var(--surface-1); border-radius: 8px; padding: 3px; }
+  .period-toggle span { font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; color: var(--text-secondary); }
+  .period-toggle span.active { background: var(--bg); color: var(--text-primary); }
+  .briefing { background: var(--surface-1); border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; }
+  .briefing p.label { font-size: 13px; font-weight: 600; margin: 0 0 8px; }
+  .briefing p.body { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .chip { font-size: 12px; padding: 4px 12px; border-radius: 12px; background: var(--surface-1); color: var(--text-secondary); cursor: pointer; }
+  .chip.active { background: var(--accent-bg); color: var(--accent-text); }
+  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
+  .metric { background: var(--surface-1); border-radius: 8px; padding: 14px; }
+  .metric .m-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 6px; }
+  .metric .m-value { font-size: 20px; font-weight: 600; margin: 0; }
+  .news-list { border-top: 1px solid var(--border); margin-bottom: 20px; }
+  .news-item { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; }
+  .news-item .n-title { font-size: 14px; margin: 0 0 3px; }
+  .news-item .n-meta { font-size: 12px; color: var(--text-secondary); margin: 0; }
+  .badge-overseas { background: var(--surface-1); color: var(--text-secondary); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-right: 6px; white-space: nowrap; }
+  .section-title { font-size: 13px; font-weight: 600; margin: 0 0 10px; }
+  .trend-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
+  .trend-card { background: var(--surface-1); border-radius: 12px; padding: 14px; min-height: 110px; }
+  .trend-card .t-label { font-size: 11px; color: var(--text-secondary); margin: 0 0 8px; }
+  .trend-card .t-pending { font-size: 12px; color: var(--text-muted); }
+  .cal-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cal-card, .list-card { background: var(--surface-1); border-radius: 12px; padding: 14px; }
+  .cal-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .cal-nav-btn { border: none; background: none; font-size: 16px; line-height: 1; cursor: pointer; color: var(--text-secondary); padding: 2px 8px; }
+  .cal-nav-btn:hover { color: var(--text-primary); }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+  .cal-grid span { font-size: 11px; padding: 3px 0; }
+  .cal-grid .dow { color: var(--text-muted); font-size: 10px; }
+  .cal-grid .hit { background: var(--accent-bg); color: var(--accent-text); border-radius: 4px; }
+  .cal-grid .evt { font-weight: 600; cursor: pointer; position: relative; }
+  .cal-grid .evt::after { content: ""; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--accent-text); }
+  .cal-detail { margin-top: 10px; font-size: 12px; color: var(--text-secondary); min-height: 16px; }
+  .cal-detail a { color: var(--accent-text); }
+  .exh-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; }
+  .exh-row .exh-date { color: var(--text-secondary); }
+  .empty { color: var(--text-muted); font-size: 13px; padding: 20px 0; text-align: center; }
+  @media (max-width: 640px) {
+    .metrics, .trend-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .cal-list-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="row">
+    <div>
+      <h1>화장품 시장 뉴스 클리핑</h1>
+      <p class="muted" id="lastUpdated">불러오는 중...</p>
+    </div>
+    <button onclick="location.reload()">새로고침</button>
+  </div>
+
+  <div class="row">
+    <div class="tabs">
+      <div class="tab active" data-topic="main">더마 스킨케어 · 홈뷰티 디바이스</div>
+      <div class="tab" data-topic="sub">화장품 시장 전체</div>
+    </div>
+    <div class="period-toggle">
+      <span class="active" data-period="1">오늘</span>
+      <span data-period="7">주간</span>
+      <span data-period="30">월간</span>
+    </div>
+  </div>
+
+  <div class="briefing">
+    <p class="label">브리핑 요약</p>
+    <p class="body" id="briefingText">데이터를 불러오는 중입니다...</p>
+  </div>
+
+  <div class="chips" id="categoryChips">
+    <span class="chip active" data-category="전체">전체</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><p class="m-label">자사 브랜드 언급</p><p class="m-value" id="mOwn">–</p></div>
+    <div class="metric"><p class="m-label">경쟁사 언급</p><p class="m-value" id="mCompetitor">–</p></div>
+    <div class="metric"><p class="m-label">메인 주제 비중</p><p class="m-value" id="mMainShare">–</p></div>
+    <div class="metric"><p class="m-label">최다 카테고리</p><p class="m-value" id="mTopCategory">–</p></div>
+  </div>
+
+  <div class="news-list" id="newsList">
+    <p class="empty">불러오는 중...</p>
+  </div>
+
+  <p class="section-title">데이터 · 트렌드</p>
+  <div class="trend-grid">
+    <div class="trend-card" id="trendOnlineShopping">
+      <p class="t-label">온라인쇼핑 거래액 (통계청, 월별)</p>
+      <p class="t-pending">불러오는 중...</p>
+    </div>
+    <div class="trend-card">
+      <p class="t-label">국내 생산실적 (식약처, 연도별)</p>
+      <p class="t-pending">연동 예정 — 식약처 화장품 생산실적 통계는 연 1회 발표됩니다.</p>
+    </div>
+    <div class="trend-card">
+      <p class="t-label">수출입 금액 (관세청, 월별)</p>
+      <p class="t-pending">연동 예정 — 관세청 수출입통계 오픈API 추가 시 표시됩니다.</p>
+    </div>
+  </div>
+
+  <div class="cal-list-grid">
+    <div class="cal-card">
+      <div class="cal-nav">
+        <button class="cal-nav-btn" id="calPrev" aria-label="이전 달" type="button">‹</button>
+        <p class="t-label" id="calTitle" style="margin:0;">전시회 캘린더</p>
+        <button class="cal-nav-btn" id="calNext" aria-label="다음 달" type="button">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-detail" id="calDetail">날짜를 클릭하면 해당일의 전시회를 볼 수 있어요.</div>
+    </div>
+    <div class="list-card">
+      <p class="t-label">다가오는 전시회 · 박람회</p>
+      <div id="exhList"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const DATA_URL = "data/news.json";
+const EXH_URL = "data/exhibitions.json";
+
+let allNews = [];
+let state = { topic: "main", periodDays: 1, category: "전체" };
+
+async function loadData() {
+  try {
+    const res = await fetch(DATA_URL, { cache: "no-store" });
+    allNews = res.ok ? await res.json() : [];
+  } catch (e) {
+    allNews = [];
+  }
+  render();
+}
+
+function withinPeriod(item, days) {
+  const d = new Date(item.pub_date);
+  if (isNaN(d)) return true;
+  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+  return d.getTime() >= cutoff;
+}
+
+function filteredNews() {
+  return allNews.filter(item =>
+    item.topic === state.topic &&
+    withinPeriod(item, state.periodDays) &&
+    (state.category === "전체" || (item.categories || []).includes(state.category))
+  );
+}
+
+function relTime(dateStr) {
+  const d = new Date(dateStr);
+  if (isNaN(d)) return "";
+  const diffMin = Math.round((Date.now() - d.getTime()) / 60000);
+  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffMin < 60 * 24) return `${Math.round(diffMin / 60)}시간 전`;
+  return `${Math.round(diffMin / 1440)}일 전`;
+}
+
+function renderChips() {
+  const cats = new Set();
+  allNews.filter(i => i.topic === state.topic).forEach(i => (i.categories || []).forEach(c => cats.add(c)));
+  const el = document.getElementById("categoryChips");
+  el.innerHTML = "";
+  ["전체", ...Array.from(cats).sort()].forEach(cat => {
+    const span = document.createElement("span");
+    span.className = "chip" + (state.category === cat ? " active" : "");
+    span.textContent = cat;
+    span.onclick = () => { state.category = cat; render(); };
+    el.appendChild(span);
+  });
+}
+
+function renderMetrics(items) {
+  const ownCount = items.filter(i => (i.own_brand_mentions || []).length > 0).length;
+  const compCount = items.filter(i => (i.competitor_mentions || []).length > 0).length;
+  const allTodayTopicItems = allNews.filter(i => withinPeriod(i, state.periodDays));
+  const mainCount = allTodayTopicItems.filter(i => i.topic === "main").length;
+  const mainShare = allTodayTopicItems.length ? Math.round((mainCount / allTodayTopicItems.length) * 100) : 0;
+
+  const catCounts = {};
+  items.forEach(i => (i.categories || []).forEach(c => { catCounts[c] = (catCounts[c] || 0) + 1; }));
+  const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
+
+  document.getElementById("mOwn").textContent = `${ownCount}건`;
+  document.getElementById("mCompetitor").textContent = `${compCount}건`;
+  document.getElementById("mMainShare").textContent = `${mainShare}%`;
+  document.getElementById("mTopCategory").textContent = topCat ? `${topCat[0]} ${topCat[1]}건` : "–";
+}
+
+function renderBriefing(items) {
+  const el = document.getElementById("briefingText");
+  if (!allNews.length) {
+    el.textContent = "아직 수집된 데이터가 없습니다. GitHub Actions 수집 스크립트가 처음 실행되면 여기에 요약이 표시됩니다.";
+    return;
+  }
+  if (!items.length) {
+    el.textContent = "선택한 기간·카테고리에 해당하는 기사가 없습니다.";
+    return;
+  }
+  const catCounts = {};
+  items.forEach(i => (i.categories || []).forEach(c => { catCounts[c] = (catCounts[c] || 0) + 1; }));
+  const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
+  el.textContent = `이 기간 총 ${items.length}건 수집되었고, "${topCat ? topCat[0] : "미분류"}" 카테고리 언급이 가장 많았습니다. (요약문은 1차 버전으로 단순 집계 기반입니다 — 다음 단계에서 자연어 브리핑 생성 추가 예정)`;
+}
+
+function renderNewsList(items) {
+  const el = document.getElementById("newsList");
+  el.innerHTML = "";
+  if (!items.length) {
+    el.innerHTML = '<p class="empty">해당 조건의 기사가 없습니다.</p>';
+    return;
+  }
+  items.slice(0, 50).forEach(item => {
+    const a = document.createElement("a");
+    a.className = "news-item";
+    a.href = item.link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = `
+      <div style="min-width:0;">
+        <p class="n-title">${item.is_overseas ? '<span class="badge-overseas">해외</span>' : ""}${item.title}</p>
+        <p class="n-meta">${item.source} · ${(item.categories || []).join(", ")} · ${relTime(item.pub_date)}</p>
+      </div>`;
+    el.appendChild(a);
+  });
+}
+
+function render() {
+  const items = filteredNews();
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.topic === state.topic));
+  document.querySelectorAll(".period-toggle span").forEach(s => s.classList.toggle("active", Number(s.dataset.period) === state.periodDays));
+  renderChips();
+  renderBriefing(items);
+  renderMetrics(items);
+  renderNewsList(items);
+
+  const updated = allNews.length ? new Date(Math.max(...allNews.map(i => new Date(i.pub_date).getTime() || 0))) : null;
+  document.getElementById("lastUpdated").textContent = updated
+    ? `최근 수집: ${updated.toLocaleString("ko-KR")}`
+    : "아직 수집된 데이터가 없습니다";
+}
+
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => { state.topic = t.dataset.topic; state.category = "전체"; render(); });
+document.querySelectorAll(".period-toggle span").forEach(s => s.onclick = () => { state.periodDays = Number(s.dataset.period); render(); });
+
+let exhibitionsData = [];
+let calYear, calMonth;
+
+async function loadExhibitions() {
+  let raw = [];
+  try {
+    const res = await fetch(EXH_URL, { cache: "no-store" });
+    raw = res.ok ? await res.json() : [];
+  } catch (e) { raw = []; }
+
+  exhibitionsData = raw
+    .map(e => ({ ...e, start: new Date(e.start_date), end: new Date(e.end_date) }))
+    .sort((a, b) => a.start - b.start);
+
+  const listEl = document.getElementById("exhList");
+  listEl.innerHTML = exhibitionsData.length
+    ? exhibitionsData.map(e => `<div class="exh-row"><span>${linkOrText(e)}</span><span class="exh-date">${fmtRange(e.start, e.end)}</span></div>`).join("")
+    : '<p class="empty">등록된 전시회가 없습니다.</p>';
+
+  const today = new Date();
+  const next = exhibitionsData.find(e => e.end >= today) || exhibitionsData[exhibitionsData.length - 1];
+  calYear = next ? next.start.getFullYear() : today.getFullYear();
+  calMonth = next ? next.start.getMonth() : today.getMonth();
+  renderCalendar();
+}
+
+function linkOrText(e) {
+  return e.source && e.source.startsWith("http")
+    ? `<a href="${e.source}" target="_blank" rel="noopener noreferrer">${e.name}</a>`
+    : e.name;
+}
+
+function fmtRange(start, end) {
+  const m1 = start.getMonth() + 1, d1 = start.getDate();
+  const m2 = end.getMonth() + 1, d2 = end.getDate();
+  return m1 === m2 ? `${m1}.${d1}–${d2}` : `${m1}.${d1}–${m2}.${d2}`;
+}
+
+function exhibitionsOnDate(date) {
+  return exhibitionsData.filter(e => date >= new Date(e.start.toDateString()) && date <= new Date(e.end.toDateString()));
+}
+
+function showDayDetail(date, matches) {
+  const el = document.getElementById("calDetail");
+  if (!matches.length) {
+    el.textContent = "이 날짜에는 예정된 전시회가 없어요.";
+    return;
+  }
+  el.innerHTML = matches.map(e => `${linkOrText(e)} (${fmtRange(e.start, e.end)})`).join("<br>");
+}
+
+function renderCalendar() {
+  document.getElementById("calTitle").textContent = `${calYear}년 ${calMonth + 1}월`;
+  const grid = document.getElementById("calGrid");
+  grid.innerHTML = "";
+  ["일", "월", "화", "수", "목", "금", "토"].forEach(d => {
+    const s = document.createElement("span");
+    s.className = "dow";
+    s.textContent = d;
+    grid.appendChild(s);
+  });
+  const firstDow = new Date(calYear, calMonth, 1).getDay();
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  for (let i = 0; i < firstDow; i++) grid.appendChild(document.createElement("span"));
+  for (let day = 1; day <= daysInMonth; day++) {
+    const cur = new Date(calYear, calMonth, day);
+    const span = document.createElement("span");
+    span.textContent = day;
+    const matches = exhibitionsOnDate(cur);
+    if (matches.length) {
+      span.className = "evt";
+      span.onclick = () => showDayDetail(cur, matches);
+    }
+    grid.appendChild(span);
+  }
+  document.getElementById("calDetail").textContent = "날짜를 클릭하면 해당일의 전시회를 볼 수 있어요.";
+}
+
+document.getElementById("calPrev").onclick = () => {
+  calMonth -= 1;
+  if (calMonth < 0) { calMonth = 11; calYear -= 1; }
+  renderCalendar();
+};
+document.getElementById("calNext").onclick = () => {
+  calMonth += 1;
+  if (calMonth > 11) { calMonth = 0; calYear += 1; }
+  renderCalendar();
+};
+
+async function loadTrendOnlineShopping() {
+  const el = document.getElementById("trendOnlineShopping");
+  const pendingEl = el.querySelector(".t-pending");
+  let points = [];
+  try {
+    const res = await fetch("data/trend_online_shopping.json", { cache: "no-store" });
+    points = res.ok ? await res.json() : [];
+  } catch (e) { points = []; }
+
+  if (!points.length) {
+    pendingEl.textContent = "연동 예정 — 통계청 KOSIS 오픈API 추가 시 표시됩니다.";
+    return;
+  }
+
+  const values = points.map(p => p.value_million_krw);
+  const min = Math.min(...values), max = Math.max(...values);
+  const w = 200, h = 52;
+  const coords = points.map((p, i) => {
+    const x = points.length > 1 ? (i / (points.length - 1)) * w : 0;
+    const y = max > min ? h - ((p.value_million_krw - min) / (max - min)) * h : h / 2;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(" ");
+
+  const latest = points[points.length - 1];
+  const yearAgo = points.find(p => p.period === monthsBeforePeriod(latest.period, 12));
+  const compare = yearAgo || points[0];
+  const growth = compare.value_million_krw
+    ? (((latest.value_million_krw - compare.value_million_krw) / compare.value_million_krw) * 100).toFixed(1)
+    : null;
+  const trillion = (latest.value_million_krw / 1_000_000).toFixed(2);
+
+  el.innerHTML = `
+    <p class="t-label">온라인쇼핑 거래액 (통계청, 월별)</p>
+    <svg viewBox="0 0 200 60" style="width:100%; height:52px;" role="img" aria-label="화장품 온라인쇼핑 거래액 최근 추이">
+      <polyline points="${coords}" fill="none" stroke="#0F6E56" stroke-width="2.5" transform="translate(0,4)"/>
+    </svg>
+    <p style="font-size:20px; font-weight:500; margin:6px 0 0;">${trillion}조원
+      <span style="font-size:12px; font-weight:400; color:var(--text-secondary);">
+        (${latest.period}${growth !== null ? `, ${yearAgo ? "전년 동월比" : "최초 대비"} ${growth > 0 ? "+" : ""}${growth}%` : ""})
+      </span>
+    </p>`;
+}
+
+function monthsBeforePeriod(period, n) {
+  const [y, m] = period.split("-").map(Number);
+  const total = y * 12 + (m - 1) - n;
+  const ny = Math.floor(total / 12), nm = (total % 12) + 1;
+  return `${ny}-${String(nm).padStart(2, "0")}`;
+}
+
+loadData();
+loadExhibitions();
+loadTrendOnlineShopping();
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+name: 화장품 뉴스 클리핑 수집
+
+on:
+  schedule:
+    # 매일 한국시간(KST, UTC+9) 오전 7시 30분 = UTC 전날 22시30분
+    - cron: "30 22 * * *"
+  workflow_dispatch: {}   # Actions 탭에서 수동 실행 버튼도 사용 가능
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Python 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+
+      - name: 네이버 뉴스 수집
+        working-directory: collectors
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: python naver_news.py
+
+      - name: 통계청 온라인쇼핑 거래액 수집
+        working-directory: collectors
+        continue-on-error: true
+        env:
+          KOSIS_API_KEY: ${{ secrets.KOSIS_API_KEY }}
+        run: python kosis_online_shopping.py
+
+      - name: 이메일 브리핑 발송
+        working-directory: collectors
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: python ../send_email.py
+
+      - name: 변경사항 커밋 및 푸시
+        run: |
+          git config user.name "news-clipping-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/*.json docs/data/*.json
+          git diff --quiet --cached || git commit -m "chore: 뉴스 데이터 자동 갱신 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

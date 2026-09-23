@@ -1,37 +1,51 @@
 [
   {
-    "name": "코스모뷰티서울 (Cosmobeauty Seoul)",
-    "start_date": "2026-05-27",
-    "end_date": "2026-05-29",
-    "location": "코엑스",
-    "source": "https://www.cosmobeautyseoul.com"
+    "name": "IMCAS World 2027",
+    "start_date": "2027-01-28",
+    "end_date": "2027-01-30",
+    "location": "Paris, France & Online",
+    "source": "https://www.imcas.com/en/imcas-world-2027"
   },
   {
-    "name": "코스모프로프 아세안 방콕",
-    "start_date": "2026-06-24",
-    "end_date": "2026-06-26",
-    "location": "방콕 QSNCC",
-    "source": "검색 결과 기준, 공식 사이트에서 재확인 필요"
-  },
-  {
-    "name": "K-Beauty Expo Korea",
-    "start_date": "2026-10-15",
-    "end_date": "2026-10-17",
-    "location": "킨텍스",
-    "source": "https://k-beautyexpo.co.kr"
-  },
-  {
-    "name": "Cosmoprof North America (Las Vegas)",
-    "start_date": "2026-07-13",
-    "end_date": "2026-07-15",
-    "location": "Mandalay Bay Convention Center, Las Vegas",
-    "source": "https://cosmoprofnorthamerica.com/las-vegas/"
-  },
-  {
-    "name": "Cosmoprof Worldwide Bologna",
+    "name": "KIMES 2027",
     "start_date": "2027-03-18",
     "end_date": "2027-03-21",
-    "location": "BolognaFiere, Bologna",
-    "source": "https://www.cosmoprof.com/en/"
+    "location": "COEX, Seoul",
+    "source": "https://kimes.kr/ko/visitor/floor-plan"
+  },
+  {
+    "name": "AMWC 2027",
+    "start_date": "2027-04-01",
+    "end_date": "2027-04-03",
+    "location": "Palais des Festivals, Cannes, France",
+    "source": "https://www.amwc-conference.com/"
+  },
+  {
+    "name": "Dubai Derma 2027",
+    "start_date": "2027-04-06",
+    "end_date": "2027-04-08",
+    "location": "Dubai World Trade Centre, UAE",
+    "source": "https://dubaiderma.com/about-us/"
+  },
+  {
+    "name": "ASLMS 2027 Annual Conference",
+    "start_date": "2027-04-14",
+    "end_date": "2027-04-18",
+    "location": "Hilton Anatole, Dallas, Texas",
+    "source": "https://www.aslms.org/event/annual-conference-event/"
+  },
+  {
+    "name": "IMCAS Americas 2027",
+    "start_date": "2027-05-20",
+    "end_date": "2027-05-22",
+    "location": "São Paulo, Brazil",
+    "source": "https://www.imcas.com/en"
+  },
+  {
+    "name": "IMCAS Asia 2027",
+    "start_date": "2027-06-04",
+    "end_date": "2027-06-06",
+    "location": "Bangkok, Thailand",
+    "source": "https://www.imcas.com/en"
   }
 ]

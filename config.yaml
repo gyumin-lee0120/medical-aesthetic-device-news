@@ -1,128 +1,203 @@
-# 화장품 시장 뉴스 클리핑 설정 파일
-# 아래 TODO 표시된 항목은 실제 값으로 반드시 채워주세요.
+# 원텍 Medical Aesthetic Device News Clipping 설정
+# V1: 국내 뉴스 자동수집 + 자사/경쟁사/경쟁제품 분류 + 학회·전시회 + Telegram 브리핑 준비
 
 brand:
-  own:
+  own_company:
+    - "원텍"
+    - "WONTECH"
+  own_products:
     - "Oligio"
     - "올리지오"
-  competitors:
-    - "에이피알"
-    - "APR"
-    - "메디큐브"
-    - "Medicube"
+    - "Oligio X"
+    - "올리지오 X"
+    - "Oligio XM"
+    - "올리지오 XM"
+    - "PicoCare"
+    - "피코케어"
+    - "Lavieen"
+    - "라비앙"
+    - "Tightan"
+    - "타이탄"
+    - "V-Laser"
+    - "브이레이저"
+  competitor_companies:
     - "클래시스"
     - "Classys"
+    - "사이노슈어 루트로닉"
+    - "Cynosure Lutronic"
+    - "루트로닉"
+    - "제이시스메디칼"
+    - "Jeisys"
+    - "솔타메디칼"
+    - "Solta Medical"
+    - "인모드"
+    - "InMode"
+    - "캔델라"
+    - "Candela"
+    - "멀츠"
+    - "Merz Aesthetics"
+    - "큐테라"
+    - "Cutera"
+  competitor_products:
+    - "XERF"
+    - "세르프"
+    - "DENSITY"
+    - "덴서티"
+    - "Volnewmer"
+    - "볼뉴머"
+    - "Thermage"
+    - "써마지"
+    - "Ultherapy"
+    - "울쎄라"
+    - "Ultraformer"
+    - "슈링크"
+    - "Morpheus8"
+    - "모피어스8"
+    - "PicoSure"
+    - "피코슈어"
+    - "PicoWay"
+    - "피코웨이"
+    - "Clarity II"
+    - "클라리티 II"
 
-# 메인 주제(더마 스킨케어 · 홈뷰티 디바이스) vs 서브 주제(그 외 화장품 시장) 분류 키워드
-# 기사 제목+요약에 아래 키워드가 하나라도 포함되면 해당 주제로 태그됩니다.
-# main과 sub에 동시에 걸리면 main 우선.
-topics:
-  main:
-    - 더마코스메틱
-    - 더마 스킨케어
-    - PDRN
-    - 엑소좀
-    - 펩타이드
-    - 스킨부스터
-    - 나이아신아마이드
-    - 홈뷰티
-    - 홈케어 디바이스
-    - LED마스크
-    - 리프팅기기
-    - 뷰티디바이스
-    - 뷰티테크
-  sub:
-    - 향수
-    - 바디로션
-    - 메이크업
-    - 색조화장품
-    - 립스틱
-    - 파운데이션
+# 네이버 뉴스 검색어. 너무 넓은 단일 키워드(RF, 레이저 등)는 노이즈가 커서 조합형으로 사용합니다.
+search_keywords:
+  - "미용의료기기"
+  - "피부미용 의료기기"
+  - "에스테틱 의료기기"
+  - "에너지 기반 의료기기"
+  - "리프팅 의료기기"
+  - "고주파 리프팅"
+  - "RF 리프팅"
+  - "HIFU 리프팅"
+  - "하이푸 리프팅"
+  - "피코 레이저"
+  - "의료용 레이저"
+  - "레이저 의료기기"
+  - "미용성형 의료기기"
+  - "원텍"
+  - "올리지오"
+  - "피코케어"
+  - "라비앙"
+  - "타이탄 원텍"
+  - "세르프"
+  - "덴서티"
+  - "볼뉴머"
+  - "써마지"
+  - "울쎄라"
+  - "클래시스"
+  - "사이노슈어 루트로닉"
+  - "제이시스메디칼"
+  - "인모드 의료기기"
+  - "캔델라 의료기기"
 
-# 뉴스를 세부 카테고리로 태깅하기 위한 키워드 (제목+요약 기준 매칭, 다중 태그 가능)
+# 기사 제목+요약 기준 다중 태깅
 categories:
-  원료:
-    - 원료
-    - 성분
-    - 스킨부스터
-    - PDRN
-    - 엑소좀
-    - 펩타이드
-    - 콜라겐
-  디바이스·기술:
-    - 디바이스
-    - LED마스크
-    - 리프팅기기
-    - 뷰티테크
-    - 홈케어
-    - AI
-  특허:
-    - 특허
-    - 키프리스
-    - 출원
-  패키지:
-    - 패키지
-    - 용기
-    - 리필
-    - 포장
-  마케팅:
-    - 마케팅
-    - 광고
-    - 캠페인
-    - 인플루언서
-  규제:
+  시장동향:
+    - 시장
+    - 수출
+    - 매출
+    - 성장
+    - 점유율
+    - 전망
+    - 투자
+    - 인수
+    - 합병
+  RF:
+    - 고주파
+    - RF 리프팅
+    - 모노폴라
+    - 멀티폴라
+    - 써마지
+    - 볼뉴머
+    - 세르프
+    - 덴서티
+    - 올리지오
+  HIFU:
+    - HIFU
+    - 하이푸
+    - 집속초음파
+    - 울쎄라
+    - 울트라포머
+    - 슈링크
+  Laser·Pico:
+    - 레이저
+    - 피코
+    - picosecond
+    - PicoSure
+    - PicoWay
+    - 피코케어
+    - 라비앙
+    - Clarity
+  RF Microneedling:
+    - 마이크로니들
+    - microneedling
+    - Morpheus8
+    - 모피어스
+    - 포텐자
+  Surgical:
+    - 써지컬
+    - surgical
+    - 수술용
+    - surgical laser
+  신제품·출시:
+    - 신제품
+    - 출시
+    - 론칭
+    - 런칭
+    - 공개
+    - 선보
+  인허가·규제:
     - 식약처
-    - 규제
+    - MFDS
+    - FDA
+    - NMPA
+    - PMDA
+    - CE MDR
     - 허가
-    - 고시
-    - 개정안
+    - 승인
+    - 인증
+    - 규제
+  학회·임상:
+    - 학회
+    - 임상
+    - 논문
+    - 연구
+    - KOL
+    - 심포지엄
+    - 워크숍
+    - congress
+  글로벌사업:
+    - 해외
+    - 글로벌
+    - 수출
+    - 총판
+    - 대리점
+    - distributor
+    - 파트너십
+    - 업무협약
+    - MOU
 
-# 소스별 설정. enabled: false 인 항목은 이번 1차 구현에서 아직 코드가 없고,
-# config만 미리 잡아둔 상태입니다 (README의 로드맵 참고).
 sources:
   naver_news:
     enabled: true
-    display: 100      # 1회 호출당 최대 결과 수 (네이버 API 한도)
-    max_pages: 2       # 키워드당 조회 페이지 수 (100건 x 2 = 최대 200건/키워드)
+    display: 100
+    max_pages: 2
     sort: date
-
-  bigkinds:
-    enabled: false     # TODO: 다음 단계 — 빅카인즈 오픈API 연동
-
-  cosmetics_trade_press_rss:
-    enabled: false     # TODO: 다음 단계 — 코스인/코스모닝/CMN 등 RSS 확인 후 연동
-
-  mfds_cosmetics_regulation:
-    enabled: false     # TODO: 다음 단계 — 식약처 화장품 규제정보 공공데이터 API
-
-  mfds_medical_device:
-    enabled: false     # TODO: 다음 단계 — 식약처 의료기기 품목허가정보 API (홈뷰티 디바이스용)
-
-  kipris_patents:
-    enabled: false     # TODO: 다음 단계 — 특허청 키프리스 오픈API
-
-  wipo_patentscope:
-    enabled: false     # TODO: 다음 단계 — WIPO PatentScope RSS 알림
-
   overseas_media:
-    enabled: false     # TODO: 다음 단계 — Global Cosmetics News, CosmeticsDesign 등 (RSS 제공 여부 확인 필요)
-
-  kosis_online_shopping:
-      enabled: true      # 통계청 온라인쇼핑동향조사 - 화장품(objL1=010) 합계(objL2=00) 거래액(itmId=T20), tblId=DT_1KE10071
-      months_back: 24
-
-  customs_trade_stats:
-    enabled: false     # TODO: 다음 단계 — 관세청 수출입통계 오픈API (HS Code 33류)
-
-  mfds_production_stats:
-    enabled: false     # TODO: 다음 단계 — 식약처 화장품 생산실적 통계 (연 1회 수동 갱신도 가능)
-
+    enabled: false      # V2: 해외 전문매체/기업 Newsroom 추가
+  mfds_medical_device:
+    enabled: false      # V2: 식약처 의료기기 인허가 데이터
+  fda_medical_device:
+    enabled: false      # V2: FDA 공개 데이터
   exhibitions:
     enabled: true
-    # 자동 수집 대신 수동으로 관리하는 전시회 일정 (data/exhibitions.json)
+
+telegram:
+  enabled: false        # Bot/Chat ID 설정 완료 후 true로 변경
+  send_hour_kst: 8
+  dashboard_url: "https://gyumin-lee0120.github.io/medical-aesthetic-device-news/"
+  max_items: 8
 
 email:
-  enabled: false       # 이메일까지 보내려면 true로 변경하고 GitHub secrets에 발신 계정 정보 등록
-  to:
-    - "TODO: 받는사람@example.com"
-  send_hour_kst: 8
+  enabled: false        # 향후 Weekly / 해외 벤더 발송 단계에서 활용

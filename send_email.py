@@ -31,7 +31,7 @@ def build_summary(items, cfg):
     competitor_hits = [i for i in items if i.get("competitor_mentions")]
 
     lines = []
-    lines.append(f"오늘 수집된 기사: 총 {len(items)}건 (메인 주제 {len(main_items)}건)")
+    lines.append(f"오늘 수집된 기사: 총 {len(items)}건 (주요 주제 {len(main_items)}건)")
     if top_cats:
         cat_text = ", ".join(f"{c} {n}건" for c, n in top_cats)
         lines.append(f"카테고리 상위: {cat_text}")
@@ -92,7 +92,7 @@ def run():
     today_items = [i for i in all_items if is_today(i)]
     body = build_summary(today_items, cfg)
     today_str = datetime.now().strftime("%Y.%m.%d")
-    subject = f"[화장품 뉴스 클리핑] {today_str} 브리핑"
+    subject = f"[Medical Aesthetic Device News] {today_str} 브리핑"
 
     send(subject, body, to_addrs, from_addr, app_password)
     print(f"이메일 발송 완료 → {', '.join(to_addrs)}")

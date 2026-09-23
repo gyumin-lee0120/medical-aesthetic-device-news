@@ -3,443 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>화장품 시장 뉴스 클리핑</title>
+<title>WONTECH Medical Aesthetic Device News</title>
 <style>
-  :root {
-    --bg: #ffffff;
-    --surface-1: #f4f4f2;
-    --text-primary: #1a1a1a;
-    --text-secondary: #666660;
-    --text-muted: #999990;
-    --border: #e2e2dd;
-    --accent-bg: #e6f1fb;
-    --accent-text: #0c447c;
-    --accent-border: #378add;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #171715;
-      --surface-1: #232320;
-      --text-primary: #f0f0ec;
-      --text-secondary: #a8a89f;
-      --text-muted: #77776e;
-      --border: #33332e;
-      --accent-bg: #0c447c;
-      --accent-text: #b5d4f4;
-      --accent-border: #378add;
-    }
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 24px 16px 60px;
-    background: var(--bg); color: var(--text-primary);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
-    font-size: 15px; line-height: 1.6;
-  }
-  .wrap { max-width: 900px; margin: 0 auto; }
-  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
-  h1 { font-size: 18px; font-weight: 600; margin: 0; }
-  .muted { color: var(--text-secondary); font-size: 13px; }
-  button, .btn {
-    font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 8px;
-    border: 1px solid var(--border); background: var(--bg); color: var(--text-primary); cursor: pointer;
-  }
-  button:hover { background: var(--surface-1); }
-  .tabs { display: flex; gap: 8px; margin: 16px 0 12px; }
-  .tab { font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 8px; cursor: pointer; color: var(--text-secondary); }
-  .tab.active { background: var(--surface-1); color: var(--text-primary); border-bottom: 2px solid var(--accent-border); }
-  .period-toggle { display: flex; gap: 4px; background: var(--surface-1); border-radius: 8px; padding: 3px; }
-  .period-toggle span { font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; color: var(--text-secondary); }
-  .period-toggle span.active { background: var(--bg); color: var(--text-primary); }
-  .briefing { background: var(--surface-1); border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; }
-  .briefing p.label { font-size: 13px; font-weight: 600; margin: 0 0 8px; }
-  .briefing p.body { font-size: 13px; color: var(--text-secondary); margin: 0; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-  .chip { font-size: 12px; padding: 4px 12px; border-radius: 12px; background: var(--surface-1); color: var(--text-secondary); cursor: pointer; }
-  .chip.active { background: var(--accent-bg); color: var(--accent-text); }
-  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
-  .metric { background: var(--surface-1); border-radius: 8px; padding: 14px; }
-  .metric .m-label { font-size: 12px; color: var(--text-secondary); margin: 0 0 6px; }
-  .metric .m-value { font-size: 20px; font-weight: 600; margin: 0; }
-  .news-list { border-top: 1px solid var(--border); margin-bottom: 20px; }
-  .news-item { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: inherit; }
-  .news-item .n-title { font-size: 14px; margin: 0 0 3px; }
-  .news-item .n-meta { font-size: 12px; color: var(--text-secondary); margin: 0; }
-  .badge-overseas { background: var(--surface-1); color: var(--text-secondary); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-right: 6px; white-space: nowrap; }
-  .section-title { font-size: 13px; font-weight: 600; margin: 0 0 10px; }
-  .trend-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-bottom: 16px; }
-  .trend-card { background: var(--surface-1); border-radius: 12px; padding: 14px; min-height: 110px; }
-  .trend-card .t-label { font-size: 11px; color: var(--text-secondary); margin: 0 0 8px; }
-  .trend-card .t-pending { font-size: 12px; color: var(--text-muted); }
-  .cal-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cal-card, .list-card { background: var(--surface-1); border-radius: 12px; padding: 14px; }
-  .cal-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .cal-nav-btn { border: none; background: none; font-size: 16px; line-height: 1; cursor: pointer; color: var(--text-secondary); padding: 2px 8px; }
-  .cal-nav-btn:hover { color: var(--text-primary); }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
-  .cal-grid span { font-size: 11px; padding: 3px 0; }
-  .cal-grid .dow { color: var(--text-muted); font-size: 10px; }
-  .cal-grid .hit { background: var(--accent-bg); color: var(--accent-text); border-radius: 4px; }
-  .cal-grid .evt { font-weight: 600; cursor: pointer; position: relative; }
-  .cal-grid .evt::after { content: ""; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--accent-text); }
-  .cal-detail { margin-top: 10px; font-size: 12px; color: var(--text-secondary); min-height: 16px; }
-  .cal-detail a { color: var(--accent-text); }
-  .exh-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; }
-  .exh-row .exh-date { color: var(--text-secondary); }
-  .empty { color: var(--text-muted); font-size: 13px; padding: 20px 0; text-align: center; }
-  @media (max-width: 640px) {
-    .metrics, .trend-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .cal-list-grid { grid-template-columns: 1fr; }
-  }
+:root{--bg:#fff;--surface:#f5f5f3;--text:#171717;--sub:#666;--muted:#999;--border:#e5e5e0;--accent:#fb510d;--accent-soft:#fff0e9}
+@media(prefers-color-scheme:dark){:root{--bg:#171715;--surface:#242420;--text:#f3f3ef;--sub:#aaa;--muted:#777;--border:#35352f;--accent-soft:#4a2415}}
+*{box-sizing:border-box}body{margin:0;padding:24px 16px 64px;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;font-size:14px;line-height:1.55}.wrap{max-width:1040px;margin:auto}.row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}h1{font-size:20px;margin:0}.muted{color:var(--sub);font-size:12px;margin:4px 0 0}.btn{border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:8px;padding:7px 11px;cursor:pointer}.tabs,.chips,.quick{display:flex;gap:7px;flex-wrap:wrap}.tabs{margin:18px 0 10px}.tab,.chip,.quick span{padding:6px 11px;border-radius:999px;background:var(--surface);color:var(--sub);cursor:pointer;font-size:12px}.tab.active,.chip.active,.quick span.active{background:var(--accent-soft);color:var(--accent);font-weight:600}.period{display:flex;gap:3px;background:var(--surface);padding:3px;border-radius:8px}.period span{padding:4px 9px;border-radius:6px;color:var(--sub);font-size:12px;cursor:pointer}.period span.active{background:var(--bg);color:var(--text)}.brief{background:var(--surface);padding:16px 18px;border-radius:12px;margin:14px 0}.brief b{font-size:13px}.brief p{margin:6px 0 0;color:var(--sub);font-size:13px}.section{margin-top:22px}.section h2{font-size:14px;margin:0 0 10px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.metric,.panel,.cal-card,.list-card{background:var(--surface);border-radius:12px;padding:14px}.metric small{color:var(--sub)}.metric strong{display:block;font-size:22px;margin-top:5px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.panel-title{font-size:12px;color:var(--sub);margin-bottom:10px}.bar-row{display:grid;grid-template-columns:88px 1fr 42px;gap:8px;align-items:center;margin:7px 0;font-size:12px}.bar{height:7px;background:var(--border);border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);border-radius:999px}.news-list{border-top:1px solid var(--border);margin-top:10px}.news{display:block;text-decoration:none;color:inherit;padding:11px 0;border-bottom:1px solid var(--border)}.news-title{font-size:14px;margin:0 0 4px}.meta{font-size:11px;color:var(--sub)}.badge{display:inline-block;padding:1px 6px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:10px;margin-right:5px}.empty{color:var(--muted);text-align:center;padding:24px 0}.calgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:10px}.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center}.cal-days span{padding:4px 0;font-size:11px}.dow{color:var(--muted)}.evt{cursor:pointer;font-weight:700;color:var(--accent)}.detail{font-size:12px;color:var(--sub);margin-top:8px;min-height:20px}.detail a{color:var(--accent)}.event-row{display:flex;justify-content:space-between;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid var(--border)}.event-row a{color:inherit;text-decoration:none}.event-row a:hover{color:var(--accent)}
+@media(max-width:760px){.metrics{grid-template-columns:repeat(2,1fr)}.grid3,.calgrid{grid-template-columns:1fr}.bar-row{grid-template-columns:78px 1fr 36px}}
 </style>
 </head>
-<body>
-<div class="wrap">
-
-  <div class="row">
-    <div>
-      <h1>화장품 시장 뉴스 클리핑</h1>
-      <p class="muted" id="lastUpdated">불러오는 중...</p>
-    </div>
-    <button onclick="location.reload()">새로고침</button>
-  </div>
-
-  <div class="row">
-    <div class="tabs">
-      <div class="tab active" data-topic="main">더마 스킨케어 · 홈뷰티 디바이스</div>
-      <div class="tab" data-topic="sub">화장품 시장 전체</div>
-    </div>
-    <div class="period-toggle">
-      <span class="active" data-period="1">오늘</span>
-      <span data-period="7">주간</span>
-      <span data-period="30">월간</span>
-    </div>
-  </div>
-
-  <div class="briefing">
-    <p class="label">브리핑 요약</p>
-    <p class="body" id="briefingText">데이터를 불러오는 중입니다...</p>
-  </div>
-
-  <div class="chips" id="categoryChips">
-    <span class="chip active" data-category="전체">전체</span>
-  </div>
-
-  <div class="metrics">
-    <div class="metric"><p class="m-label">자사 브랜드 언급</p><p class="m-value" id="mOwn">–</p></div>
-    <div class="metric"><p class="m-label">경쟁사 언급</p><p class="m-value" id="mCompetitor">–</p></div>
-    <div class="metric"><p class="m-label">메인 주제 비중</p><p class="m-value" id="mMainShare">–</p></div>
-    <div class="metric"><p class="m-label">최다 카테고리</p><p class="m-value" id="mTopCategory">–</p></div>
-  </div>
-
-  <div class="news-list" id="newsList">
-    <p class="empty">불러오는 중...</p>
-  </div>
-
-  <p class="section-title">데이터 · 트렌드</p>
-  <div class="trend-grid">
-    <div class="trend-card" id="trendOnlineShopping">
-      <p class="t-label">온라인쇼핑 거래액 (통계청, 월별)</p>
-      <p class="t-pending">불러오는 중...</p>
-    </div>
-    <div class="trend-card">
-      <p class="t-label">국내 생산실적 (식약처, 연도별)</p>
-      <p class="t-pending">연동 예정 — 식약처 화장품 생산실적 통계는 연 1회 발표됩니다.</p>
-    </div>
-    <div class="trend-card">
-      <p class="t-label">수출입 금액 (관세청, 월별)</p>
-      <p class="t-pending">연동 예정 — 관세청 수출입통계 오픈API 추가 시 표시됩니다.</p>
-    </div>
-  </div>
-
-  <div class="cal-list-grid">
-    <div class="cal-card">
-      <div class="cal-nav">
-        <button class="cal-nav-btn" id="calPrev" aria-label="이전 달" type="button">‹</button>
-        <p class="t-label" id="calTitle" style="margin:0;">전시회 캘린더</p>
-        <button class="cal-nav-btn" id="calNext" aria-label="다음 달" type="button">›</button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div class="cal-detail" id="calDetail">날짜를 클릭하면 해당일의 전시회를 볼 수 있어요.</div>
-    </div>
-    <div class="list-card">
-      <p class="t-label">다가오는 전시회 · 박람회</p>
-      <div id="exhList"></div>
-    </div>
-  </div>
-
+<body><div class="wrap">
+<div class="row"><div><h1>WONTECH Medical Aesthetic Device News</h1><p class="muted" id="lastUpdated">불러오는 중...</p></div><button class="btn" onclick="location.reload()">새로고침</button></div>
+<div class="row"><div class="tabs"><span class="tab active" data-view="all">전체 시장</span><span class="tab" data-view="wontech">WONTECH</span><span class="tab" data-view="competitor">주요 경쟁사</span></div><div class="period"><span class="active" data-period="1">오늘</span><span data-period="7">7일</span><span data-period="30">30일</span></div></div>
+<div class="brief"><b>이번 기간 브리핑</b><p id="briefText">데이터를 불러오는 중입니다...</p></div>
+<div class="section"><h2>경쟁제품 바로보기</h2><div class="quick" id="productQuick"></div></div>
+<div class="section"><h2>기술·이슈 필터</h2><div class="chips" id="categoryChips"></div></div>
+<div class="metrics"><div class="metric"><small>수집 뉴스</small><strong id="mTotal">-</strong></div><div class="metric"><small>WONTECH 언급</small><strong id="mOwn">-</strong></div><div class="metric"><small>경쟁사 언급</small><strong id="mComp">-</strong></div><div class="metric"><small>최다 기술·이슈</small><strong id="mTop">-</strong></div></div>
+<div class="section"><h2>시장 지표</h2><div class="grid3"><div class="panel"><div class="panel-title">뉴스 모멘텀 · 최근 7일 vs 이전 7일</div><div id="momentum"></div></div><div class="panel"><div class="panel-title">경쟁사/경쟁제품 언급 TOP</div><div id="competitorBars"></div></div><div class="panel"><div class="panel-title">기술군·이슈 구성</div><div id="categoryBars"></div></div></div></div>
+<div class="section"><h2>뉴스</h2><div class="news-list" id="newsList"><div class="empty">불러오는 중...</div></div></div>
+<div class="section"><h2>학회·전시회 캘린더</h2><div class="calgrid"><div class="cal-card"><div class="cal-nav"><button class="btn" id="prev">‹</button><b id="calTitle"></b><button class="btn" id="next">›</button></div><div class="cal-days" id="calendar"></div><div class="detail" id="calDetail">날짜를 클릭하면 행사 링크를 확인할 수 있습니다.</div></div><div class="list-card"><div class="panel-title">다가오는 주요 행사</div><div id="eventList"></div></div></div></div>
 </div>
-
 <script>
-const DATA_URL = "data/news.json";
-const EXH_URL = "data/exhibitions.json";
-
-let allNews = [];
-let state = { topic: "main", periodDays: 1, category: "전체" };
-
-async function loadData() {
-  try {
-    const res = await fetch(DATA_URL, { cache: "no-store" });
-    allNews = res.ok ? await res.json() : [];
-  } catch (e) {
-    allNews = [];
-  }
-  render();
-}
-
-function withinPeriod(item, days) {
-  const d = new Date(item.pub_date);
-  if (isNaN(d)) return true;
-  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
-  return d.getTime() >= cutoff;
-}
-
-function filteredNews() {
-  return allNews.filter(item =>
-    item.topic === state.topic &&
-    withinPeriod(item, state.periodDays) &&
-    (state.category === "전체" || (item.categories || []).includes(state.category))
-  );
-}
-
-function relTime(dateStr) {
-  const d = new Date(dateStr);
-  if (isNaN(d)) return "";
-  const diffMin = Math.round((Date.now() - d.getTime()) / 60000);
-  if (diffMin < 60) return `${diffMin}분 전`;
-  if (diffMin < 60 * 24) return `${Math.round(diffMin / 60)}시간 전`;
-  return `${Math.round(diffMin / 1440)}일 전`;
-}
-
-function renderChips() {
-  const cats = new Set();
-  allNews.filter(i => i.topic === state.topic).forEach(i => (i.categories || []).forEach(c => cats.add(c)));
-  const el = document.getElementById("categoryChips");
-  el.innerHTML = "";
-  ["전체", ...Array.from(cats).sort()].forEach(cat => {
-    const span = document.createElement("span");
-    span.className = "chip" + (state.category === cat ? " active" : "");
-    span.textContent = cat;
-    span.onclick = () => { state.category = cat; render(); };
-    el.appendChild(span);
-  });
-}
-
-function renderMetrics(items) {
-  const ownCount = items.filter(i => (i.own_brand_mentions || []).length > 0).length;
-  const compCount = items.filter(i => (i.competitor_mentions || []).length > 0).length;
-  const allTodayTopicItems = allNews.filter(i => withinPeriod(i, state.periodDays));
-  const mainCount = allTodayTopicItems.filter(i => i.topic === "main").length;
-  const mainShare = allTodayTopicItems.length ? Math.round((mainCount / allTodayTopicItems.length) * 100) : 0;
-
-  const catCounts = {};
-  items.forEach(i => (i.categories || []).forEach(c => { catCounts[c] = (catCounts[c] || 0) + 1; }));
-  const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
-
-  document.getElementById("mOwn").textContent = `${ownCount}건`;
-  document.getElementById("mCompetitor").textContent = `${compCount}건`;
-  document.getElementById("mMainShare").textContent = `${mainShare}%`;
-  document.getElementById("mTopCategory").textContent = topCat ? `${topCat[0]} ${topCat[1]}건` : "–";
-}
-
-function renderBriefing(items) {
-  const el = document.getElementById("briefingText");
-  if (!allNews.length) {
-    el.textContent = "아직 수집된 데이터가 없습니다. GitHub Actions 수집 스크립트가 처음 실행되면 여기에 요약이 표시됩니다.";
-    return;
-  }
-  if (!items.length) {
-    el.textContent = "선택한 기간·카테고리에 해당하는 기사가 없습니다.";
-    return;
-  }
-  const catCounts = {};
-  items.forEach(i => (i.categories || []).forEach(c => { catCounts[c] = (catCounts[c] || 0) + 1; }));
-  const topCat = Object.entries(catCounts).sort((a, b) => b[1] - a[1])[0];
-  el.textContent = `이 기간 총 ${items.length}건 수집되었고, "${topCat ? topCat[0] : "미분류"}" 카테고리 언급이 가장 많았습니다. (요약문은 1차 버전으로 단순 집계 기반입니다 — 다음 단계에서 자연어 브리핑 생성 추가 예정)`;
-}
-
-function renderNewsList(items) {
-  const el = document.getElementById("newsList");
-  el.innerHTML = "";
-  if (!items.length) {
-    el.innerHTML = '<p class="empty">해당 조건의 기사가 없습니다.</p>';
-    return;
-  }
-  items.slice(0, 50).forEach(item => {
-    const a = document.createElement("a");
-    a.className = "news-item";
-    a.href = item.link;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    a.innerHTML = `
-      <div style="min-width:0;">
-        <p class="n-title">${item.is_overseas ? '<span class="badge-overseas">해외</span>' : ""}${item.title}</p>
-        <p class="n-meta">${item.source} · ${(item.categories || []).join(", ")} · ${relTime(item.pub_date)}</p>
-      </div>`;
-    el.appendChild(a);
-  });
-}
-
-function render() {
-  const items = filteredNews();
-  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.topic === state.topic));
-  document.querySelectorAll(".period-toggle span").forEach(s => s.classList.toggle("active", Number(s.dataset.period) === state.periodDays));
-  renderChips();
-  renderBriefing(items);
-  renderMetrics(items);
-  renderNewsList(items);
-
-  const updated = allNews.length ? new Date(Math.max(...allNews.map(i => new Date(i.pub_date).getTime() || 0))) : null;
-  document.getElementById("lastUpdated").textContent = updated
-    ? `최근 수집: ${updated.toLocaleString("ko-KR")}`
-    : "아직 수집된 데이터가 없습니다";
-}
-
-document.querySelectorAll(".tab").forEach(t => t.onclick = () => { state.topic = t.dataset.topic; state.category = "전체"; render(); });
-document.querySelectorAll(".period-toggle span").forEach(s => s.onclick = () => { state.periodDays = Number(s.dataset.period); render(); });
-
-let exhibitionsData = [];
-let calYear, calMonth;
-
-async function loadExhibitions() {
-  let raw = [];
-  try {
-    const res = await fetch(EXH_URL, { cache: "no-store" });
-    raw = res.ok ? await res.json() : [];
-  } catch (e) { raw = []; }
-
-  exhibitionsData = raw
-    .map(e => ({ ...e, start: new Date(e.start_date), end: new Date(e.end_date) }))
-    .sort((a, b) => a.start - b.start);
-
-  const listEl = document.getElementById("exhList");
-  listEl.innerHTML = exhibitionsData.length
-    ? exhibitionsData.map(e => `<div class="exh-row"><span>${linkOrText(e)}</span><span class="exh-date">${fmtRange(e.start, e.end)}</span></div>`).join("")
-    : '<p class="empty">등록된 전시회가 없습니다.</p>';
-
-  const today = new Date();
-  const next = exhibitionsData.find(e => e.end >= today) || exhibitionsData[exhibitionsData.length - 1];
-  calYear = next ? next.start.getFullYear() : today.getFullYear();
-  calMonth = next ? next.start.getMonth() : today.getMonth();
-  renderCalendar();
-}
-
-function linkOrText(e) {
-  return e.source && e.source.startsWith("http")
-    ? `<a href="${e.source}" target="_blank" rel="noopener noreferrer">${e.name}</a>`
-    : e.name;
-}
-
-function fmtRange(start, end) {
-  const m1 = start.getMonth() + 1, d1 = start.getDate();
-  const m2 = end.getMonth() + 1, d2 = end.getDate();
-  return m1 === m2 ? `${m1}.${d1}–${d2}` : `${m1}.${d1}–${m2}.${d2}`;
-}
-
-function exhibitionsOnDate(date) {
-  return exhibitionsData.filter(e => date >= new Date(e.start.toDateString()) && date <= new Date(e.end.toDateString()));
-}
-
-function showDayDetail(date, matches) {
-  const el = document.getElementById("calDetail");
-  if (!matches.length) {
-    el.textContent = "이 날짜에는 예정된 전시회가 없어요.";
-    return;
-  }
-  el.innerHTML = matches.map(e => `${linkOrText(e)} (${fmtRange(e.start, e.end)})`).join("<br>");
-}
-
-function renderCalendar() {
-  document.getElementById("calTitle").textContent = `${calYear}년 ${calMonth + 1}월`;
-  const grid = document.getElementById("calGrid");
-  grid.innerHTML = "";
-  ["일", "월", "화", "수", "목", "금", "토"].forEach(d => {
-    const s = document.createElement("span");
-    s.className = "dow";
-    s.textContent = d;
-    grid.appendChild(s);
-  });
-  const firstDow = new Date(calYear, calMonth, 1).getDay();
-  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-  for (let i = 0; i < firstDow; i++) grid.appendChild(document.createElement("span"));
-  for (let day = 1; day <= daysInMonth; day++) {
-    const cur = new Date(calYear, calMonth, day);
-    const span = document.createElement("span");
-    span.textContent = day;
-    const matches = exhibitionsOnDate(cur);
-    if (matches.length) {
-      span.className = "evt";
-      span.onclick = () => showDayDetail(cur, matches);
-    }
-    grid.appendChild(span);
-  }
-  document.getElementById("calDetail").textContent = "날짜를 클릭하면 해당일의 전시회를 볼 수 있어요.";
-}
-
-document.getElementById("calPrev").onclick = () => {
-  calMonth -= 1;
-  if (calMonth < 0) { calMonth = 11; calYear -= 1; }
-  renderCalendar();
-};
-document.getElementById("calNext").onclick = () => {
-  calMonth += 1;
-  if (calMonth > 11) { calMonth = 0; calYear += 1; }
-  renderCalendar();
-};
-
-async function loadTrendOnlineShopping() {
-  const el = document.getElementById("trendOnlineShopping");
-  const pendingEl = el.querySelector(".t-pending");
-  let points = [];
-  try {
-    const res = await fetch("data/trend_online_shopping.json", { cache: "no-store" });
-    points = res.ok ? await res.json() : [];
-  } catch (e) { points = []; }
-
-  if (!points.length) {
-    pendingEl.textContent = "연동 예정 — 통계청 KOSIS 오픈API 추가 시 표시됩니다.";
-    return;
-  }
-
-  const values = points.map(p => p.value_million_krw);
-  const min = Math.min(...values), max = Math.max(...values);
-  const w = 200, h = 52;
-  const coords = points.map((p, i) => {
-    const x = points.length > 1 ? (i / (points.length - 1)) * w : 0;
-    const y = max > min ? h - ((p.value_million_krw - min) / (max - min)) * h : h / 2;
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(" ");
-
-  const latest = points[points.length - 1];
-  const yearAgo = points.find(p => p.period === monthsBeforePeriod(latest.period, 12));
-  const compare = yearAgo || points[0];
-  const growth = compare.value_million_krw
-    ? (((latest.value_million_krw - compare.value_million_krw) / compare.value_million_krw) * 100).toFixed(1)
-    : null;
-  const trillion = (latest.value_million_krw / 1_000_000).toFixed(2);
-
-  el.innerHTML = `
-    <p class="t-label">온라인쇼핑 거래액 (통계청, 월별)</p>
-    <svg viewBox="0 0 200 60" style="width:100%; height:52px;" role="img" aria-label="화장품 온라인쇼핑 거래액 최근 추이">
-      <polyline points="${coords}" fill="none" stroke="#0F6E56" stroke-width="2.5" transform="translate(0,4)"/>
-    </svg>
-    <p style="font-size:20px; font-weight:500; margin:6px 0 0;">${trillion}조원
-      <span style="font-size:12px; font-weight:400; color:var(--text-secondary);">
-        (${latest.period}${growth !== null ? `, ${yearAgo ? "전년 동월比" : "최초 대비"} ${growth > 0 ? "+" : ""}${growth}%` : ""})
-      </span>
-    </p>`;
-}
-
-function monthsBeforePeriod(period, n) {
-  const [y, m] = period.split("-").map(Number);
-  const total = y * 12 + (m - 1) - n;
-  const ny = Math.floor(total / 12), nm = (total % 12) + 1;
-  return `${ny}-${String(nm).padStart(2, "0")}`;
-}
-
-loadData();
-loadExhibitions();
-loadTrendOnlineShopping();
-</script>
-</body>
-</html>
+const DATA_URL='data/news.json', EXH_URL='data/exhibitions.json';
+const trackedProducts=['세르프','덴서티','볼뉴머','써마지','울쎄라','슈링크','Morpheus8','피코슈어','피코웨이','Clarity II'];
+let allNews=[], events=[], state={view:'all',days:1,category:'전체',product:'전체'};
+const arr=v=>Array.isArray(v)?v:[];
+function when(s){const d=new Date(s);return isNaN(d)?null:d}
+function inDays(i,d){const x=when(i.pub_date);return !x||x>=new Date(Date.now()-d*86400000)}
+function own(i){return arr(i.own_company_mentions).length+arr(i.own_product_mentions).length+arr(i.own_brand_mentions).length>0}
+function comp(i){return arr(i.competitor_company_mentions).length+arr(i.competitor_product_mentions).length+arr(i.competitor_mentions).length>0}
+function productText(i){return [...arr(i.competitor_product_mentions),...arr(i.competitor_mentions)].join(' ').toLowerCase()}
+function filtered(){return allNews.filter(i=>inDays(i,state.days)&&(state.view==='all'||(state.view==='wontech'&&own(i))||(state.view==='competitor'&&comp(i)))&&(state.category==='전체'||arr(i.categories).includes(state.category))&&(state.product==='전체'||productText(i).includes(state.product.toLowerCase())))}
+function counts(items,keyfn){const o={};items.forEach(i=>keyfn(i).forEach(k=>o[k]=(o[k]||0)+1));return Object.entries(o).sort((a,b)=>b[1]-a[1])}
+function bars(el,rows){const max=rows[0]?.[1]||1;el.innerHTML=rows.length?rows.slice(0,5).map(([k,v])=>`<div class="bar-row"><span>${k}</span><div class="bar"><i style="width:${Math.max(6,v/max*100)}%"></i></div><b>${v}</b></div>`).join(''):'<div class="empty">데이터 없음</div>'}
+function renderFilters(){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===state.view));document.querySelectorAll('.period span').forEach(x=>x.classList.toggle('active',+x.dataset.period===state.days));const cats=['전체',...new Set(allNews.flatMap(i=>arr(i.categories)))];categoryChips.innerHTML=cats.map(c=>`<span class="chip ${c===state.category?'active':''}" data-c="${c}">${c}</span>`).join('');categoryChips.querySelectorAll('span').forEach(x=>x.onclick=()=>{state.category=x.dataset.c;render()});productQuick.innerHTML=['전체',...trackedProducts].map(p=>`<span class="${p===state.product?'active':''}" data-p="${p}">${p}</span>`).join('');productQuick.querySelectorAll('span').forEach(x=>x.onclick=()=>{state.product=x.dataset.p;state.view=p==='전체'?state.view:'competitor';render()})}
+function renderMetrics(items){mTotal.textContent=items.length+'건';mOwn.textContent=items.filter(own).length+'건';mComp.textContent=items.filter(comp).length+'건';const c=counts(items,i=>arr(i.categories))[0];mTop.textContent=c?`${c[0]} ${c[1]}건`:'-'}
+function renderBrief(items){if(!allNews.length){briefText.textContent='아직 수집된 뉴스가 없습니다. Actions를 최초 실행하면 데이터가 표시됩니다.';return}if(!items.length){briefText.textContent='선택한 조건에 해당하는 뉴스가 없습니다.';return}const topC=counts(items,i=>arr(i.categories))[0];const topComp=counts(items,i=>[...arr(i.competitor_company_mentions),...arr(i.competitor_product_mentions)])[0];briefText.textContent=`총 ${items.length}건. ${topC?`'${topC[0]}' 관련 뉴스가 가장 많고`:''} ${topComp?`경쟁사/제품 중 '${topComp[0]}' 언급이 두드러집니다.`:'경쟁사 언급은 아직 많지 않습니다.'}`}
+function renderNews(items){newsList.innerHTML=items.length?items.slice(0,60).map(i=>`<a class="news" href="${i.link}" target="_blank" rel="noopener"><p class="news-title">${own(i)?'<span class="badge">WONTECH</span>':''}${comp(i)?'<span class="badge">경쟁</span>':''}${i.title}</p><div class="meta">${i.source||''} · ${arr(i.categories).join(' · ')} · ${when(i.pub_date)?when(i.pub_date).toLocaleDateString('ko-KR'):''}</div></a>`).join(''):'<div class="empty">해당 조건의 기사가 없습니다.</div>'}
+function renderTrends(){const now=Date.now();const w1=allNews.filter(i=>{const d=when(i.pub_date);return d&&d>=new Date(now-7*86400000)}).length;const w2=allNews.filter(i=>{const d=when(i.pub_date);return d&&d<new Date(now-7*86400000)&&d>=new Date(now-14*86400000)}).length;const delta=w2?Math.round((w1-w2)/w2*100):null;momentum.innerHTML=`<div style="font-size:28px;font-weight:700">${w1}건</div><div class="meta">이전 7일 ${w2}건 · ${delta===null?'비교기준 없음':(delta>=0?'+':'')+delta+'%'}</div>`;const base=allNews.filter(i=>inDays(i,30));bars(competitorBars,counts(base,i=>[...arr(i.competitor_company_mentions),...arr(i.competitor_product_mentions)]));bars(categoryBars,counts(base,i=>arr(i.categories)))}
+function render(){const items=filtered();renderFilters();renderMetrics(items);renderBrief(items);renderNews(items);renderTrends();const dates=allNews.map(i=>when(i.pub_date)).filter(Boolean);lastUpdated.textContent=dates.length?`최근 수집 기사: ${new Date(Math.max(...dates)).toLocaleString('ko-KR')}`:'아직 수집된 데이터가 없습니다.'}
+document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>{state.view=x.dataset.view;state.product='전체';render()});document.querySelectorAll('.period span').forEach(x=>x.onclick=()=>{state.days=+x.dataset.period;render()});
+async function load(){try{const r=await fetch(DATA_URL,{cache:'no-store'});allNews=r.ok?await r.json():[]}catch(e){allNews=[]}render();loadEvents()}
+let cy,cm;function fmt(d){return `${d.getMonth()+1}/${d.getDate()}`}
+async function loadEvents(){try{const r=await fetch(EXH_URL,{cache:'no-store'});events=r.ok?await r.json():[]}catch(e){events=[]}events=events.map(e=>({...e,s:new Date(e.start_date),t:new Date(e.end_date)})).sort((a,b)=>a.s-b.s);const now=new Date();eventList.innerHTML=events.filter(e=>e.t>=new Date(now.toDateString())).slice(0,10).map(e=>`<div class="event-row"><a href="${e.source}" target="_blank">${e.name}</a><span>${fmt(e.s)}~${fmt(e.t)}</span></div>`).join('')||'<div class="empty">등록 행사 없음</div>';cy=now.getFullYear();cm=now.getMonth();drawCal()}
+function drawCal(){calTitle.textContent=`${cy}년 ${cm+1}월`;const first=new Date(cy,cm,1),last=new Date(cy,cm+1,0);let h=['일','월','화','수','목','금','토'].map(x=>`<span class="dow">${x}</span>`).join('');for(let i=0;i<first.getDay();i++)h+='<span></span>';for(let d=1;d<=last.getDate();d++){const x=new Date(cy,cm,d);const hit=events.some(e=>x>=new Date(e.s.toDateString())&&x<=new Date(e.t.toDateString()));h+=`<span class="${hit?'evt':''}" data-d="${d}">${d}</span>`}calendar.innerHTML=h;calendar.querySelectorAll('.evt').forEach(x=>x.onclick=()=>{const d=new Date(cy,cm,+x.dataset.d);const es=events.filter(e=>d>=new Date(e.s.toDateString())&&d<=new Date(e.t.toDateString()));calDetail.innerHTML=es.map(e=>`<a href="${e.source}" target="_blank">${e.name}</a> · ${e.location}`).join('<br>')})}
+prev.onclick=()=>{cm--;if(cm<0){cm=11;cy--}drawCal()};next.onclick=()=>{cm++;if(cm>11){cm=0;cy++}drawCal()};load();
+</script></body></html>

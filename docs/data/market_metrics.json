@@ -1,0 +1,54 @@
+{
+  "updated_at": "2026-09-29",
+  "production": {
+    "label": "피부개선 관련 의료기기 생산실적",
+    "unit": "억원",
+    "latest_year": 2025,
+    "latest_value": 1804,
+    "source": "식약처",
+    "scope": "범용전기수술기",
+    "history": [
+      {"year": 2023, "value": 1219},
+      {"year": 2024, "value": 1318},
+      {"year": 2025, "value": 1804}
+    ]
+  },
+  "export": {
+    "label": "피부개선 관련 의료기기 수출실적",
+    "unit": "백만달러",
+    "latest_year": 2025,
+    "latest_value": 157,
+    "source": "식약처",
+    "scope": "범용전기수술기",
+    "history": [
+      {"year": 2023, "value": 97},
+      {"year": 2024, "value": 105},
+      {"year": 2025, "value": 157}
+    ]
+  },
+  "market": {
+    "label": "국내 시장규모",
+    "unit": "연동 준비중",
+    "latest_year": null,
+    "latest_value": null,
+    "source": "식약처·KHIDI",
+    "scope": "에스테틱 관련 품목군",
+    "history": []
+  },
+  "approval": {
+    "label": "에스테틱 의료기기 인허가 추이",
+    "unit": "건",
+    "latest_year": null,
+    "latest_value": null,
+    "source": "식약처",
+    "history": []
+  },
+  "clinic": {
+    "label": "피부과·성형외과 진료 의료기관 수",
+    "unit": "개소",
+    "latest_year": null,
+    "latest_value": null,
+    "source": "HIRA",
+    "history": []
+  }
+}

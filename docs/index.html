@@ -205,7 +205,10 @@
 </div>
 
 <script>
-const DATA_URL='data/news.json', EXH_URL='data/exhibitions.json', PATENT_URL='data/patent_trend.json';
+const DATA_URL='data/news.json',
+      EXH_URL='data/exhibitions.json',
+      PATENT_URL='data/patent_trend.json',
+      MARKET_URL='data/market_metrics.json';
 const productAliases={
 '슈링크':['슈링크','Shurink','Ultraformer'],'인모드':['인모드','InMode'],'온다':['온다','Onda'],'볼뉴머':['볼뉴머','Volnewmer'],'덴서티':['덴서티','Density'],
 '울쎄라':['울쎄라','Ultherapy'],'써마지':['써마지','Thermage'],'티타늄':['티타늄','Titanium'],'세르프':['세르프','XERF'],'리프테라':['리프테라','Liftera'],'소프웨이브':['소프웨이브','Sofwave']
@@ -264,7 +267,55 @@ document.querySelectorAll('.seg-tab').forEach(x=>x.onclick=()=>{state.segment=x.
 metricOwn.onclick=()=>{state.kpi=state.kpi==='own'?null:'own';state.product='전체';render()};metricComp.onclick=()=>{state.kpi=state.kpi==='comp'?null:'comp';state.product='전체';render()};
 brandHome.onclick=()=>location.reload();footerHome.onclick=e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})};
 function setTheme(dark){document.documentElement.classList.toggle('dark',dark);themeToggle.textContent=dark?'☀️':'🌙';localStorage.setItem('madn-theme',dark?'dark':'light')}themeToggle.onclick=()=>setTheme(!document.documentElement.classList.contains('dark'));setTheme(localStorage.getItem('madn-theme')==='dark');
-async function load(){try{const r=await fetch(DATA_URL,{cache:'no-store'});allNews=r.ok?await r.json():[]}catch(e){allNews=[]}render();loadEvents();loadPatent()}
+async function load(){
+  try{
+    const r=await fetch(DATA_URL,{cache:'no-store'});
+    allNews=r.ok?await r.json():[];
+  }catch(e){
+    allNews=[];
+  }
+
+  render();
+  loadEvents();
+  loadPatent();
+  loadMarketMetrics();
+}
+async function loadMarketMetrics(){
+  let d={};
+
+  try{
+    const r=await fetch(MARKET_URL,{cache:'no-store'});
+    d=r.ok?await r.json():{};
+  }catch(e){
+    return;
+  }
+
+  const renderMarket=(key,valueId,sparkId)=>{
+    const x=d[key];
+    if(!x || x.latest_value==null) return;
+
+    document.getElementById(valueId).textContent=
+      `${Number(x.latest_value).toLocaleString()}${x.unit}`;
+
+    const history=Array.isArray(x.history)?x.history:[];
+    const spark=document.getElementById(sparkId);
+
+    if(!spark || !history.length) return;
+
+    const max=Math.max(...history.map(v=>Number(v.value)||0),1);
+
+    spark.innerHTML=history.map(v=>
+      `<i title="${v.year} · ${Number(v.value).toLocaleString()}${x.unit}"
+          style="height:${Math.max(5,(Number(v.value)||0)/max*30)}px"></i>`
+    ).join('');
+  };
+
+  renderMarket('production','metricProduction','sparkProduction');
+  renderMarket('export','metricExport','sparkExport');
+  renderMarket('market','metricMarket','sparkMarket');
+  renderMarket('approval','metricApproval','sparkApproval');
+  renderMarket('clinic','metricClinic','sparkClinic');
+}
 let cy,cm;function fmt(d){return `${d.getMonth()+1}.${String(d.getDate()).padStart(2,'0')}`}
 async function loadEvents(){try{const r=await fetch(EXH_URL,{cache:'no-store'});events=r.ok?await r.json():[]}catch(e){events=[]}events=events.map(e=>({...e,s:new Date(e.start_date),t:new Date(e.end_date)})).sort((a,b)=>a.s-b.s);const now=new Date();eventList.innerHTML=events.filter(e=>e.t>=new Date(now.toDateString())).slice(0,8).map(e=>`<div class="event-row"><a href="${e.source}" target="_blank">${e.name}</a><span>${fmt(e.s)}–${fmt(e.t)}</span></div>`).join('')||'<div class="empty">등록 행사 없음</div>';cy=now.getFullYear();cm=now.getMonth();drawCal()}
 function drawCal(){calTitle.textContent=`${cy}년 ${cm+1}월`;const first=new Date(cy,cm,1),last=new Date(cy,cm+1,0);let h=['일','월','화','수','목','금','토'].map(x=>`<span class="dow">${x}</span>`).join('');for(let i=0;i<first.getDay();i++)h+='<span></span>';for(let d=1;d<=last.getDate();d++){const x=new Date(cy,cm,d);const hit=events.some(e=>x>=new Date(e.s.toDateString())&&x<=new Date(e.t.toDateString()));h+=`<span class="${hit?'evt':''}" data-d="${d}">${d}</span>`}calendar.innerHTML=h;calendar.querySelectorAll('.evt').forEach(x=>x.onclick=()=>{const d=new Date(cy,cm,+x.dataset.d);const es=events.filter(e=>d>=new Date(e.s.toDateString())&&d<=new Date(e.t.toDateString()));calDetail.innerHTML=es.map(e=>`<a href="${e.source}" target="_blank">${e.name}</a><br>${e.location}`).join('<br><br>')})}prev.onclick=()=>{cm--;if(cm<0){cm=11;cy--}drawCal()};next.onclick=()=>{cm++;if(cm>11){cm=0;cy++}drawCal()}

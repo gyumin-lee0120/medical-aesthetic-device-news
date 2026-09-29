@@ -31,14 +31,25 @@
 .header-tools{display:flex;align-items:center;gap:8px}.period{display:flex;background:var(--surface);border-radius:8px;padding:3px;gap:2px}
 .period button,.iconbtn{border:0;background:transparent;color:var(--sub);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px}.period button.active{background:var(--bg);color:var(--text);font-weight:700}.iconbtn{border:1px solid var(--border);background:var(--bg);font-size:15px;line-height:1}
 .seg-tabs{display:flex;gap:8px;margin:12px 0 16px}.seg-tab{border:0;background:transparent;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer}.seg-tab.active{background:var(--accent);color:#fff;font-weight:700}
-.top-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 16px}.trend-card{background:var(--surface);border-radius:12px;padding:14px 16px;min-height:118px;box-shadow:var(--shadow)}.trend-card .label{font-size:11px;color:var(--sub)}.trend-card .big{font-size:23px;font-weight:800;margin-top:18px}.trend-card .sub{font-size:11px;color:var(--sub);margin-top:4px}.spark{height:34px;display:flex;align-items:flex-end;gap:3px;margin-top:9px}.spark i{display:block;width:8%;min-width:4px;background:var(--accent);border-radius:2px 2px 0 0;opacity:.86}
+.top-metrics{display:grid;grid-template-columns:grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 16px}.trend-card{background:var(--surface);border-radius:12px;padding:14px 16px;min-height:118px;box-shadow:var(--shadow)}.trend-card .label{font-size:11px;color:var(--sub)}.trend-card .big{font-size:23px;font-weight:800;margin-top:18px}.trend-card .sub{font-size:11px;color:var(--sub);margin-top:4px}.spark{height:34px;display:flex;align-items:flex-end;gap:3px;margin-top:9px}.spark i{display:block;width:8%;min-width:4px;background:var(--accent);border-radius:2px 2px 0 0;opacity:.86}
 .main-layout{
   display:grid;
-  grid-template-columns:145px minmax(0,1fr) 260px;
-  gap:20px;
+  grid-template-columns:160px minmax(0,1fr) 270px;
+  gap:22px;
   align-items:start;
 }
-.side-title{font-size:11px;color:var(--muted);margin-bottom:8px}.cats{position:sticky;top:14px}.cat{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px;margin:2px 0;border-radius:8px;color:var(--sub);cursor:pointer;font-size:12px}.cat.active{background:var(--accent-soft);color:var(--accent);font-weight:700}
+.desktop-cats{
+  position:sticky;
+  top:20px;
+  align-self:start;
+}
+
+.right-col{
+  position:sticky;
+  top:20px;
+  align-self:start;
+}
+.side-title{font-size:11px;color:var(--muted);margin-bottom:8px}.cats{position:static}.cat{display:block;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px;margin:2px 0;border-radius:8px;color:var(--sub);cursor:pointer;font-size:12px}.cat.active{background:var(--accent-soft);color:var(--accent);font-weight:700}
 .mobile-cat{display:none;width:100%;border:1px solid var(--border);background:var(--bg);color:var(--text);padding:10px;border-radius:9px;margin-bottom:10px}
 .brief{background:var(--purple-soft);border-radius:11px;padding:14px 16px;margin-bottom:12px}.brief b{color:var(--purple);font-size:12px}.brief p{margin:5px 0 0;font-size:13px}
 .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:12px}.metric{background:var(--surface);padding:12px;border-radius:10px;min-height:72px;box-shadow:var(--shadow)}.metric.clickable{cursor:pointer;transition:.15s}.metric.clickable:hover{outline:1px solid var(--border);transform:translateY(-1px)}.metric.clickable.selected{outline:2px solid var(--accent);background:var(--accent-soft)}.metric span{font-size:11px;color:var(--sub)}.metric strong{display:block;font-size:20px;margin-top:4px}
@@ -89,7 +100,7 @@
 .empty{padding:20px;text-align:center;color:var(--muted)}
 .skeleton{position:relative;overflow:hidden;background:var(--surface2)!important;color:transparent!important;border-radius:7px}.skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:sk 1.2s infinite}@keyframes sk{100%{transform:translateX(100%)}}
 .skel-line{height:12px;margin:9px 0}.skel-line.w80{width:80%}.skel-line.w55{width:55%}
-@media(max-width:900px){.main-layout{grid-template-columns:1fr}.desktop-cats{display:none}.mobile-cat{display:block}.right-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}.top-metrics{grid-template-columns:1fr}.comp-grid{grid-template-columns:1fr}}
+@media(max-width:900px){.main-layout{grid-template-columns:1fr}.desktop-cats{display:none}.mobile-cat{display:block}.right-col{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px}.top-metrics{grid-template-columns:1fr}.comp-grid{grid-template-columns:1fr}}
 @media(max-width:640px){.header{align-items:flex-start;flex-direction:column}.brand{align-items:flex-start}.metric-row{grid-template-columns:repeat(2,1fr)}.right-col{grid-template-columns:1fr}.seg-tabs{overflow:auto}.seg-tab{white-space:nowrap}.comp-head{align-items:flex-start;gap:6px;flex-direction:column}.footer{flex-direction:column}}
 </style>
 </head>
@@ -106,11 +117,44 @@
 
   <nav class="seg-tabs"><button class="seg-tab active" data-seg="전체">전체</button><button class="seg-tab" data-seg="에스테틱">에스테틱</button><button class="seg-tab" data-seg="써지컬">써지컬</button></nav>
 
-  <section class="top-metrics">
-    <div class="trend-card"><div class="label">RF · HIFU 이슈</div><div class="spark" id="sparkRF"></div><div class="big skeleton" id="topRF">&nbsp;</div><div class="sub" id="subRF">메인 모니터링</div></div>
-    <div class="trend-card"><div class="label">Laser · Pico 이슈</div><div class="spark" id="sparkLaser"></div><div class="big skeleton" id="topLaser">&nbsp;</div><div class="sub" id="subLaser">에스테틱 서브 모니터링</div></div>
-    <div class="trend-card"><div class="label">Surgical 이슈</div><div class="spark" id="sparkSurg"></div><div class="big skeleton" id="topSurg">&nbsp;</div><div class="sub" id="subSurg">메디컬솔루션본부 서브 모니터링</div></div>
-  </section>
+<section class="top-metrics market-metrics">
+
+  <div class="trend-card">
+    <div class="label">피부개선 관련 의료기기 생산실적</div>
+    <div class="big" id="metricProduction">연동 준비중</div>
+    <div class="sub">식약처 · 연간</div>
+    <div class="spark" id="sparkProduction"></div>
+  </div>
+
+  <div class="trend-card">
+    <div class="label">피부개선 관련 의료기기 수출실적</div>
+    <div class="big" id="metricExport">연동 준비중</div>
+    <div class="sub">식약처 · 연간</div>
+    <div class="spark" id="sparkExport"></div>
+  </div>
+
+  <div class="trend-card">
+    <div class="label">국내 시장규모</div>
+    <div class="big" id="metricMarket">연동 준비중</div>
+    <div class="sub">식약처·KHIDI · 연간</div>
+    <div class="spark" id="sparkMarket"></div>
+  </div>
+
+  <div class="trend-card">
+    <div class="label">에스테틱 의료기기 인허가 추이</div>
+    <div class="big" id="metricApproval">연동 준비중</div>
+    <div class="sub">식약처 · 허가·인증</div>
+    <div class="spark" id="sparkApproval"></div>
+  </div>
+
+  <div class="trend-card">
+    <div class="label">피부과·성형외과 진료 의료기관 수</div>
+    <div class="big" id="metricClinic">연동 준비중</div>
+    <div class="sub">HIRA · 국내영업 시장 Pool</div>
+    <div class="spark" id="sparkClinic"></div>
+  </div>
+
+</section>
 
   <section class="comp-list">
     <div class="comp-head">
@@ -174,7 +218,7 @@ function countRows(items,fn){const o={};items.forEach(i=>fn(i).forEach(k=>o[k]=(
 function pct(n,d){return d?Math.round(n/d*100):0}
 function preferredCats(){return ['전체','RF','HIFU','Laser·Pico','RF Microneedling','Surgical','시장동향','신제품·출시','인허가·규제','학회·임상','글로벌사업','기타']}
 function renderCats(){const present=new Set(allNews.flatMap(i=>A(i.categories)));const list=preferredCats().filter(x=>x==='전체'||present.has(x));categoryList.innerHTML=list.map(c=>`<button class="cat ${state.category===c?'active':''}" data-c="${c}">${c}</button>`).join('');mobileCategory.innerHTML=list.map(c=>`<option value="${c}" ${state.category===c?'selected':''}>${c}</option>`).join('');categoryList.querySelectorAll('.cat').forEach(x=>x.onclick=()=>{state.category=x.dataset.c;state.product='전체';render()})}
-function renderTop(items){const rf=items.filter(i=>A(i.categories).some(c=>['RF','HIFU'].includes(c))).length;const laser=items.filter(i=>A(i.categories).includes('Laser·Pico')).length;const surg=items.filter(i=>A(i.categories).includes('Surgical')||segs(i).includes('써지컬')).length;topRF.classList.remove('skeleton');topLaser.classList.remove('skeleton');topSurg.classList.remove('skeleton');topRF.textContent=rf+'건';topLaser.textContent=laser+'건';topSurg.textContent=surg+'건';[['sparkRF',rf],['sparkLaser',laser],['sparkSurg',surg]].forEach(([id,n])=>{const el=document.getElementById(id);const vals=[3,5,4,7,5,8,6,10].map(x=>Math.max(2,Math.round(x*(n?Math.min(1,n/12):.2))));el.innerHTML=vals.map(v=>`<i style="height:${v*3}px"></i>`).join('')})}
+function renderTop(items){}
 function renderExposure(){
   const base=allNews.filter(i=>
     inDays(i,state.days) &&

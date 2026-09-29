@@ -6367,28 +6367,35 @@
   },
   {
     "title": "케이바이오솔루션 강경윤 대표 “의료기기 FDA·MDR 허가, 대응 경험이 ...",
-    "summary": "피부과용 HIFU(집속형 초음파) 리프팅 의료기기와 제이에스알메디컬의 대장암 수술용 의료기기 프로젝트에서는 케이바이오솔루션이 미국 내 임상시험 수행기관을 직접 발굴·확보했습니다. 이후 FDA IDE Pre...",
+    "summary": "대표적인 성공 사례로는 클래시스의 ‘볼뉴머(Volnewmer)’가 있습니다. 볼뉴머는 FDA 510(k) 심사 과정에서 행정심사와 실질심사 모두 별도의 보완 요청 없이 승인을 획득했습니다. 또한 클래시스의 ‘울트라포머...",
     "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=330958",
     "source": "네이버 뉴스",
     "pub_date": "Wed, 12 Aug 2026 06:02:00 +0900",
-    "matched_keyword": "수술용 의료기기",
+    "matched_keyword": "볼뉴머",
     "categories": [
+      "RF",
       "HIFU",
-      "Surgical",
-      "인허가·규제",
-      "학회·임상"
+      "인허가·규제"
     ],
     "segments": [
-      "에스테틱",
-      "써지컬"
+      "에스테틱"
     ],
     "is_overseas": false,
     "own_company_mentions": [],
     "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [
+      "볼뉴머",
+      "Volnewmer"
+    ],
     "own_brand_mentions": [],
-    "competitor_mentions": []
+    "competitor_mentions": [
+      "클래시스",
+      "볼뉴머",
+      "Volnewmer"
+    ]
   },
   {
     "title": "닥터스피부과 목동점, 리프팅 수요 증가에 소프웨이브 도입 완료",
@@ -8969,6 +8976,91 @@
     "competitor_mentions": []
   },
   {
+    "title": "밀·설탕값 급등에 과자값까지…10월 식품물가 비상",
+    "summary": "제품 가격이 그대로여도 단위 중량당 가격은 상승하는 이른바 '슈링크플레이션'에 해당한다. 음료업계에서도 가격 인상이 이어진다. 웅진식품은 같은 날부터 아침햇살과 초록매실, 하늘보리 등 20여 개 품목의 가격을...",
+    "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=102717",
+    "source": "네이버 뉴스",
+    "pub_date": "Tue, 29 Sep 2026 10:48:00 +0900",
+    "matched_keyword": "슈링크",
+    "categories": [
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "슈링크"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "슈링크"
+    ]
+  },
+  {
+    "title": "’주근깨’ 레이저 많던데… 피코·루비·IPL, 뭐가 다를까?",
+    "summary": "532nm는 엔디야그(Nd) 레이저와 일부 피코 레이저에, 694nm는 루비 레이저에, 755nm는 알렉산드라이트 레이저에 활용되는 파장이다. 모두 멜라닌 색소에 반응해 색소 병변을 치료하는 원리다. 아름다운나라피부과 서동혜...",
+    "link": "https://health.chosun.com/site/data/html_dir/2026/09/28/2026092803598.html",
+    "source": "네이버 뉴스",
+    "pub_date": "Tue, 29 Sep 2026 09:16:00 +0900",
+    "matched_keyword": "피코 레이저",
+    "categories": [
+      "Laser·Pico"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "보톡스·필러에서 하이브리드까지…계속 진화하는 K-에스테틱",
+    "summary": "불과 5년전만에도 대중에게는 생소했던 에너지 기반 미용기기(EBD)인 울쎄라·써마지 등 리프팅 장비가... 에너지 기반 의료기기(EBD) 영역에서는 멀츠의 울쎄라, 솔타의 써마지, 클래시스(CLASSYS)의 슈링크(HIFU)·볼뉴머(RF)...",
+    "link": "https://www.medicaltimes.com/Main/News/NewsView.html?ID=1170877&ref=naverpc",
+    "source": "네이버 뉴스",
+    "pub_date": "Tue, 29 Sep 2026 05:30:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF",
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스",
+      "Classys",
+      "멀츠"
+    ],
+    "competitor_product_mentions": [
+      "슈링크",
+      "볼뉴머",
+      "울쎄라",
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스",
+      "Classys",
+      "멀츠",
+      "슈링크",
+      "볼뉴머",
+      "울쎄라",
+      "써마지"
+    ]
+  },
+  {
     "title": "친구 만나기도 부담… 물가가 만든 신조어 '프렌드플레이션' 무슨 뜻이...",
     "summary": "기업이 가격은 그대로 두고 용량만 줄이는 '슈링크플레이션(Shrinkflation)'도 비슷한 시기에 자리 잡은 신조어다. 프렌드플레이션은 이런 개별 품목 중심의 조어들과 달리, 물가 상승이 사람과 사람 사이의 만남과 관계...",
     "link": "https://www.wikitree.co.kr/articles/1149020",
@@ -10619,7 +10711,7 @@
     "competitor_mentions": []
   },
   {
-    "title": "(주)메디우스아이앤티, '콴타 유저미팅 코리아 2026' 개최…레이저 치료...",
+    "title": "(주)메디우스아이앤티, '퀀타 유저미팅 코리아 2026' 개최…레이저 치료...",
     "summary": "행사에서는 색소질환 치료를 비롯해 레이저 토닝, 피코 레이저, 멀티파장을 활용한 치료 접근 등 실제 진료 현장에서 다뤄지는 다양한 주제를 중심으로 발표와 임상 경험 공유가 진행됐다. 특히 다양한 색소 병변에...",
     "link": "https://www.rapportian.com/news/articleView.html?idxno=240675",
     "source": "네이버 뉴스",
@@ -23907,31 +23999,6 @@
     ]
   },
   {
-    "title": "\"돈 안 아깝다\" 강소라, 미간 주름에 꾸준히 맞는 ‘이 시술’ 뭐길래?",
-    "summary": "이어 \"1년에 한 번 정도, 활동이 많을 때는 두 번 정도 울쎄라를 받는다\"며, 최근에는 세르프 시술도 받았다고... 울쎄라·세르프도 언급…강소라의 피부 관리 루틴 강소라는 \"1년에 한 번 정도, 활동이 많을 때는 두 번 정도...",
-    "link": "https://kormedi.com/?p=2820718",
-    "source": "네이버 뉴스",
-    "pub_date": "Sun, 31 May 2026 20:44:00 +0900",
-    "matched_keyword": "세르프",
-    "categories": [
-      "RF",
-      "HIFU"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [
-      "세르프",
-      "울쎄라"
-    ],
-    "own_brand_mentions": [],
-    "competitor_mentions": [
-      "세르프",
-      "울쎄라"
-    ]
-  },
-  {
     "title": "권은비, 리프팅 시술에 '확 달라진 얼굴'..\"온다+소프웨이브 확실히 효...",
     "summary": "이후 권은비는 피부과에 가서 \"온다랑 소프웨이브를 받을 거다\"라며 레이저시술 전후 비교샷을 선보였다. 그는 마취크림을 바른 자신의 얼굴을 보고 \"원숭이 같다\"라며 웃었다. 시술을 마친 권은비는 \"확실히 효과가...",
     "link": "https://www.starnewskorea.com/music/2026/08/30/2026083023250491597",
@@ -28774,6 +28841,209 @@
       "클래시스",
       "볼뉴머"
     ]
+  },
+  {
+    "title": "[주식마감] 담관암 치료제 FDA 승인 소식에 HLB그룹주 '上'... 씨싸이트,...",
+    "summary": "미용의료기기 개발·제조·판매와 바이오 유통사업을 영위하고 있다. HA 기반 더말필러와 보툴리눔 톡신, 콜라겐 조직보충재, 더마 코스메틱 등 의료기기·의약품·화장품의 연구개발부터 제조·판매·유통까지...",
+    "link": "https://www.ggilbo.com/news/articleView.html?idxno=1183962",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 19:40:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "인허가·규제",
+      "학회·임상"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "허니버터칩·아침햇살도 오른다…10월 먹거리 가격 줄인상",
+    "summary": "오사쯔, 빠새, 허니버터칩 등 14개 품목은 가격을 유지하는 대신 중량을 줄이는 '슈링크플레이션(Shrinkflation)' 방식을 적용한다. 해태제과 관계자는 \"장기간 원가 부담이 지속되며 조정이 불가피한 품목에 대해서만...",
+    "link": "https://www.idomin.com/news/articleView.html?idxno=2015800",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 17:06:00 +0900",
+    "matched_keyword": "슈링크",
+    "categories": [
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "슈링크"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "슈링크"
+    ]
+  },
+  {
+    "title": "셀레스티얼의원 강미지 원장, 日 저명 의료진 대상 '덴서티 느와르' 시...",
+    "summary": "셀레스티얼의원 강미지 대표원장이 일본 현지에서 높은 신뢰를 받고 있는 히데키 이토(HIDEKI ITO) 원장과 고주파 리프팅 장비 '덴서티 느와르(DENSITY NOIR)'를 활용한 시술 경험과 임상 노하우를 공유하는 학술 교류의 시간을...",
+    "link": "http://www.medisobizanews.com/news/articleView.html?idxno=142631",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 16:52:00 +0900",
+    "matched_keyword": "고주파 리프팅",
+    "categories": [
+      "RF",
+      "학회·임상"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "덴서티",
+      "Density"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "덴서티",
+      "Density"
+    ]
+  },
+  {
+    "title": "\"AI기반 피부진료 구축\"...옵티마의원 신사점, 올리지오 XM 런칭 행사 진...",
+    "summary": "옵티마의원 신사점이 AI 피부 분석 데이터를 실제 상담과 진료에 연계하는 시스템을 구축했으며, 최근 '올리지오 XM' 런칭 행사를 개최해 새로운 진료 환경과 장비 활용 방향을 소개했다고 전했다. 옵티마의원의...",
+    "link": "https://www.beopbo.com/news/articleView.html?idxno=338003",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 16:32:00 +0900",
+    "matched_keyword": "올리지오 XM",
+    "categories": [
+      "RF",
+      "신제품·출시"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [
+      "올리지오",
+      "올리지오 X",
+      "올리지오 XM"
+    ],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [
+      "올리지오",
+      "올리지오 X",
+      "올리지오 XM"
+    ],
+    "competitor_mentions": []
+  },
+  {
+    "title": "[주식 클래스 <8>] ‘지PE지기 백전불태’ 사모펀드가 재편하는 미용 의...",
+    "summary": "이에 더해 투자 단가보다 시장 가격이 높기에 투자사로서는 급할 이유가 없다.향후 국내에서의 업황 반등, 미국과 브라질에서의 꾸준한 성장세 유지, 연말 중국 ‘볼뉴머’ 허가 등이 주가를 좌우할 주요...",
+    "link": "https://economychosun.com/site/data/html_dir/2026/09/19/2026091900020.html",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 15:10:00 +0900",
+    "matched_keyword": "볼뉴머",
+    "categories": [
+      "RF",
+      "시장동향",
+      "인허가·규제"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "볼뉴머"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "볼뉴머"
+    ]
+  },
+  {
+    "title": "한국비엔씨 주가, 상한가... 이유는?",
+    "summary": "미용의료기기 개발·제조·판매와 바이오 유통사업을 영위하고 있다. HA 기반 더말필러와 보툴리눔 톡신, 콜라겐 조직보충재, 더마 코스메틱 등 의료기기·의약품·화장품의 연구개발부터 제조·판매·유통까지 사업...",
+    "link": "https://www.ggilbo.com/news/articleView.html?idxno=1183902",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 14:26:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "학회·임상"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "'추석 후유증' 처진 얼굴선, 피부과 진단으로 노화 원인부터 짚어야",
+    "summary": "이 경우 피부과에서는 근막층까지 에너지를 전달하는 울쎄라와 같은 초음파 리프팅으로 처진 얼굴선을 구조적으로 끌어올리는 방식을 고려하는 것이 좋다. 피부 처짐보다 볼륨과 무게 자체가 문제인 경우도 있다....",
+    "link": "https://www.eroun.net/news/articleView.html?idxno=91081",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 13:40:00 +0900",
+    "matched_keyword": "울쎄라",
+    "categories": [
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "울쎄라"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "울쎄라"
+    ]
+  },
+  {
+    "title": "스페클립스, 150억 프리IPO 투자 유치…기업가치 1800억원",
+    "summary": "고주파(RF) 미용의료기기 ‘써젯(Therjet)’은 모노폴라와 바이폴라 기능을 한 기기에 구현한 제품으로 현재 인허가를 진행하고 있다. 2027년 상반기 출시가 목표다. 제모용 듀얼 롱펄스 레이저 의료기기 ‘듀오-K(Duo-K)...",
+    "link": "https://www.edaily.co.kr/News/Read?newsId=02502646645584712&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "source": "네이버 뉴스",
+    "pub_date": "Mon, 28 Sep 2026 10:41:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "RF",
+      "Laser·Pico",
+      "시장동향",
+      "신제품·출시",
+      "인허가·규제"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
   },
   {
     "title": "[인터뷰]K-뷰티 M&A 딜엔 반드시 그가 있다 \"써보고 판단해요\"",
@@ -35755,35 +36025,6 @@
     "competitor_mentions": [
       "제이시스메디칼",
       "덴서티"
-    ]
-  },
-  {
-    "title": "[K-뷰티 라운드테이블] \"미용 의료기기, 병원-소비자 선순환 핵심\"",
-    "summary": "대표 제품인 집속초음파(HIFU) 기반 '슈링크'와 고주파(RF) 기반 '볼뉴머'를 중심으로 한 장비부터 소모품까지 이어지는 매출 구조를 구축했다. 최 대표는 \"슈링크 시술에 사용되는 카트리지는 일정 횟수 사용 후 병원이 다시...",
-    "link": "https://dealsite.co.kr/articles/162662",
-    "source": "네이버 뉴스",
-    "pub_date": "Mon, 01 Jun 2026 10:16:00 +0900",
-    "matched_keyword": "볼뉴머",
-    "categories": [
-      "RF",
-      "HIFU",
-      "시장동향"
-    ],
-    "segments": [
-      "에스테틱"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [
-      "슈링크",
-      "볼뉴머"
-    ],
-    "own_brand_mentions": [],
-    "competitor_mentions": [
-      "슈링크",
-      "볼뉴머"
     ]
   },
   {

@@ -182,9 +182,21 @@
   "clinic": {
     "label": "피부과·성형외과 진료 의료기관 수",
     "unit": "개소",
-    "latest_year": null,
-    "latest_value": null,
+    "latest_year": 2026,
+    "latest_value": 19091,
     "source": "HIRA",
-    "history": []
+    "scope": "피부과·성형외과 진료과목 신고 의료기관, 요양기관 중복 제거",
+    "detail": {
+      "피부과": 17837,
+      "성형외과": 5212,
+      "중복": 3958,
+      "합계_중복제거": 19091
+    },
+    "history": [
+      {
+        "year": 2026,
+        "value": 19091
+      }
+    ]
   }
 }

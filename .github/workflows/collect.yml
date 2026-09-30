@@ -30,11 +30,13 @@ jobs:
         working-directory: collectors
         continue-on-error: true
         run: python overseas_rss.py
-              - name: 식약처 의료기기 인허가 수집
+
+      - name: 식약처 의료기기 인허가 수집
         working-directory: collectors
         env:
           MFDS_API_KEY: ${{ secrets.MFDS_API_KEY }}
         run: python mfds_approvals.py
+
       - name: KIPRIS 특허 트렌드
         working-directory: collectors
         continue-on-error: true

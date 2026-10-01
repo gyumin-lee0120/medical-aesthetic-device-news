@@ -14,7 +14,7 @@ CFG = yaml.safe_load(
 )
 
 API_URL = (
-    "https://plus.kipris.or.kr/kipo-api/kipi/"
+    "http://plus.kipris.or.kr/kipo-api/kipi/"
     "patUtiModInfoSearchSevice/getWordSearch"
 )
 

@@ -70,7 +70,13 @@
   background:var(--accent);
   border-radius:2px 2px 0 0;
 }
-
+.spark-item b{
+  font-size:8px;
+  font-weight:700;
+  color:var(--accent);
+  line-height:1;
+  white-space:nowrap;
+}
 .spark-item small{
   font-size:8px;
   color:var(--muted);
@@ -179,7 +185,7 @@
   </div>
 
   <div class="trend-card">
-    <div class="label">에스테틱 의료기기 인허가 추이</div>
+    <div class="label">에스테틱 의료기기 인허가 추이 (2023 기준)</div>
     <div class="big" id="metricApproval">연동 준비중</div>
     <div class="sub">식약처 · 허가·인증</div>
     <div class="spark" id="sparkApproval"></div>
@@ -324,44 +330,39 @@ async function loadMarketMetrics(){
   }
 
   const renderMarket=(key,valueId,sparkId)=>{
-    const x=d[key];
-    if(!x || x.latest_value==null) return;
+  const x=d[key];
+  if(!x || x.latest_value==null) return;
 
-    document.getElementById(valueId).textContent=
-      `${Number(x.latest_value).toLocaleString()}${x.unit}`;
+  document.getElementById(valueId).textContent=
+    `${Number(x.latest_value).toLocaleString()}${x.unit}`;
 
-    let history=Array.isArray(x.history)?x.history:[];
+  let history=Array.isArray(x.history)?x.history:[];
 
-    if(key==='approval'){
-      history=history.slice(-5);
-    }
-    const spark=document.getElementById(sparkId);
+  if(key==='approval'){
+    history=history.slice(-5);
+  }
 
-    if(!spark || !history.length) return;
+  const spark=document.getElementById(sparkId);
+  if(!spark || !history.length) return;
 
-    const max=Math.max(...history.map(v=>Number(v.value)||0),1);
+  const max=Math.max(...history.map(v=>Number(v.value)||0),1);
 
-    const first=history[0];
-    const last=history[history.length-1];
+  spark.innerHTML=
+    `<div class="spark-bars">` +
+    history.map((v,i)=>{
+      const prev=i>0 ? Number(history[i-1].value) : null;
+      const curr=Number(v.value)||0;
+      const yoy=prev>0 ? ((curr-prev)/prev*100) : null;
 
-    let changeText='';
-
-    if(history.length > 1 && first && last && Number(first.value)>0){
-      const change=((Number(last.value)-Number(first.value))/Number(first.value))*100;
-      changeText=`${String(first.year).slice(-2)}→${String(last.year).slice(-2)} ${change>=0?'+':''}${change.toFixed(1)}%`;
-    }
-
-    spark.innerHTML=
-      `<div class="spark-bars">` +
-    history.map(v=>
-      `<span class="spark-item">
-        <i title="${v.year} · ${Number(v.value).toLocaleString()}${x.unit}"
-          style="height:${Math.max(5,(Number(v.value)||0)/max*30)}px"></i>
-        <small>${String(v.year).slice(-2)}</small>
-      </span>`
-    ).join('') +
-    `</div>` +
-    (changeText ? `<b class="spark-change">${changeText}</b>` : '');
+      return `
+        <span class="spark-item">
+          ${yoy!==null ? `<b>${yoy>=0?'+':''}${yoy.toFixed(1)}%</b>` : `<b>&nbsp;</b>`}
+          <i title="${v.year} · ${curr.toLocaleString()}${x.unit}"
+             style="height:${Math.max(5,curr/max*30)}px"></i>
+          <small>${String(v.year).slice(-2)}</small>
+        </span>`;
+    }).join('') +
+    `</div>`;
   };
 
   renderMarket('production','metricProduction','sparkProduction');

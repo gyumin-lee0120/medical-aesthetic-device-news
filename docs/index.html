@@ -122,6 +122,71 @@
   font-size:10px;
   color:var(--accent);
 }
+.metric-group{
+  margin-top:12px;
+}
+
+.metric-line{
+  padding:7px 0;
+  border-top:1px solid var(--border);
+}
+
+.metric-line:first-child{
+  border-top:0;
+}
+
+.metric-line-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.metric-line-name{
+  font-size:10px;
+  color:var(--sub);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.metric-line-value{
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.metric-line-yoy{
+  color:var(--accent);
+  font-size:10px;
+  font-weight:700;
+  margin-left:4px;
+}
+
+.metric-mini{
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  height:25px;
+  margin-top:5px;
+}
+
+.metric-mini span{
+  flex:1;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:3px;
+  font-size:8px;
+  color:var(--muted);
+}
+
+.metric-mini i{
+  display:block;
+  width:6px;
+  background:var(--accent);
+  border-radius:2px 2px 0 0;
+}
 .right-col{
   position:sticky;
   top:20px;
@@ -198,24 +263,21 @@
 <section class="top-metrics market-metrics">
 
   <div class="trend-card">
-    <div class="label">피부개선 관련 의료기기 생산실적</div>
-    <div class="big" id="metricProduction">연동 준비중</div>
-    <div class="sub">식약처 · 연간</div>
-    <div class="spark" id="sparkProduction"></div>
+    <div class="label">주요 피부개선 의료기기 생산 동향</div>
+    <div class="sub">식약처 · '23~'25 · 억원</div>
+    <div class="metric-group" id="metricProduction"></div>
   </div>
 
   <div class="trend-card">
-    <div class="label">피부개선 관련 의료기기 수출실적</div>
-    <div class="big" id="metricExport">연동 준비중</div>
-    <div class="sub">식약처 · 연간</div>
-    <div class="spark" id="sparkExport"></div>
+    <div class="label">주요 피부개선 의료기기 수출 동향</div>
+    <div class="sub">식약처 · '23~'25 · 백만달러</div>
+    <div class="metric-group" id="metricExport"></div>
   </div>
 
   <div class="trend-card">
-    <div class="label">국내 시장규모</div>
-    <div class="big" id="metricMarket">연동 준비중</div>
-    <div class="sub">식약처·KHIDI · 연간</div>
-    <div class="spark" id="sparkMarket"></div>
+    <div class="label">주요 피부개선 의료기기 수입 동향</div>
+    <div class="sub">식약처 · '23~'25 · 백만달러</div>
+    <div class="metric-group" id="metricMarket"></div>
   </div>
 
   <div class="trend-card">
@@ -362,7 +424,50 @@ async function loadMarketMetrics(){
   }catch(e){
     return;
   }
+  const renderTrendGroup=(key,valueId)=>{
+    const x=d[key];
+    const box=document.getElementById(valueId);
 
+    if(!x || !box || !Array.isArray(x.items)) return;
+
+    box.innerHTML=x.items.map(item=>{
+      const h=item.history || [];
+      if(!h.length) return '';
+
+      const latest=h[h.length-1];
+      const prev=h.length>1 ? h[h.length-2] : null;
+
+      const yoy=
+        prev && Number(prev.value)>0
+          ? ((Number(latest.value)-Number(prev.value))/Number(prev.value))*100
+          : null;
+
+      const max=Math.max(...h.map(v=>Number(v.value)||0),1);
+
+      return `
+        <div class="metric-line">
+          <div class="metric-line-head">
+            <span class="metric-line-name">${item.name}</span>
+            <span class="metric-line-value">
+              ${Number(latest.value).toLocaleString()}
+              <b class="metric-line-yoy">
+                ${yoy!==null ? `${yoy>=0?'+':''}${yoy.toFixed(1)}%` : ''}
+              </b>
+            </span>
+          </div>
+
+          <div class="metric-mini">
+            ${h.map(v=>`
+              <span>
+                <i style="height:${Math.max(4,(Number(v.value)||0)/max*18)}px"></i>
+                '${String(v.year).slice(-2)}
+              </span>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }).join('');
+  };
   const renderMarket=(key,valueId,sparkId)=>{
   const x=d[key];
   if(!x || x.latest_value==null) return;
@@ -399,9 +504,9 @@ async function loadMarketMetrics(){
     `</div>`;
   };
 
-  renderMarket('production','metricProduction','sparkProduction');
-  renderMarket('export','metricExport','sparkExport');
-  renderMarket('market','metricMarket','sparkMarket');
+  renderTrendGroup('production','metricProduction');
+  renderTrendGroup('export','metricExport');
+  renderTrendGroup('market','metricMarket');
   renderMarket('approval','metricApproval','sparkApproval');
   renderMarket('clinic','metricClinic','sparkClinic');
 }

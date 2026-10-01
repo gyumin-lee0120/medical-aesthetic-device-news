@@ -1,57 +1,97 @@
 {
   "updated_at": "2026-09-29",
   "production": {
-    "label": "피부개선 관련 의료기기 생산실적",
+    "label": "주요 피부개선 의료기기 생산 동향",
     "unit": "억원",
-    "latest_year": 2025,
-    "latest_value": 1804,
     "source": "식약처",
-    "scope": "범용전기수술기",
-    "history": [
+    "items": [
       {
-        "year": 2023,
-        "value": 1219
+        "name": "범용전기수술기",
+        "history": [
+          {"year": 2023, "value": 1219},
+          {"year": 2024, "value": 1318},
+          {"year": 2025, "value": 1804}
+        ]
       },
       {
-        "year": 2024,
-        "value": 1318
+        "name": "일회용 전극",
+        "history": [
+          {"year": 2023, "value": 1207},
+          {"year": 2024, "value": 1255},
+          {"year": 2025, "value": 1889}
+        ]
       },
       {
-        "year": 2025,
-        "value": 1804
+        "name": "조직수복용생체재료",
+        "history": [
+          {"year": 2023, "value": 5017},
+          {"year": 2024, "value": 4842},
+          {"year": 2025, "value": 5224}
+        ]
       }
     ]
   },
   "export": {
-    "label": "피부개선 관련 의료기기 수출실적",
+    "label": "주요 피부개선 의료기기 수출 동향",
     "unit": "백만달러",
-    "latest_year": 2025,
-    "latest_value": 157,
     "source": "식약처",
-    "scope": "범용전기수술기",
-    "history": [
+    "items": [
       {
-        "year": 2023,
-        "value": 97
+        "name": "범용전기수술기",
+        "history": [
+          {"year": 2023, "value": 97},
+          {"year": 2024, "value": 105},
+          {"year": 2025, "value": 157}
+        ]
       },
       {
-        "year": 2024,
-        "value": 105
+        "name": "일회용 전극",
+        "history": [
+          {"year": 2023, "value": 38},
+          {"year": 2024, "value": 49},
+          {"year": 2025, "value": 90}
+        ]
       },
       {
-        "year": 2025,
-        "value": 157
+        "name": "조직수복용생체재료",
+        "history": [
+          {"year": 2023, "value": 346},
+          {"year": 2024, "value": 370},
+          {"year": 2025, "value": 376}
+        ]
       }
     ]
   },
   "market": {
-    "label": "국내 시장규모",
-    "unit": "연동 준비중",
-    "latest_year": null,
-    "latest_value": null,
-    "source": "식약처·KHIDI",
-    "scope": "에스테틱 관련 품목군",
-    "history": []
+    "label": "주요 피부개선 의료기기 수입 동향",
+    "unit": "백만달러",
+    "source": "식약처",
+    "items": [
+      {
+        "name": "범용전기수술기",
+        "history": [
+          {"year": 2023, "value": 26},
+          {"year": 2024, "value": 36},
+          {"year": 2025, "value": 61}
+        ]
+      },
+      {
+        "name": "일회용 전극",
+        "history": [
+          {"year": 2023, "value": 112},
+          {"year": 2024, "value": 107},
+          {"year": 2025, "value": 169}
+        ]
+      },
+      {
+        "name": "조직수복용생체재료",
+        "history": [
+          {"year": 2023, "value": 46},
+          {"year": 2024, "value": 61},
+          {"year": 2025, "value": 77}
+        ]
+      }
+    ]
   },
   "approval": {
     "label": "에스테틱 의료기기 인허가 추이",

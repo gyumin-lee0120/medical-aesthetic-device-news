@@ -346,9 +346,9 @@ async function loadMarketMetrics(){
 
     let changeText='';
 
-    if(first && last && Number(first.value)>0){
+    if(history.length > 1 && first && last && Number(first.value)>0){
       const change=((Number(last.value)-Number(first.value))/Number(first.value))*100;
-      changeText=`${change>=0?'+':''}${change.toFixed(1)}%`;
+      changeText=`${String(first.year).slice(-2)}→${String(last.year).slice(-2)} ${change>=0?'+':''}${change.toFixed(1)}%`;
     }
 
     spark.innerHTML=

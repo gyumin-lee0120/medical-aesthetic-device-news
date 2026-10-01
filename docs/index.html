@@ -117,6 +117,38 @@
   line-height:1;
 }
 
+.metric-big-row{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+
+.latest-yoy{
+  font-size:11px;
+  font-weight:700;
+  color:var(--accent);
+}
+
+.metric-unit{
+  text-align:right;
+  margin-top:5px;
+  font-size:9px;
+  color:var(--muted);
+}
+
+.metric-scope{
+  margin-top:8px;
+  font-size:8px;
+  color:var(--muted);
+  line-height:1.35;
+}
+
+.metric-source{
+  margin-top:4px;
+  font-size:8px;
+  color:var(--muted);
+}
+
 .spark-change{
   margin-left:8px;
   font-size:10px;
@@ -264,20 +296,38 @@
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 생산 동향</div>
-    <div class="sub">식약처 · '23~'25 · 억원</div>
-    <div class="metric-group" id="metricProduction"></div>
+    <div class="metric-big-row">
+      <div class="big" id="metricProduction">-</div>
+      <div class="latest-yoy" id="yoyProduction"></div>
+    </div>
+    <div class="metric-unit">[단위: 억 원]</div>
+    <div class="spark" id="sparkProduction"></div>
+    <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
+    <div class="metric-source">출처: 식품의약품안전처</div>
   </div>
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 수출 동향</div>
-    <div class="sub">식약처 · '23~'25 · 백만달러</div>
-    <div class="metric-group" id="metricExport"></div>
+    <div class="metric-big-row">
+      <div class="big" id="metricExport">-</div>
+      <div class="latest-yoy" id="yoyExport"></div>
+    </div>
+    <div class="metric-unit">[단위: 백만달러]</div>
+    <div class="spark" id="sparkExport"></div>
+    <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
+    <div class="metric-source">출처: 식품의약품안전처</div>
   </div>
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 수입 동향</div>
-    <div class="sub">식약처 · '23~'25 · 백만달러</div>
-    <div class="metric-group" id="metricMarket"></div>
+    <div class="metric-big-row">
+      <div class="big" id="metricMarket">-</div>
+      <div class="latest-yoy" id="yoyMarket"></div>
+    </div>
+    <div class="metric-unit">[단위: 백만달러]</div>
+    <div class="spark" id="sparkMarket"></div>
+    <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
+    <div class="metric-source">출처: 식품의약품안전처</div>
   </div>
 
   <div class="trend-card">
@@ -473,7 +523,24 @@ async function loadMarketMetrics(){
   if(!x || x.latest_value==null) return;
 
   document.getElementById(valueId).textContent=
-    `${Number(x.latest_value).toLocaleString()}${x.unit}`;
+    Number(x.latest_value).toLocaleString();
+
+  const yoyId={
+    production:'yoyProduction',
+    export:'yoyExport',
+    market:'yoyMarket'
+  }[key];
+
+  if(yoyId && Array.isArray(x.history) && x.history.length>1){
+    const prev=Number(x.history[x.history.length-2].value);
+    const curr=Number(x.history[x.history.length-1].value);
+
+    if(prev>0){
+      const yoy=((curr-prev)/prev)*100;
+      document.getElementById(yoyId).textContent=
+        `YoY ${yoy>=0?'+':''}${yoy.toFixed(1)}%`;
+    }
+  }
 
   let history=Array.isArray(x.history)?x.history:[];
 

@@ -2,95 +2,41 @@
   "updated_at": "2026-09-29",
   "production": {
     "label": "주요 피부개선 의료기기 생산 동향",
-    "unit": "억원",
-    "source": "식약처",
-    "items": [
-      {
-        "name": "범용전기수술기",
-        "history": [
-          {"year": 2023, "value": 1219},
-          {"year": 2024, "value": 1318},
-          {"year": 2025, "value": 1804}
-        ]
-      },
-      {
-        "name": "일회용 전극",
-        "history": [
-          {"year": 2023, "value": 1207},
-          {"year": 2024, "value": 1255},
-          {"year": 2025, "value": 1889}
-        ]
-      },
-      {
-        "name": "조직수복용생체재료",
-        "history": [
-          {"year": 2023, "value": 5017},
-          {"year": 2024, "value": 4842},
-          {"year": 2025, "value": 5224}
-        ]
-      }
+    "unit": "억 원",
+    "latest_year": 2025,
+    "latest_value": 8917,
+    "source": "식품의약품안전처",
+    "scope": "범용전기수술기·일회용 전극·조직수복용생체재료 합산",
+    "history": [
+      {"year": 2023, "value": 7443},
+      {"year": 2024, "value": 7415},
+      {"year": 2025, "value": 8917}
     ]
   },
   "export": {
     "label": "주요 피부개선 의료기기 수출 동향",
     "unit": "백만달러",
-    "source": "식약처",
-    "items": [
-      {
-        "name": "범용전기수술기",
-        "history": [
-          {"year": 2023, "value": 97},
-          {"year": 2024, "value": 105},
-          {"year": 2025, "value": 157}
-        ]
-      },
-      {
-        "name": "일회용 전극",
-        "history": [
-          {"year": 2023, "value": 38},
-          {"year": 2024, "value": 49},
-          {"year": 2025, "value": 90}
-        ]
-      },
-      {
-        "name": "조직수복용생체재료",
-        "history": [
-          {"year": 2023, "value": 346},
-          {"year": 2024, "value": 370},
-          {"year": 2025, "value": 376}
-        ]
-      }
+    "latest_year": 2025,
+    "latest_value": 623,
+    "source": "식품의약품안전처",
+    "scope": "범용전기수술기·일회용 전극·조직수복용생체재료 합산",
+    "history": [
+      {"year": 2023, "value": 481},
+      {"year": 2024, "value": 524},
+      {"year": 2025, "value": 623}
     ]
   },
   "market": {
     "label": "주요 피부개선 의료기기 수입 동향",
     "unit": "백만달러",
-    "source": "식약처",
-    "items": [
-      {
-        "name": "범용전기수술기",
-        "history": [
-          {"year": 2023, "value": 26},
-          {"year": 2024, "value": 36},
-          {"year": 2025, "value": 61}
-        ]
-      },
-      {
-        "name": "일회용 전극",
-        "history": [
-          {"year": 2023, "value": 112},
-          {"year": 2024, "value": 107},
-          {"year": 2025, "value": 169}
-        ]
-      },
-      {
-        "name": "조직수복용생체재료",
-        "history": [
-          {"year": 2023, "value": 46},
-          {"year": 2024, "value": 61},
-          {"year": 2025, "value": 77}
-        ]
-      }
+    "latest_year": 2025,
+    "latest_value": 307,
+    "source": "식품의약품안전처",
+    "scope": "범용전기수술기·일회용 전극·조직수복용생체재료 합산",
+    "history": [
+      {"year": 2023, "value": 184},
+      {"year": 2024, "value": 204},
+      {"year": 2025, "value": 307}
     ]
   },
   "approval": {

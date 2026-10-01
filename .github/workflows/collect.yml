@@ -37,11 +37,7 @@ jobs:
           MFDS_API_KEY: ${{ secrets.MFDS_API_KEY }}
         run: python mfds_approvals.py
 
-      - name: HIRA 의료기관 수 수집
-        working-directory: collectors
-        env:
-          HIRA_API_KEY: ${{ secrets.HIRA_API_KEY }}
-        run: python hira_clinics.py
+      
 
       - name: KIPRIS 특허 트렌드
         working-directory: collectors

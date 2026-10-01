@@ -72,7 +72,7 @@ sources:
         url: "https://www.globalcosmeticsnews.com/regions/?format=feed&type=rss"
         segment: "에스테틱"
   kipris_patents:
-    enabled: false   # KIPRIS Plus API 키 발급 후 true
+    enabled: true   # KIPRIS Plus API 키 발급 후 true
     keywords: ["고주파 리프팅","집속초음파","피코 레이저","의료용 레이저","수술용 레이저"]
   exhibitions:
     enabled: true

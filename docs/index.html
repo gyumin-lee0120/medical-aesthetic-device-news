@@ -48,7 +48,40 @@
   top:20px;
   align-self:start;
 }
+.spark-bars{
+  display:flex;
+  align-items:flex-end;
+  gap:5px;
+  height:42px;
+}
 
+.spark-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-end;
+  gap:3px;
+  height:42px;
+}
+
+.spark-item i{
+  display:block;
+  width:9px;
+  background:var(--accent);
+  border-radius:2px 2px 0 0;
+}
+
+.spark-item small{
+  font-size:8px;
+  color:var(--muted);
+  line-height:1;
+}
+
+.spark-change{
+  margin-left:8px;
+  font-size:10px;
+  color:var(--accent);
+}
 .right-col{
   position:sticky;
   top:20px;
@@ -297,17 +330,38 @@ async function loadMarketMetrics(){
     document.getElementById(valueId).textContent=
       `${Number(x.latest_value).toLocaleString()}${x.unit}`;
 
-    const history=Array.isArray(x.history)?x.history:[];
+    let history=Array.isArray(x.history)?x.history:[];
+
+    if(key==='approval'){
+      history=history.slice(-5);
+    }
     const spark=document.getElementById(sparkId);
 
     if(!spark || !history.length) return;
 
     const max=Math.max(...history.map(v=>Number(v.value)||0),1);
 
-    spark.innerHTML=history.map(v=>
-      `<i title="${v.year} · ${Number(v.value).toLocaleString()}${x.unit}"
-          style="height:${Math.max(5,(Number(v.value)||0)/max*30)}px"></i>`
-    ).join('');
+    const first=history[0];
+    const last=history[history.length-1];
+
+    let changeText='';
+
+    if(first && last && Number(first.value)>0){
+      const change=((Number(last.value)-Number(first.value))/Number(first.value))*100;
+      changeText=`${change>=0?'+':''}${change.toFixed(1)}%`;
+    }
+
+    spark.innerHTML=
+      `<div class="spark-bars">` +
+    history.map(v=>
+      `<span class="spark-item">
+        <i title="${v.year} · ${Number(v.value).toLocaleString()}${x.unit}"
+          style="height:${Math.max(5,(Number(v.value)||0)/max*30)}px"></i>
+        <small>${String(v.year).slice(-2)}</small>
+      </span>`
+    ).join('') +
+    `</div>` +
+    (changeText ? `<b class="spark-change">${changeText}</b>` : '');
   };
 
   renderMarket('production','metricProduction','sparkProduction');

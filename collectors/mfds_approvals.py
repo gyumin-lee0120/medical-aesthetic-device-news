@@ -37,8 +37,10 @@ OUT_FILES = [
 
 def fetch_product(category, product):
     page = 1
-    rows = 500
+    rows = 200
     results = []
+
+    session = requests.Session()
 
     while True:
         params = {
@@ -49,8 +51,24 @@ def fetch_product(category, product):
             "PRDUCT": product,
         }
 
-        r = requests.get(API_URL, params=params, timeout=30)
-        r.raise_for_status()
+        for attempt in range(3):
+            try:
+                r = session.get(
+                    API_URL,
+                    params=params,
+                    timeout=(10, 90),
+                )
+                r.raise_for_status()
+                break
+
+            except requests.exceptions.RequestException as e:
+                if attempt == 2:
+                    raise
+
+                print(
+                    f"[재시도] {category} / {product} "
+                    f"page {page} / {attempt + 1}"
+                )
 
         root = ET.fromstring(r.text)
 
@@ -65,7 +83,6 @@ def fetch_product(category, product):
         items = root.findall("./body/items/item")
 
         for item in items:
-            # 응답 필드를 전부 보존
             raw = {}
 
             for child in list(item):
@@ -73,7 +90,6 @@ def fetch_product(category, product):
 
             permit_date = raw.get("PRMISN_DT", "")
 
-            # 지금 필요한 최신 구간만 저장
             if (
                 len(permit_date) >= 4
                 and permit_date[:4].isdigit()
@@ -88,6 +104,11 @@ def fetch_product(category, product):
                     "company": raw.get("ENTRPS", ""),
                     "raw": raw,
                 })
+
+        print(
+            f"  page {page} 완료 "
+            f"({min(page * rows, total)}/{total})"
+        )
 
         if page * rows >= total:
             break

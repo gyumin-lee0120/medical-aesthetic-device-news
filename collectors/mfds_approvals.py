@@ -3,7 +3,6 @@ import json
 import requests
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from collections import defaultdict
 
 BASE = Path(__file__).resolve().parents[1]
 
@@ -15,21 +14,28 @@ API_URL = (
 
 API_KEY = os.environ.get("MFDS_API_KEY")
 
-# 에스테틱 장비 관련 식약처 품목명
-TARGET_PRODUCTS = [
-    "범용전기수술기",
-    "집속형초음파자극시스템",
-    "레이저수술기",
-    "엔디야그레이저수술기",
-]
+# 식약처 공식 품목명 기준 후보군
+TARGET_PRODUCTS = {
+    "RF": [
+        "범용전기수술기",
+    ],
+    "HIFU": [
+        "집속형초음파자극시스템",
+    ],
+    "LASER": [
+        "레이저수술기",
+        "엔디야그레이저수술기",
+        "탄산가스레이저수술기",
+    ],
+}
 
 OUT_FILES = [
-    BASE / "data" / "market_metrics.json",
-    BASE / "docs" / "data" / "market_metrics.json",
+    BASE / "data" / "mfds_aesthetic_candidates.json",
+    BASE / "docs" / "data" / "mfds_aesthetic_candidates.json",
 ]
 
 
-def fetch_product(product):
+def fetch_product(category, product):
     page = 1
     rows = 100
     results = []
@@ -40,7 +46,7 @@ def fetch_product(product):
             "pageNo": page,
             "numOfRows": rows,
             "type": "xml",
-            "prduct": product,
+            "PRDUCT": product,
         }
 
         r = requests.get(API_URL, params=params, timeout=30)
@@ -59,11 +65,29 @@ def fetch_product(product):
         items = root.findall("./body/items/item")
 
         for item in items:
-            results.append({
-                "product": item.findtext("PRDUCT") or "",
-                "permit_no": item.findtext("PRODUCT_PRMISN_NO") or "",
-                "permit_date": item.findtext("PRMISN_DT") or "",
-            })
+            # 응답 필드를 전부 보존
+            raw = {}
+
+            for child in list(item):
+                raw[child.tag] = (child.text or "").strip()
+
+            permit_date = raw.get("PRMISN_DT", "")
+
+            # 지금 필요한 최신 구간만 저장
+            if (
+                len(permit_date) >= 4
+                and permit_date[:4].isdigit()
+                and int(permit_date[:4]) >= 2024
+            ):
+                results.append({
+                    "category": category,
+                    "query_product": product,
+                    "permit_date": permit_date,
+                    "permit_no": raw.get("PRODUCT_PRMISN_NO", ""),
+                    "product": raw.get("PRDUCT", ""),
+                    "company": raw.get("ENTRPS", ""),
+                    "raw": raw,
+                })
 
         if page * rows >= total:
             break
@@ -77,56 +101,70 @@ def run():
     if not API_KEY:
         raise RuntimeError("MFDS_API_KEY가 없습니다.")
 
+    all_rows = []
+
+    for category, products in TARGET_PRODUCTS.items():
+        for product in products:
+            print(f"[수집] {category} / {product}")
+
+            rows = fetch_product(category, product)
+            all_rows.extend(rows)
+
+            print(f"  → 2024년 이후 {len(rows)}건")
+
     # 허가번호 기준 중복 제거
-    permits = {}
+    dedup = {}
 
-    for product in TARGET_PRODUCTS:
-        print(f"[수집] {product}")
-        for item in fetch_product(product):
-            key = item["permit_no"]
+    for row in all_rows:
+        key = row["permit_no"]
 
-            if not key:
-                key = f"{item['product']}-{item['permit_date']}"
+        if not key:
+            key = (
+                f"{row['category']}-"
+                f"{row['product']}-"
+                f"{row['permit_date']}-"
+                f"{row['company']}"
+            )
 
-            permits[key] = item
+        dedup[key] = row
 
-    yearly = defaultdict(int)
+    rows = list(dedup.values())
 
-    for item in permits.values():
-        date = item["permit_date"]
+    summary = {
+        "RF": 0,
+        "HIFU": 0,
+        "LASER": 0,
+    }
 
-        if len(date) >= 4 and date[:4].isdigit():
-            yearly[int(date[:4])] += 1
+    for row in rows:
+        summary[row["category"]] += 1
 
-    history = [
-        {"year": year, "value": yearly[year]}
-        for year in sorted(yearly)
-    ]
-
-    if not history:
-        raise RuntimeError("집계 가능한 인허가 데이터가 없습니다.")
-
-    latest = history[-1]
+    output = {
+        "purpose": "에스테틱 RF/HIFU/Laser 허가 범위 검증용",
+        "period": "2024~현재",
+        "source": "식품의약품안전처 의료기기 품목허가 정보",
+        "candidate_summary": summary,
+        "records": sorted(
+            rows,
+            key=lambda x: x["permit_date"],
+            reverse=True,
+        ),
+    }
 
     for path in OUT_FILES:
-        data = json.loads(path.read_text(encoding="utf-8"))
-
-        data["approval"] = {
-            "label": "에스테틱 의료기기 인허가 추이",
-            "unit": "건",
-            "latest_year": latest["year"],
-            "latest_value": latest["value"],
-            "source": "식약처",
-            "scope": "범용전기수술기·집속형초음파자극시스템·레이저수술기·엔디야그레이저수술기",
-            "history": history,
-        }
+        path.parent.mkdir(parents=True, exist_ok=True)
 
         path.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2),
+            json.dumps(
+                output,
+                ensure_ascii=False,
+                indent=2,
+            ),
             encoding="utf-8",
         )
 
-    print(f"[완료] 총 {len(permits)}건 / 최신 {latest['year']}년 {latest['value']}건")
+    print("[완료]")
+    print(json.dumps(summary, ensure_ascii=False))
 
 
 if __name__ == "__main__":

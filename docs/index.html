@@ -109,6 +109,7 @@
   width:14px;
   background:var(--accent);
   border-radius:3px 3px 0 0;
+  flex-shrink:0;
 }
 
 .spark-item small{
@@ -148,7 +149,40 @@
   font-size:8px;
   color:var(--muted);
 }
+.market-metrics .trend-card:nth-child(-n+3) .label{
+  text-align:center;
+  font-weight:700;
+}
 
+.market-metrics .trend-card:nth-child(-n+3) .metric-unit{
+  text-align:right;
+  margin-top:8px;
+}
+
+.market-metrics .trend-card:nth-child(-n+3) .spark{
+  margin-top:4px;
+}
+
+.market-metrics .trend-card:nth-child(-n+3) .spark-bars{
+  height:105px;
+  gap:12px;
+}
+
+.market-metrics .trend-card:nth-child(-n+3) .spark-item{
+  height:105px;
+}
+
+.market-metrics .trend-card:nth-child(-n+3) .spark-item i{
+  width:16px;
+  flex-shrink:0;
+}
+
+.market-metrics .trend-card:nth-child(-n+3) .spark-value{
+  font-size:11px;
+  font-weight:800;
+  color:var(--text);
+  line-height:1;
+}
 .spark-change{
   margin-left:8px;
   font-size:10px;
@@ -296,10 +330,6 @@
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 생산 동향</div>
-    <div class="metric-big-row">
-      <div class="big" id="metricProduction">-</div>
-      <div class="latest-yoy" id="yoyProduction"></div>
-    </div>
     <div class="metric-unit">[단위: 억 원]</div>
     <div class="spark" id="sparkProduction"></div>
     <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
@@ -308,10 +338,6 @@
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 수출 동향</div>
-    <div class="metric-big-row">
-      <div class="big" id="metricExport">-</div>
-      <div class="latest-yoy" id="yoyExport"></div>
-    </div>
     <div class="metric-unit">[단위: 백만달러]</div>
     <div class="spark" id="sparkExport"></div>
     <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
@@ -320,11 +346,7 @@
 
   <div class="trend-card">
     <div class="label">주요 피부개선 의료기기 수입 동향</div>
-    <div class="metric-big-row">
-      <div class="big" id="metricMarket">-</div>
-      <div class="latest-yoy" id="yoyMarket"></div>
-    </div>
-    <div class="metric-unit">[단위: 백만달러]</div>
+     <div class="metric-unit">[단위: 백만달러]</div>
     <div class="spark" id="sparkMarket"></div>
     <div class="metric-scope">* 범용전기수술기·일회용 전극·조직수복용생체재료 합산</div>
     <div class="metric-source">출처: 식품의약품안전처</div>
@@ -522,27 +544,7 @@ async function loadMarketMetrics(){
   const x=d[key];
   if(!x || x.latest_value==null) return;
 
-  document.getElementById(valueId).textContent=
-    Number(x.latest_value).toLocaleString();
-
-  const yoyId={
-    production:'yoyProduction',
-    export:'yoyExport',
-    market:'yoyMarket'
-  }[key];
-
-  if(yoyId && Array.isArray(x.history) && x.history.length>1){
-    const prev=Number(x.history[x.history.length-2].value);
-    const curr=Number(x.history[x.history.length-1].value);
-
-    if(prev>0){
-      const yoy=((curr-prev)/prev)*100;
-      document.getElementById(yoyId).textContent=
-        `YoY ${yoy>=0?'+':''}${yoy.toFixed(1)}%`;
-    }
-  }
-
-  let history=Array.isArray(x.history)?x.history:[];
+    let history=Array.isArray(x.history)?x.history:[];
 
   if(key==='approval'){
     history=history.slice(-5);

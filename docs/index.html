@@ -562,10 +562,13 @@ async function loadMarketMetrics(){
 
       return `
         <span class="spark-item">
-          ${yoy!==null ? `<b>${yoy>=0?'+':''}${yoy.toFixed(1)}%</b>` : `<b>&nbsp;</b>`}
-          <i title="${v.year} · ${curr.toLocaleString()}${x.unit}"
-             style="height:${Math.max(5,curr/max*30)}px"></i>
+          <span class="spark-value">${curr.toLocaleString()}</span>
+          <i title="${v.year} · ${curr.toLocaleString()} ${x.unit}"
+            style="height:${Math.max(10,curr/max*38)}px"></i>
           <small>'${String(v.year).slice(-2)}</small>
+          ${yoy!==null
+            ? `<b>${yoy>=0?'+':''}${yoy.toFixed(1)}%</b>`
+            : `<b>&nbsp;</b>`}
         </span>`;
     }).join('') +
     `</div>`;

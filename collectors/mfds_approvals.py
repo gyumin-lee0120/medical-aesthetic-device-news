@@ -37,7 +37,7 @@ OUT_FILES = [
 
 def fetch_product(category, product):
     page = 1
-    rows = 100
+    rows = 1000
     results = []
 
     while True:

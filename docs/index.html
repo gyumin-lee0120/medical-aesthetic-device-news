@@ -571,9 +571,9 @@ async function loadMarketMetrics(){
     `</div>`;
   };
 
-  renderTrendGroup('production','metricProduction');
-  renderTrendGroup('export','metricExport');
-  renderTrendGroup('market','metricMarket');
+  renderMarket('production','metricProduction','sparkProduction');
+  renderMarket('export','metricExport','sparkExport');
+  renderMarket('market','metricMarket','sparkMarket');
   renderMarket('approval','metricApproval','sparkApproval');
   renderMarket('clinic','metricClinic','sparkClinic');
 }

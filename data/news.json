@@ -22368,44 +22368,6 @@
     "competitor_mentions": []
   },
   {
-    "title": "원텍, 中·대만 누비며 현지 영업망 확장",
-    "summary": "대만 행사에서는 △올리지오 X △타이탄 △피코케어 마제스티 △피코 알렉스를 중심으로 학술 강연과 전시를 열었다. 중국 청두·광저우 행사에서는 현지 인허가를 확보한 △피코케어 마제스티 △피코케어 450 △라비앙...",
-    "link": "https://www.etnews.com/20260604000355",
-    "source": "네이버 뉴스",
-    "pub_date": "Thu, 04 Jun 2026 15:59:00 +0900",
-    "matched_keyword": "피코케어",
-    "categories": [
-      "RF",
-      "Laser·Pico",
-      "인허가·규제"
-    ],
-    "segments": [
-      "에스테틱"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [
-      "원텍"
-    ],
-    "own_product_mentions": [
-      "올리지오",
-      "올리지오 X",
-      "피코케어",
-      "라비앙",
-      "타이탄"
-    ],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [],
-    "own_brand_mentions": [
-      "원텍",
-      "올리지오",
-      "올리지오 X",
-      "피코케어",
-      "라비앙",
-      "타이탄"
-    ],
-    "competitor_mentions": []
-  },
-  {
     "title": "환자가 찍고 AI가 9개 피부지표 분석…룰루랩 ‘루스킨S’, 병원 상담과...",
     "summary": "룰루랩은 옵티마의원 신사올리지오점에 루스킨S를 공급했으며 병원 홈페이지 및 병원용 웹 뷰어와의 연동을 추진한다. 생성된 피부 분석 데이터는 환자 상담과 맞춤형...",
     "link": "https://www.venturesquare.net/1110735/",
@@ -45871,6 +45833,51 @@
       "울쎄라",
       "써마지"
     ]
+  },
+  {
+    "title": "덱스레보, 고우리 국내 출시 1주년 심포지엄 개최",
+    "summary": "미용의료기기 전문기업 덱스레보(DEXLEVO)가 액상형 PCL 제품 고우리(GOURI)의 국내 출시 1주년을 맞아 의료진과 임상 경험을 공유하는 심포지엄을 개최했다. 덱스레보는 지난 9월 30일 그랜드 인터컨티넨탈 서울...",
+    "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215347",
+    "source": "네이버 뉴스",
+    "pub_date": "Fri, 02 Oct 2026 16:26:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "신제품·출시",
+      "학회·임상"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "영국 말 수의학 시장의 현재와 미래, BEVA Congress 2026 참관기",
+    "summary": "<BEVA Congress 2026 행사 전경> [자료: KOTRA 런던 무역관 촬영] <주요 참가 리스트> 기업/기관명 (국가) 주요 사업 및 역할 의료기기 Arthrex Vet Systems (미국) - 수의 정형외과 수술용 의료기기·수술 솔루션 개발 진단검사...",
+    "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=180&CONTENTS_NO=1&bbsGbn=243&bbsSn=243&pNttSn=244230",
+    "source": "네이버 뉴스",
+    "pub_date": "Fri, 02 Oct 2026 16:06:00 +0900",
+    "matched_keyword": "수술용 의료기기",
+    "categories": [
+      "Surgical",
+      "시장동향",
+      "학회·임상"
+    ],
+    "segments": [
+      "써지컬"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
   },
   {
     "title": "李대통령 치킨값 점검 예고에… 국감 앞둔 업계 ‘긴장’",

@@ -95,7 +95,7 @@ def fetch_product(category, product):
 
             year = permit_date[:4]
 
-            if year.isdigit() and int(year) >= 2024:
+            if year.isdigit():
                 results.append({
                     "category": category,
                     "query_product": product,
@@ -137,7 +137,9 @@ def run():
         dedup[key] = row
 
     rows = list(dedup.values())
-
+    dates = [r["permit_date"] for r in rows if r["permit_date"]]
+    print("[최신 허가일자]", max(dates) if dates else "없음")
+    print("[최초 허가일자]", min(dates) if dates else "없음")
     yearly = {
         "2024": {"RF": 0, "HIFU": 0, "LASER": 0},
         "2025": {"RF": 0, "HIFU": 0, "LASER": 0},

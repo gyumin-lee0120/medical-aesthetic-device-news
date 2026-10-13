@@ -76,7 +76,21 @@ def fetch_product(category, product):
                 for child in list(item)
             }
 
-            permit_date = raw.get("PRMISN_DT", "")
+            permit_date = (
+                raw.get("PRMSN_YMD")
+                or raw.get("PRMISN_DT")
+                or raw.get("PRMISN_DE")
+                or raw.get("PERMIT_DT")
+                or ""
+            )
+
+            permit_no = (
+                raw.get("PRODUCT_PRMISN_NO")
+                or raw.get("PERMIT_NO")
+                or raw.get("PRMISN_NO")
+                or ""
+            )
+
             year = permit_date[:4]
 
             if year.isdigit() and int(year) >= 2024:
@@ -84,16 +98,15 @@ def fetch_product(category, product):
                     "category": category,
                     "query_product": product,
                     "permit_date": permit_date,
-                    "permit_no": raw.get("PRODUCT_PRMISN_NO", ""),
+                    "permit_no": permit_no,
                     "product": raw.get("PRDUCT", ""),
                     "company": raw.get("ENTRPS", ""),
                     "raw": raw,
                 })
+            if page * rows >= total:
+               break
 
-        if page * rows >= total:
-            break
-
-        page += 1
+            page += 1
 
     return results
 

@@ -71,6 +71,8 @@ def fetch_product(category, product):
         items = root.findall("./body/items/item")
 
         for item in items:
+            if page == 1 and item is items[0]:
+                print("[샘플 RAW]", {child.tag: (child.text or "").strip() for child in list(item)})
             raw = {
                 child.tag: (child.text or "").strip()
                 for child in list(item)

@@ -103,10 +103,10 @@ def fetch_product(category, product):
                     "company": raw.get("ENTRPS", ""),
                     "raw": raw,
                 })
-            if page * rows >= total:
-               break
+        if page * rows >= total:
+           break
 
-            page += 1
+        page += 1
 
     return results
 

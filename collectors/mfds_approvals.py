@@ -8,20 +8,15 @@ BASE = Path(__file__).resolve().parents[1]
 
 API_URL = (
     "https://apis.data.go.kr/1471000/"
-    "MdeqStdCdPrdtInfoService03/"
-    "getMdeqStdCdPrdtInfoInq03"
+    "MdlpPrdlstPrmisnInfoService06/"
+    "getMdlpPrdlstPrmisnList05"
 )
 
 API_KEY = os.environ.get("MFDS_API_KEY")
 
-# 식약처 공식 품목명 기준
 TARGET_PRODUCTS = {
-    "RF": [
-        "범용전기수술기",
-    ],
-    "HIFU": [
-        "집속형초음파자극시스템",
-    ],
+    "RF": ["범용전기수술기"],
+    "HIFU": ["집속형초음파자극시스템"],
     "LASER": [
         "레이저수술기",
         "엔디야그레이저수술기",
@@ -35,19 +30,10 @@ OUT_FILES = [
 ]
 
 
-def pick(raw, *keys):
-    for key in keys:
-        value = raw.get(key, "")
-        if value:
-            return value
-    return ""
-
-
 def fetch_product(category, product):
     page = 1
     rows = 100
     results = []
-
     session = requests.Session()
 
     while True:
@@ -56,101 +42,53 @@ def fetch_product(category, product):
             "pageNo": page,
             "numOfRows": rows,
             "type": "xml",
-
-            # 공식 명세의 품목명 요청변수
-            "PRDLST_NM": product,
+            "prduct": product,
         }
 
-        r = session.get(
-            API_URL,
-            params=params,
-            timeout=(10, 60),
-        )
+        r = session.get(API_URL, params=params, timeout=(10, 60))
         r.raise_for_status()
 
         root = ET.fromstring(r.text)
 
         result_code = root.findtext("./header/resultCode")
+        result_msg = root.findtext("./header/resultMsg")
 
         if result_code != "00":
             raise RuntimeError(
-                f"MFDS API 오류: {result_code} "
-                f"{root.findtext('./header/resultMsg')}"
+                f"MFDS API 오류: {result_code} {result_msg}"
             )
 
         total = int(root.findtext("./body/totalCount") or 0)
 
-        print(
-            f"[수집] {category} / {product} "
-            f"→ totalCount={total}"
-        )
+        print(f"[수집] {category} / {product} → totalCount={total}")
 
-        # 품목 필터가 안 먹는 경우 즉시 중단
-        if total > 10000:
+        # 필터가 또 무시되면 즉시 중단
+        if total > 5000:
             raise RuntimeError(
-                f"품목 필터가 적용되지 않은 것으로 보입니다. "
-                f"{product} totalCount={total}"
+                f"품목명 필터 미적용 의심: {product} totalCount={total}"
             )
 
         items = root.findall("./body/items/item")
 
         for item in items:
-            raw = {}
+            raw = {
+                child.tag: (child.text or "").strip()
+                for child in list(item)
+            }
 
-            for child in list(item):
-                raw[child.tag] = (child.text or "").strip()
+            permit_date = raw.get("PRMISN_DT", "")
+            year = permit_date[:4]
 
-            permit_no = pick(
-                raw,
-                "PERMIT_NO",
-                "PRMISN_NO",
-                "PRODUCT_PRMISN_NO",
-            )
-
-            permit_date = pick(
-                raw,
-                "PERMIT_DT",
-                "PRMISN_DT",
-                "PRMSN_YMD",
-                "PRMSN_DT",
-            )
-
-            product_name = pick(
-                raw,
-                "PRDLST_NM",
-                "PRDUCT",
-            )
-
-            class_no = pick(
-                raw,
-                "MDEQ_CLSF_NO",
-                "CLSF_NO",
-            )
-
-            company = pick(
-                raw,
-                "MNET_IPRT_ENTP_NM",
-                "ENTRPS",
-            )
-
-            use_purpose = pick(
-                raw,
-                "USE_PURPS",
-                "USE_PURPOSE",
-                "USE_MTH",
-            )
-
-            results.append({
-                "category": category,
-                "query_product": product,
-                "product": product_name,
-                "class_no": class_no,
-                "permit_no": permit_no,
-                "permit_date": permit_date,
-                "company": company,
-                "use_purpose": use_purpose,
-                "raw": raw,
-            })
+            if year.isdigit() and int(year) >= 2024:
+                results.append({
+                    "category": category,
+                    "query_product": product,
+                    "permit_date": permit_date,
+                    "permit_no": raw.get("PRODUCT_PRMISN_NO", ""),
+                    "product": raw.get("PRDUCT", ""),
+                    "company": raw.get("ENTRPS", ""),
+                    "raw": raw,
+                })
 
         if page * rows >= total:
             break
@@ -171,55 +109,60 @@ def run():
             rows = fetch_product(category, product)
             all_rows.extend(rows)
 
-    # 동일 허가번호/UDI 제품 중복 정리
+    # 허가번호 중복 제거
     dedup = {}
 
     for row in all_rows:
-        key = row["permit_no"]
-
-        if not key:
-            key = (
-                f"{row['category']}|"
-                f"{row['product']}|"
-                f"{row['class_no']}|"
-                f"{row['company']}|"
-                f"{row['permit_date']}"
-            )
-
+        key = row["permit_no"] or (
+            f"{row['category']}|"
+            f"{row['product']}|"
+            f"{row['permit_date']}|"
+            f"{row['company']}"
+        )
         dedup[key] = row
 
     rows = list(dedup.values())
 
-    summary = {
-        "RF": 0,
-        "HIFU": 0,
-        "LASER": 0,
+    yearly = {
+        "2024": {"RF": 0, "HIFU": 0, "LASER": 0},
+        "2025": {"RF": 0, "HIFU": 0, "LASER": 0},
+        "2026": {"RF": 0, "HIFU": 0, "LASER": 0},
     }
 
     for row in rows:
-        summary[row["category"]] += 1
+        year = row["permit_date"][:4]
+
+        if year in yearly:
+            yearly[year][row["category"]] += 1
+
+    for year in yearly:
+        yearly[year]["total_candidates"] = (
+            yearly[year]["RF"]
+            + yearly[year]["HIFU"]
+            + yearly[year]["LASER"]
+        )
 
     output = {
-        "purpose": "에스테틱 RF/HIFU/Laser 허가 범위 검증",
-        "source": "식품의약품안전처 의료기기 표준코드별 제품정보",
-        "candidate_summary": summary,
-        "records": rows,
+        "purpose": "에스테틱 RF/HIFU/Laser 최신 품목허가 후보",
+        "period": "2024~현재",
+        "source": "식품의약품안전처 의료기기 품목허가 정보",
+        "yearly_candidates": yearly,
+        "records": sorted(
+            rows,
+            key=lambda x: x["permit_date"],
+            reverse=True,
+        ),
     }
 
     for path in OUT_FILES:
         path.parent.mkdir(parents=True, exist_ok=True)
-
         path.write_text(
-            json.dumps(
-                output,
-                ensure_ascii=False,
-                indent=2,
-            ),
+            json.dumps(output, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
     print("[완료]")
-    print(json.dumps(summary, ensure_ascii=False))
+    print(json.dumps(yearly, ensure_ascii=False))
 
 
 if __name__ == "__main__":

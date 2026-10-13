@@ -2,9 +2,9 @@
   "purpose": "에스테틱 RF/HIFU/Laser 허가 범위 검증",
   "source": "식품의약품안전처 의료기기 표준코드별 제품정보",
   "candidate_summary": {
-    "RF": 174,
+    "RF": 173,
     "HIFU": 31,
-    "LASER": 367
+    "LASER": 366
   },
   "records": [
     {
@@ -740,38 +740,6 @@
         "STRG_CND_INFO": "",
         "CIRC_CND_INFO": "",
         "MNFT_IPRT_ENTP_NM": "(주)메드로메디칼디비젼",
-        "RCPRSLRY_TRGT_YN": "N"
-      }
-    },
-    {
-      "category": "RF",
-      "query_product": "범용전기수술기",
-      "product": "범용전기수술기",
-      "class_no": "A35010.01",
-      "permit_no": "제허 21-970 호",
-      "permit_date": "2021-12-01",
-      "company": "",
-      "use_purpose": "",
-      "raw": {
-        "UDIDI_CD": "08800017100821",
-        "PRDLST_NM": "범용전기수술기",
-        "MDEQ_CLSF_NO": "A35010.01",
-        "CLSF_NO_GRAD_CD": "3",
-        "PERMIT_NO": "제허 21-970 호",
-        "PRMSN_YMD": "2021-12-01",
-        "FOML_INFO": "VirtueRF",
-        "PRDT_NM_INFO": "",
-        "HMBD_TRSPT_MDEQ_YN": "아니오",
-        "DSPSBL_MDEQ_YN": "아니오",
-        "TRCK_MNG_TRGT_YN": "아니오",
-        "TOTAL_DEV": "예",
-        "CMBNMD_YN": "아니오",
-        "USE_BEFORE_STRLZT_NEED_YN": "N",
-        "STERILIZATION_METHOD_NM": "",
-        "USE_PURPS_CONT": "고주파 전류를 사용하여 조직의 응고에 사용하는 기구",
-        "STRG_CND_INFO": "",
-        "CIRC_CND_INFO": "",
-        "MNFT_IPRT_ENTP_NM": "(주)쉬엔비",
         "RCPRSLRY_TRGT_YN": "N"
       }
     },
@@ -8042,38 +8010,6 @@
     {
       "category": "LASER",
       "query_product": "레이저수술기",
-      "product": "반도체레이저수술기",
-      "class_no": "A37010.10",
-      "permit_no": "수허 21-326 호",
-      "permit_date": "2021-12-31",
-      "company": "",
-      "use_purpose": "",
-      "raw": {
-        "UDIDI_CD": "00817495023434",
-        "PRDLST_NM": "반도체레이저수술기",
-        "MDEQ_CLSF_NO": "A37010.10",
-        "CLSF_NO_GRAD_CD": "3",
-        "PERMIT_NO": "수허 21-326 호",
-        "PRMSN_YMD": "2021-12-31",
-        "FOML_INFO": "9SYS7751-CNDL",
-        "PRDT_NM_INFO": "Nordlys Laser System",
-        "HMBD_TRSPT_MDEQ_YN": "아니오",
-        "DSPSBL_MDEQ_YN": "아니오",
-        "TRCK_MNG_TRGT_YN": "아니오",
-        "TOTAL_DEV": "예",
-        "CMBNMD_YN": "예",
-        "USE_BEFORE_STRLZT_NEED_YN": "N",
-        "STERILIZATION_METHOD_NM": "",
-        "USE_PURPS_CONT": "1. 반도체레이저수술기: 조직의 절개, 파괴, 제거를 목적으로 매질로서 반도체를 이용하는 레이저 수술기\n2. 엔디야그레이저수술기: 조직의 절개, 파괴, 제거를 목적으로 매질로서 엔디야그를 이용하는 레이저 수술기\n3. 펄스광선조사기: 에너지 세기가 큰 펄스형태의 빛(IPL, Intense Pulsed Light)을 방출시켜 피부질환치료를 위해 사용하는 기구\n4. 레이저방어용안경: 레이저 진료 시 물체에 반사되어 눈에 들어오는 레이저 빔이 영향을 미치는 것을 방지하기 위해 사용하는 안경",
-        "STRG_CND_INFO": "1) 온도: 0~40℃\n2) 습도: 20~80%",
-        "CIRC_CND_INFO": "1. 작동\n1) 온도: 15~35℃\n2) 습도: 10~75%\n\n2. 보관\n1) 온도: 0~40℃\n2) 습도: 20~80%",
-        "MNFT_IPRT_ENTP_NM": "시너론켄델라코리아 유한회사",
-        "RCPRSLRY_TRGT_YN": "N"
-      }
-    },
-    {
-      "category": "LASER",
-      "query_product": "레이저수술기",
       "product": "알렉산드라이트레이저수술기",
       "class_no": "A37010.08",
       "permit_no": "수허 21-318 호",
@@ -9521,13 +9457,13 @@
       "company": "",
       "use_purpose": "",
       "raw": {
-        "UDIDI_CD": "00817495023465",
+        "UDIDI_CD": "00817495023960",
         "PRDLST_NM": "반도체레이저수술기",
         "MDEQ_CLSF_NO": "A37010.10",
         "CLSF_NO_GRAD_CD": "3",
         "PERMIT_NO": "수허 19-12 호",
         "PRMSN_YMD": "2019-01-10",
-        "FOML_INFO": "Frax Pro",
+        "FOML_INFO": "Nordlys Mini™",
         "PRDT_NM_INFO": "",
         "HMBD_TRSPT_MDEQ_YN": "아니오",
         "DSPSBL_MDEQ_YN": "아니오",
@@ -9537,8 +9473,8 @@
         "USE_BEFORE_STRLZT_NEED_YN": "N",
         "STERILIZATION_METHOD_NM": "",
         "USE_PURPS_CONT": "1. 반도체레이저수술기 : 조직의 절개, 파괴, 제거 등을 목적으로 매질로서 반도체를 이용하는 레이저수술기. 다만, 레이저수술기와 NAFL 1940 어플리케이터를 함께 사용 시 피부개선(skin resurfacing procedures) 및 피부 유형 Ⅰ∼Ⅳ인 자의 양성 색소 병변 개선에 사용된다.\n2. 레이저방어용안경 : 레이저 진료 시 물체에 반사되어 눈에 들어오는 레이저 빔이 영향을 미치는 것을 방지하기 위하여 사용하는 안경",
-        "STRG_CND_INFO": "1. 작업 시 온도 : 15 ~ 35℃\n2. 저장 온도(액체를 배출 했을 시) : 0 ~ 40 ℃\n3. 상대 저장습도(불응축식) : 20 ~ 80 %\n4. 상대 작업 습도(불응축식) : 10 ~ 75 %\n5. 장기간(6개월 이상) 보관 시 가능하면 운송 박스에 보관하고, 운송 박스는 펠릿 위에 놓는다.\n6. 먼지와 잔해로부터 보호한다.\n7. 장기간 보관하거나 온도가 5℃ 이하로 떨어질 경우에는 반드시 냉각 시스템의 액체는 배출시킨다.\n8. 어플리케이터와 본체는 따로 보관한다.",
-        "CIRC_CND_INFO": "없음",
+        "STRG_CND_INFO": "",
+        "CIRC_CND_INFO": "",
         "MNFT_IPRT_ENTP_NM": "시너론켄델라코리아 유한회사",
         "RCPRSLRY_TRGT_YN": "N"
       }

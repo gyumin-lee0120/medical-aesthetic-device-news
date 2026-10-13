@@ -48,11 +48,16 @@
     "history": []
   },
   "clinic": {
-    "label": "국내 에스테틱 영업 타깃 시장",
-    "unit": "",
-    "latest_year": null,
-    "latest_value": null,
-    "source": "",
-    "history": []
+    "label": "국내 피부과·성형외과 의원 수 추이",
+    "unit": "개소",
+    "latest_year": 2026,
+    "latest_value": 2777,
+    "source": "건강보험심사평가원",
+    "history": [
+      {"year": 2023, "value": 2601},
+      {"year": 2024, "value": 2676},
+      {"year": 2025, "value": 2740},
+      {"year": 2026, "value": 2777}
+    ]
   }
 }

@@ -3600,7 +3600,7 @@
     "link": "https://www.edaily.co.kr/news/newspath.asp?newsid=03099606645482704",
     "source": "네이버 뉴스",
     "pub_date": "Wed, 17 Jun 2026 09:55:00 +0900",
-    "matched_keyword": "피코케어",
+    "matched_keyword": "피코초 레이저",
     "categories": [
       "Laser·Pico",
       "시장동향",
@@ -3628,32 +3628,6 @@
       "피코케어",
       "라비앙",
       "V-Laser",
-      "브이레이저"
-    ],
-    "competitor_mentions": []
-  },
-  {
-    "title": "내수보단 해외로…아시아·美 판로 찾는 국내 의료기기 기업들",
-    "summary": "최근 멕시코에서 피부 재생 장비 ‘라비앙’과 혈관·색소 병변 치료 장비 ‘브이레이저’의 허가를 획득했다. 이미 브라질, 미국, 유럽, 중국, 사우디아라비아 등에서 주요 제품을 상업화한 경험을 누적한 만큼, 중남미...",
-    "link": "https://www.etoday.co.kr/news/view/2593079",
-    "source": "네이버 뉴스",
-    "pub_date": "Wed, 17 Jun 2026 05:00:00 +0900",
-    "matched_keyword": "라비앙",
-    "categories": [
-      "Laser·Pico",
-      "인허가·규제",
-      "글로벌사업"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [
-      "라비앙",
-      "브이레이저"
-    ],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [],
-    "own_brand_mentions": [
-      "라비앙",
       "브이레이저"
     ],
     "competitor_mentions": []
@@ -5475,6 +5449,542 @@
       "XERF",
       "세르프"
     ]
+  },
+  {
+    "title": "'정경호父♥' 75세 박정수, 성형 의혹에..결국 시술 고백 \"어느 정도 해...",
+    "summary": "시술은 했지만 수술은 한 적 없다\"라며 \"6개월에 한 번씩 스킨 보톡스를 맞고, 1년에 한 번씩 써마지와 울쎄라를 받는다. 전에는 1년 반 주기로 받았는데 나이가 들면서 1년으로 줄더니 이젠 10개월 주기로 해야겠더라....",
+    "link": "https://www.sportschosun.com/entertainment/2026-10-14/202610140100093520006070",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 21:10:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF",
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "울쎄라",
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "울쎄라",
+      "써마지"
+    ]
+  },
+  {
+    "title": "블리비의원 부천점, 고주파 리프팅 장비 '덴서티' 도입",
+    "summary": "이에 피부 탄력과 얼굴 윤곽 관리를 위한 고주파 리프팅 시술에 대한 관심도 이어지고 있다. 이러한 가운데 블리비의원 부천점이 고주파 리프팅 장비 '덴서티(DENSITY)'를 도입하고 피부 탄력 관리를 위한 시술을...",
+    "link": "http://www.bokuennews.com/news/article.html?no=285528",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 18:02:00 +0900",
+    "matched_keyword": "고주파 리프팅",
+    "categories": [
+      "RF"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "덴서티",
+      "Density"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "덴서티",
+      "Density"
+    ]
+  },
+  {
+    "title": "[인터뷰①] '킬링타임' 남윤수 \"내 얼굴 큰 스크린으로 보니 단점만 보...",
+    "summary": "써마지는 1년에 한 번만 해도 좋다고 하더라. 30대부터 미리미리 해놔야 40대 때도 유지된다고 해서 받았다. 아직 큰 효과는 모르겠다. 연차가 쌓여야 효과가 눈으로 보일 거라고 하더라. 또 제가 미간은 괜찮은데, 눈썹을...",
+    "link": "https://www.sportschosun.com/entertainment/2026-10-14/202610140100092000005946",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 17:11:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "써마지"
+    ]
+  },
+  {
+    "title": "리프팅, 단순히 '당겨 올리는 시술' 아냐…피부 속 변화부터 살펴야",
+    "summary": "쿨소닉(CoolSoniq)은 고강도 집속 초음파를 기반으로 한 HIFU 리프팅 장비로, 초음파 조사 과정에서 피부 표면 냉각이 함께 이뤄지도록 설계된 것이 특징이다. 부스트청담의원 이왕진 대표원장은 \"리프팅을 단순히 피부를 당겨...",
+    "link": "https://www.rapportian.com/news/articleView.html?idxno=241267",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 16:32:00 +0900",
+    "matched_keyword": "HIFU 리프팅",
+    "categories": [
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "블루코어컴퍼니 ‘피코어맥스’, 美 FDA 510(k) 허가 획득",
+    "summary": "-피코세컨드 Nd 레이저…국내 식약처 허가 이어 미국 시장 진출 기반 마련 -‘트리니티 리프토닝’ 이어 FDA 허가 제품 확대…글로벌 미용의료기기 사업 강화 미용 의료기기 전문기업 블루코어컴퍼니가...",
+    "link": "https://economist.co.kr/article/view/ecn202610140038",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 16:19:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "Laser·Pico",
+      "시장동향",
+      "인허가·규제",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "원텍, 주력 3종 CE MDR 인증…유럽 공략 확대",
+    "summary": "레이저·에너지 기반 메디컬 솔루션 기업 원텍(대표 김종원·김정현)은 피코초 엔디야그 레이저 '피코케어(Picocare)', 1927nm 툴륨 레이저 '라비앙(Lavieen)', 고강도 집속형 초음파(HIFU) 장비 '타이탄 프로(Tightan Pro)' 등 3개...",
+    "link": "http://www.bokuennews.com/news/article.html?no=285490",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 16:16:00 +0900",
+    "matched_keyword": "피코케어",
+    "categories": [
+      "HIFU",
+      "Laser·Pico",
+      "인허가·규제"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [
+      "원텍"
+    ],
+    "own_product_mentions": [
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [
+      "원텍",
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_mentions": []
+  },
+  {
+    "title": "[의료기기업계 소식] 10월 14일",
+    "summary": "이번에 인증을 받은 제품은 피코초 엔디야그 레이저 '피코케어(Picocare)', 1927nm 툴륨 레이저 '라비앙(Lavieen)', 고강도 집속형 초음파(HIFU) '타이탄 프로(Tightan Pro)'다. 에너지원과 작동 원리가 서로 다른 세 제품이...",
+    "link": "http://www.doctorstimes.com/news/articleView.html?idxno=240491",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 16:10:00 +0900",
+    "matched_keyword": "피코케어",
+    "categories": [
+      "HIFU",
+      "Laser·Pico",
+      "인허가·규제"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_mentions": []
+  },
+  {
+    "title": "셀린의원 명동, 티타늄 업그레이드 버전 ‘포트라리프팅’ 도입",
+    "summary": "셀린의원 명동점이 티타늄 리프팅의 업그레이드 버전인 포트라리프팅을 도입했다. 피부 탄력 저하와 얼굴선 변화 등 노화에 따른 고민을 고려해 리프팅 장비 선택의 폭을 넓히고, 개인별 피부 상태에 따른 시술 계획을...",
+    "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065594494661372",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 15:44:00 +0900",
+    "matched_keyword": "티타늄 리프팅",
+    "categories": [
+      "기타"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "티타늄"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "티타늄"
+    ]
+  },
+  {
+    "title": "클래시스, 리프팅 넘어 RF·스킨케어까지…유럽 시장 공략",
+    "summary": "장비 '볼뉴머'를 중심으로 시장을 확대했다면 앞으로는 마이크로니들링과 스킨케어 분야까지 제품군을 다각화하게 된다. 기존 제품의 판매 실적도 확대되고 있다. 클래시스에 따르면 울트라포머 MPT와 볼뉴머의 유럽...",
+    "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3013927",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 15:28:00 +0900",
+    "matched_keyword": "볼뉴머",
+    "categories": [
+      "RF",
+      "HIFU",
+      "RF Microneedling",
+      "시장동향"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [
+      "볼뉴머"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스",
+      "볼뉴머"
+    ]
+  },
+  {
+    "title": "‘킬링타임’ 남윤수 “스크린 데뷔에 써마지·스킨보톡스 시술” 솔직...",
+    "summary": "1년에 한 번 정도 써마지 시술을 받으면 좋다고 해서 했다\"고 고백하며 \"30대부터는 미리미리 해야 된다고, 그래야 40대가 되어도 유지된다고 하는데 사실 효과는 잘 모르겠다\"라고 말했다. 여기에, \"이마를 많이 쓰는...",
+    "link": "https://www.newsen.com/news_view.php?uid=202610141433286710",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 15:18:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "써마지"
+    ]
+  },
+  {
+    "title": "원텍, 레이저·초음파 장비 3종 유럽 인증…해외 공략 확대",
+    "summary": "14일 원텍은 피코초 엔디야그 레이저 '피코케어', 1927㎚ 툴륨 레이저 '라비앙', 고강도 집속형 초음파(HIFU) 장비 '타이탄 프로'가 CE MDR 인증을 획득했다고 밝혔다. CE MDR은 유럽연합(EU)의 의료기기 규정으로, 기존 지침보다...",
+    "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1727818",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 15:16:00 +0900",
+    "matched_keyword": "피코케어",
+    "categories": [
+      "HIFU",
+      "Laser·Pico",
+      "인허가·규제",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [
+      "원텍"
+    ],
+    "own_product_mentions": [
+      "피코케어",
+      "라비앙",
+      "타이탄"
+    ],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [
+      "원텍",
+      "피코케어",
+      "라비앙",
+      "타이탄"
+    ],
+    "competitor_mentions": []
+  },
+  {
+    "title": "지유클리닉 강남점, 소프웨이브 4대 추가 도입… 총 8대 규모로 확대",
+    "summary": "지유클리닉 강남점(대표원장 박기범)이 소프웨이브 장비 4대를 추가 도입했다고 밝혔다. 기존 4대를 운영해 온 지유클리닉 강남점은 10월 초 4대를 새롭게 들여와 총 8대 규모로 장비를 확대했다. 소프웨이브는 초음파...",
+    "link": "http://www.medisobizanews.com/news/articleView.html?idxno=143153",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 14:02:00 +0900",
+    "matched_keyword": "소프웨이브",
+    "categories": [
+      "HIFU"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "소프웨이브"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "소프웨이브"
+    ]
+  },
+  {
+    "title": "하이로닉, KORA 2026서 '미글로우' 중심 의료기기 기술 소개",
+    "summary": "메디컬 에스테틱 의료기기 전문기업 하이로닉은 지난 11일 서울 코엑스에서 열린 '2026 대한미용비만재생의학회(KORA) 추계학술대회'에 참가해 주요 의료기기와 핵심 기술을 소개했다고 14일 밝혔다. 이번 행사에서 가장...",
+    "link": "https://www.newstopkorea.com/news/articleView.html?idxno=48176",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 13:58:00 +0900",
+    "matched_keyword": "에스테틱 의료기기",
+    "categories": [
+      "학회·임상"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "클래시스, 고주파 장비 쿼드세이 유럽 출시...비클라라는 12월 공개",
+    "summary": "장비 볼뉴머의 유럽 누적 판매량은 3500대를 넘어섰다. 회사는 올해 4분기에만 350대 이상을 추가 판매한다는 목표다. 두 장비를 결합한 복합 시술도 유럽 시장 확대 전략의 한 축이다. 국내에서 볼뉴머와 슈링크를 결합한...",
+    "link": "http://www.medical-tribune.co.kr/news/articleView.html?idxno=215475",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 13:32:00 +0900",
+    "matched_keyword": "볼뉴머",
+    "categories": [
+      "RF",
+      "HIFU",
+      "시장동향",
+      "신제품·출시"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [
+      "슈링크",
+      "볼뉴머"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스",
+      "슈링크",
+      "볼뉴머"
+    ]
+  },
+  {
+    "title": "원텍, 레이저·초음파 3종 유럽 MDR 인증…강화된 규제 기준 충족",
+    "summary": "레이저·에너지 기반 의료기기 기업 원텍(대표 김종원·김정현)은 피코케어(Picocare), 라비앙(Lavieen), 타이탄 프로(Tightan Pro) 등 3개 제품의 CE MDR 인증을 획득했다고 14일 밝혔다. 원텍은 기존에도 다수 제품에 대해 CE...",
+    "link": "http://digitalchosun.dizzo.com/site/data/html_dir/2026/10/14/2026101480092.html",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 13:32:00 +0900",
+    "matched_keyword": "피코케어",
+    "categories": [
+      "Laser·Pico",
+      "인허가·규제"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [
+      "원텍"
+    ],
+    "own_product_mentions": [
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [
+      "원텍",
+      "PicoCare",
+      "피코케어",
+      "Lavieen",
+      "라비앙",
+      "Tightan",
+      "타이탄"
+    ],
+    "competitor_mentions": []
+  },
+  {
+    "title": "클래시스, 유럽 유저 미팅 개최…신제품 2종 공개, 유럽 포트폴리오 확...",
+    "summary": "장비 볼뉴머의 유럽 누적 판매량은 3,500대를 돌파했으며, 클래시스는 올해 4분기에만 350대 이상 추가 판매를 목표로 하고 있다. 기존 장비를 결합한 복합 시술도 유럽 사업 확대의 한 축이다. 국내에서 볼뉴머와...",
+    "link": "https://www.biotimes.co.kr/news/articleView.html?idxno=35210",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 11:48:00 +0900",
+    "matched_keyword": "볼뉴머",
+    "categories": [
+      "RF",
+      "신제품·출시"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [
+      "볼뉴머"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스",
+      "볼뉴머"
+    ]
+  },
+  {
+    "title": "투자영역·운용체계 확장하는 VIG",
+    "summary": "지난해 미용의료기기 업체 비올을 인수하고 LG화학 에스테틱 사업부를 분리해 ‘리브사이언스’를 출범시킨 데 이어, 올해는 의료 서비스와 플랫폼으로 보폭을 넓혔다. VIG파트너스는 5월 치아 복구 설루션 기업...",
+    "link": "https://biz.heraldcorp.com/article/10902199?ref=naver",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 11:23:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "시장동향"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "비올"
+    ],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "비올"
+    ]
+  },
+  {
+    "title": "한국비티비 주가, 급등세... 무슨 회사길래?",
+    "summary": "고강도 집속초음파(HIFU), 피코초 레이저, 고주파(RF) 등 다양한 기술을 활용한 제품을 병·의원과 에스테틱 시장에 공급하고 있으며, 개인용 미용·홈케어 기기 분야로도 사업을 확대하고 있다. 의료기기 판매와 함께...",
+    "link": "https://www.ggilbo.com/news/articleView.html?idxno=1186782",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 11:22:00 +0900",
+    "matched_keyword": "피코초 레이저",
+    "categories": [
+      "RF",
+      "HIFU",
+      "Laser·Pico",
+      "시장동향"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "하이로닉, KORA 2026 참가…‘미글로우’ 중심 전시",
+    "summary": "글로벌 메디컬 에스테틱 의료기기 전문기업 하이로닉(149980)이 지난 11일 서울 코엑스에서 열린 ‘2026 대한미용비만재생의학회(KORA) 추계학술대회’에 참가해 주요 의료기기와 핵심 기술을 소개했다고 14일 밝혔다....",
+    "link": "https://www.edaily.co.kr/News/Read?newsId=03253766645612920&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "source": "네이버 뉴스",
+    "pub_date": "Wed, 14 Oct 2026 11:04:00 +0900",
+    "matched_keyword": "에스테틱 의료기기",
+    "categories": [
+      "학회·임상",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
   },
   {
     "title": "보습해도 피부 처져 보인다면?…\"가을철 탄력 관리 중요\"",
@@ -13454,77 +13964,6 @@
     ],
     "own_brand_mentions": [],
     "competitor_mentions": [
-      "울쎄라"
-    ]
-  },
-  {
-    "title": "세르프 리프팅, 피부 상태 따라 계획 달라져",
-    "summary": "잠실휴먼피부과 임정민 원장은 “세르프 리프팅은 고주파 에너지를 피부 속 일정 깊이에 전달해 열 반응을 유도하는 방식의 시술”이라며 “같은 장비를 사용하더라도 개인의 피부 두께, 처짐 정도, 지방층 분포에 따라...",
-    "link": "https://www.vegannews.co.kr/news/article.html?no=383357",
-    "source": "네이버 뉴스",
-    "pub_date": "Tue, 16 Jun 2026 15:08:00 +0900",
-    "matched_keyword": "세르프 리프팅",
-    "categories": [
-      "RF"
-    ],
-    "segments": [
-      "에스테틱"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [
-      "세르프"
-    ],
-    "own_brand_mentions": [],
-    "competitor_mentions": [
-      "세르프"
-    ]
-  },
-  {
-    "title": "국산 기술로 독점 깼다… 레이저옵텍 '바스큐라589' 출격",
-    "summary": "기반 589nm 고출력 구현이라는 난제를 독자 기술로 돌파한 상징적인 제품\"이라며 \"혈관성 피부질환 치료 시장의 새로운 표준을 제시하고 대한민국 의료용 레이저 기술의 경쟁력을 세계에 입증해 나가겠다\"고 밝혔다.",
-    "link": "http://www.bokuennews.com/news/article.html?no=279815",
-    "source": "네이버 뉴스",
-    "pub_date": "Tue, 16 Jun 2026 11:48:00 +0900",
-    "matched_keyword": "의료용 레이저",
-    "categories": [
-      "시장동향",
-      "Laser·Pico"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [],
-    "own_brand_mentions": [],
-    "competitor_mentions": []
-  },
-  {
-    "title": "광주 리쥬베리의원, 8일 개원...\"울쎄라 등 피부과 시술 서비스 진행\"",
-    "summary": "강력한 초음파 에너지를 이용해 피부 탄력을 끌어올리는 울쎄라피 프라임은 물론, 최신 고주파 탄력 장비 세르프(XERF)'등 하이엔드 장비들을 다수 보유하여 안전하고 정밀한 시술이 가능하다. 또한,  병원을 찾는 고객들이...",
-    "link": "http://www.hemophilia.co.kr/news/articleView.html?idxno=42623",
-    "source": "네이버 뉴스",
-    "pub_date": "Tue, 16 Jun 2026 11:04:00 +0900",
-    "matched_keyword": "세르프",
-    "categories": [
-      "RF",
-      "HIFU"
-    ],
-    "is_overseas": false,
-    "own_company_mentions": [],
-    "own_product_mentions": [],
-    "competitor_company_mentions": [],
-    "competitor_product_mentions": [
-      "XERF",
-      "세르프",
-      "울쎄라"
-    ],
-    "own_brand_mentions": [],
-    "competitor_mentions": [
-      "XERF",
-      "세르프",
       "울쎄라"
     ]
   },
@@ -22635,6 +23074,280 @@
       "루트로닉",
       "세르프"
     ]
+  },
+  {
+    "title": "불릿 \"하이로닉, 美 FDA 허가·소모품 매출 확대\"",
+    "summary": "비너스 컨셉은 캐나다 미용의료기기 기업으로 미국을 포함한 11개 나라에서 대리점을 거치지 않고 자체 영업조직을 통해 직접 판매가 가능해 한 번에 대량 수주 계약이 가능하다. 회사는 북미 시장에서 장비 설치...",
+    "link": "https://www.cstimes.com/news/articleView.html?idxno=724027",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 09:06:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "시장동향",
+      "인허가·규제",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "디렉터의원 강남, 포트라리프팅 도입… 피부 특성 고려한 시술 방침 살...",
+    "summary": "포트라리프팅은 티타늄 리프팅의 업그레이드 버전으로, 755nm·808nm·940nm·1064nm의 네 가지 파장을 활용한다. 인텐시브(Intensive)와 다이내믹(Dynamic)으로 구성된 듀얼 모드 시스템을 갖췄으며, 접촉 쿨링 시스템을 통해 시술...",
+    "link": "https://hbnpress.com/news/view/1065598069364347",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 09:06:00 +0900",
+    "matched_keyword": "티타늄 리프팅",
+    "categories": [
+      "기타"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "티타늄"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "티타늄"
+    ]
+  },
+  {
+    "title": "\"하이로닉, 美 FDA 추가 허가·북미 진출로 최대 실적 기대\" - 불릿",
+    "summary": "독립리서치 불릿은 15일 집속초음파(HIFU)·고주파(RF) 등 에너지 기반 미용의료기기를 개발·생산하는 하이로닉에 대해 미국 식품의약국(FDA) 추가 허가와 북미 독점 총판 계약을 바탕으로 해외 매출 확대가 기대된다고...",
+    "link": "https://www.newspim.com/news/view/20261015000165",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 09:05:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "RF",
+      "HIFU",
+      "시장동향",
+      "인허가·규제",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "하이로닉, 상반기 매출 204억 ‘반기 최대’…북미 총판 계약·소모품 성...",
+    "summary": "하이로닉은 지난 7월 캐나다 미용의료기기 기업 비너스 컨셉과 ‘브이로 리프팅’의 미국 및 캐나다 독점 총판 계약을 체결하고 초도물량을 출고했다. 브이로 리프팅은 집속초음파(HIFU)와 고주파(RF)를 결합한 장비다....",
+    "link": "http://www.thevaluenews.co.kr/news/view.php?idx=202358",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 09:00:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "RF",
+      "HIFU",
+      "시장동향",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "독립리서치 불릿 \"하이로닉, 美 FDA 허가·소모품 반복 매출 확대…최대...",
+    "summary": "비너스 컨셉은 캐나다 미용의료기기 기업으로 미국을 포함한 11개 나라에서 대리점을 거치지 않고 자체 영업조직을 통해 직접 판매가 가능해 한 번에 대량 수주 계약이 가능하다. 회사는 북미 시장에서 장비 설치...",
+    "link": "https://www.edaily.co.kr/News/Read?newsId=02725686645613248&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 08:45:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "시장동향",
+      "인허가·규제",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "[모닝 리포트] \"클래시스, 4분기 신제품 출시로 실적 반등 기대\"",
+    "summary": "다올투자증권은 15일 피부미용 의료기기 전문기업 '클래시스'에 대해 올해 3분기 실적은 시장 기대치를 밑돌겠지만 4분기에는 판매량 확대와 신제품 출시를 바탕으로 실적 반등이 가능할 것으로 전망했다. 투자의견...",
+    "link": "https://www.newspim.com/news/view/20261015000090",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 08:37:00 +0900",
+    "matched_keyword": "피부미용 의료기기",
+    "categories": [
+      "시장동향",
+      "신제품·출시"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스"
+    ]
+  },
+  {
+    "title": "[인터뷰 종합] 남윤수 \"써마지·스킨보톡스 맞아\"…'킬링타임'으로 깨뜨...",
+    "summary": "1년에 한 번 정도 써마지, 스킨보톡스를 맞으면 좋다고 해서 했다\"고 솔직하게 고백하며 웃었다. ■ 귀신 없는 폐병원, 남윤수가 마주한 진짜 공포 21일 개봉하는 '킬링타임'(감독 장준엽, 제작 에스엘엘중앙 주식회사...",
+    "link": "https://www.maxmovie.com/news/articleView.html?idxno=502393",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 08:24:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "써마지"
+    ]
+  },
+  {
+    "title": "\"하이로닉, 美 FDA 허가·소모품 반복 매출 확대 전망\"",
+    "summary": "비너스 컨셉은 캐나다 미용의료기기 기업으로 미국을 포함한 11개 나라에서 대리점을 거치지 않고 자체 영업조직을 통해 직접 판매가 가능해 한 번에 대량 수주 계약이 가능하다. 안 연구원은 \"두 장비는 모두 기존...",
+    "link": "https://view.asiae.co.kr/article/2026101508215071195",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 08:21:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "시장동향",
+      "인허가·규제",
+      "학회·임상",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
+  },
+  {
+    "title": "남윤수 “큰 스크린으로 본 내 피부 충격, 써마지에 스킨보톡스 맞아”...",
+    "summary": "영화를 본 뒤 피부과에서 써마지와 스킨보톡스 등 각종 시술을 받으며 피부 관리를 훨씬 열심히 하고 있어요.(웃음) 모델로 활동할 때는 주름이 지는 것도 자연스러운 멋이라고 생각했는데, 연기를 시작하니 화면에서...",
+    "link": "https://sports.donga.com/ent/article/all/20261014/134842168/1",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 08:02:00 +0900",
+    "matched_keyword": "써마지",
+    "categories": [
+      "RF"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [
+      "써마지"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "써마지"
+    ]
+  },
+  {
+    "title": "해외 소모품 31% 성장…클래시스, 유럽서 '반복 매출' 기반 넓힌다",
+    "summary": "국내에서 '슈링크 유니버스'로 알려진 주력 HIFU 장비 '울트라포머 MPT'와 모노폴라 RF 장비 '볼뉴머'의 유럽 누적 판매량은 회사 집계 기준 이미 3500대를 돌파했다. 지난해 5월 볼뉴머에 이어 같은 해 8월 울트라포머...",
+    "link": "https://www.newsway.co.kr/news/view?ud=2026101410222582940",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 07:12:00 +0900",
+    "matched_keyword": "볼뉴머",
+    "categories": [
+      "RF",
+      "HIFU",
+      "시장동향",
+      "글로벌사업"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [
+      "클래시스"
+    ],
+    "competitor_product_mentions": [
+      "슈링크",
+      "볼뉴머"
+    ],
+    "own_brand_mentions": [],
+    "competitor_mentions": [
+      "클래시스",
+      "슈링크",
+      "볼뉴머"
+    ]
+  },
+  {
+    "title": "[더벨]제이인츠바이오, IPO 주관사 대신증권 낙점",
+    "summary": "2025년에는 미용의료기기 기업 바이오비쥬와 바이오 소재 전문기업 지에프씨생명과학의 상장을 이끈 바 있다. IB 업계 관계자는 \"현재 주관사 선정을 마치고 연내 기술성평가 신청을 위한 준비 작업에 있다\"며...",
+    "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610141755246920103836",
+    "source": "네이버 뉴스",
+    "pub_date": "Thu, 15 Oct 2026 07:02:00 +0900",
+    "matched_keyword": "미용의료기기",
+    "categories": [
+      "기타"
+    ],
+    "segments": [
+      "에스테틱"
+    ],
+    "is_overseas": false,
+    "own_company_mentions": [],
+    "own_product_mentions": [],
+    "competitor_company_mentions": [],
+    "competitor_product_mentions": [],
+    "own_brand_mentions": [],
+    "competitor_mentions": []
   },
   {
     "title": "충청권 기업 3곳 '2026 코스닥 라이징스타' 이름 올렸다",
@@ -35108,40 +35821,32 @@
   },
   {
     "title": "클래시스 \"고주파기기 공략 강화…국내 매출 2000억 목표\"",
-    "summary": "국내 RF 시장은 글로벌 원조 격인 솔타메디칼의 ‘써마지 FLX’를 비롯해 원텍의 올리지오... 그는 최근 연세대 세브란스병원과 진행한 비교 임상 결과 “전체적으로 효과는 써마지와 동등하게 나왔고, 통증은 써마지...",
+    "summary": "장비 ‘볼뉴머’ 등을 판매하고 있다. 국내 새 성장축으로는 모노폴라 RF 시장을 꼽았다. 모노폴라 RF는... 최근 리프팅 시술이 HIFU 단독에서 HIFU와 RF를 함께 쓰는 복합시술로 확산되면서, ‘볼뉴머’의 시장 확대...",
     "link": "https://www.hankyung.com/article/2026071325951",
     "source": "네이버 뉴스",
     "pub_date": "Mon, 13 Jul 2026 18:49:00 +0900",
-    "matched_keyword": "써마지",
+    "matched_keyword": "볼뉴머",
     "categories": [
       "RF",
-      "시장동향",
-      "학회·임상",
-      "글로벌사업"
+      "HIFU",
+      "시장동향"
     ],
     "segments": [
       "에스테틱"
     ],
     "is_overseas": false,
-    "own_company_mentions": [
-      "원텍"
-    ],
-    "own_product_mentions": [
-      "올리지오"
-    ],
+    "own_company_mentions": [],
+    "own_product_mentions": [],
     "competitor_company_mentions": [
       "클래시스"
     ],
     "competitor_product_mentions": [
-      "써마지"
+      "볼뉴머"
     ],
-    "own_brand_mentions": [
-      "원텍",
-      "올리지오"
-    ],
+    "own_brand_mentions": [],
     "competitor_mentions": [
       "클래시스",
-      "써마지"
+      "볼뉴머"
     ]
   },
   {

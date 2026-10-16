@@ -23,6 +23,7 @@ import json
 import os
 import re
 import smtplib
+import ssl
 import sys
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
@@ -176,13 +177,14 @@ def _chat(prompt, models, token):
             r = requests.post(
                 GH_URL,
                 headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
-                         "Accept": "application/vnd.github+json"},
+                         "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"},
                 json={"model": model, "temperature": 0.2, "max_tokens": 2500,
                       "messages": [{"role": "system", "content": SYSTEM},
                                    {"role": "user", "content": prompt}]},
                 timeout=90,
             )
-            r.raise_for_status()
+            if r.status_code != 200 or "json" not in r.headers.get("content-type", ""):
+                raise RuntimeError(f"HTTP {r.status_code} {r.headers.get('content-type')} {r.text[:300]!r}")
             text = r.json()["choices"][0]["message"]["content"]
             m = re.search(r"\{.*\}", text, re.S)
             return json.loads(m.group(0)) if m else None
@@ -549,15 +551,41 @@ def send(subject, html_body, text_body, recipients, from_addr, app_password):
     msg.attach(MIMEText(html_body, "html", "utf-8"))
     host = os.environ.get("SMTP_HOST") or "smtp.gmail.com"
     port = int(os.environ.get("SMTP_PORT") or 587)
-    if port == 465:  # SSL 방식 (하이웍스 등)
-        with smtplib.SMTP_SSL(host, port, timeout=30) as s:
-            s.login(from_addr, app_password)
-            s.sendmail(from_addr, [from_addr] + recipients, msg.as_string())
-    else:            # STARTTLS 방식 (Gmail, Outlook 등)
-        with smtplib.SMTP(host, port, timeout=30) as s:
-            s.starttls()
-            s.login(from_addr, app_password)
-            s.sendmail(from_addr, [from_addr] + recipients, msg.as_string())
+    rcpts = [from_addr] + recipients
+    errors = []
+    # 회사 메일 서버는 오래된 보안 방식을 쓰는 경우가 있어, 안 되면 순서대로 다른 방식으로 재시도
+    attempts = [(port, False)] + [(p, True) for p in (port, 465, 587, 25)]
+    seen = set()
+    for p, legacy in attempts:
+        if (p, legacy) in seen:
+            continue
+        seen.add((p, legacy))
+        ctx = ssl.create_default_context()
+        if legacy:
+            ctx.set_ciphers("DEFAULT:@SECLEVEL=0")
+            ctx.minimum_version = ssl.TLSVersion.TLSv1
+            if os.environ.get("SMTP_INSECURE") == "1":
+                ctx.check_hostname = False
+                ctx.verify_mode = ssl.CERT_NONE
+        try:
+            if p == 465:
+                with smtplib.SMTP_SSL(host, p, timeout=30, context=ctx) as s:
+                    s.login(from_addr, app_password)
+                    s.sendmail(from_addr, rcpts, msg.as_string())
+            else:
+                with smtplib.SMTP(host, p, timeout=30) as s:
+                    s.ehlo()
+                    if s.has_extn("starttls"):
+                        s.starttls(context=ctx)
+                        s.ehlo()
+                    s.login(from_addr, app_password)
+                    s.sendmail(from_addr, rcpts, msg.as_string())
+            print(f"SMTP 발송 성공: {host}:{p} ({'호환 모드' if legacy else '기본'})")
+            return
+        except Exception as e:
+            errors.append(f"{host}:{p} {'호환' if legacy else '기본'} → {type(e).__name__}: {e}")
+            print("  [SMTP 시도 실패] " + errors[-1], file=sys.stderr)
+    raise RuntimeError("모든 SMTP 방식 실패:\n" + "\n".join(errors))
 
 
 def run():
@@ -586,7 +614,16 @@ def run():
     if not recipients or not from_addr or not pw:
         print(f"[오류] {env_key} / GMAIL_ADDRESS / GMAIL_APP_PASSWORD 시크릿을 확인하세요.", file=sys.stderr)
         sys.exit(1)
-    send(subject, html_body, text_body, recipients, from_addr, pw)
+    try:
+        send(subject, html_body, text_body, recipients, from_addr, pw)
+    except Exception as e:
+        g_addr, g_pw = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
+        if os.environ.get("SMTP_USER") and g_addr and g_pw:
+            print(f"[경고] 회사 메일 발송 실패 → Gmail로 대신 발송합니다.\n{e}", file=sys.stderr)
+            os.environ["SMTP_HOST"], os.environ["SMTP_PORT"] = "smtp.gmail.com", "587"
+            send(subject, html_body, text_body, recipients, g_addr, g_pw)
+        else:
+            raise
     print(f"발송 완료({mode}): {len(recipients)}명")
 
 

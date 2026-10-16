@@ -29,7 +29,8 @@ import time
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.utils import parsedate_to_datetime
+from email.header import Header
+from email.utils import formataddr, getaddresses, parsedate_to_datetime
 
 import requests
 
@@ -170,8 +171,16 @@ def pick_groups(items, groups, per_group=3):
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 
+AI_STATE = {"start": None, "down": False}
+AI_BUDGET_SEC = 240  # AI에 쓰는 시간은 최대 4분. 넘으면 AI 없이 바로 발송
+
+
 def _chat(prompt, models, key):
     """Gemini API 무료 등급 호출. 모델을 바꿔가며 재시도."""
+    if AI_STATE["start"] is None:
+        AI_STATE["start"] = time.time()
+    if AI_STATE["down"]:
+        raise RuntimeError("앞선 AI 호출 실패 → 이번 발송은 AI 생략")
     last = None
     for model in models:
         for attempt in range(4):
@@ -184,6 +193,9 @@ def _chat(prompt, models, key):
                           "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json"}},
                     timeout=90,
                 )
+                if time.time() - AI_STATE["start"] > AI_BUDGET_SEC:
+                    AI_STATE["down"] = True
+                    raise RuntimeError(f"AI 시간 한도({AI_BUDGET_SEC}초) 초과 → AI 생략")
                 if r.status_code in (500, 503) and attempt < 3:  # 구글 서버 혼잡(일시적) → 20·40·60초 대기 후 재시도
                     wait = 20 * (attempt + 1)
                     print(f"  [AI] {model} 서버 혼잡({r.status_code}) → {wait}초 후 재시도", file=sys.stderr)
@@ -206,6 +218,9 @@ def _chat(prompt, models, key):
                 last = e
                 print(f"  [AI] {model} 실패: {e}", file=sys.stderr)
                 break
+        if AI_STATE["down"]:
+            break
+    AI_STATE["down"] = True
     raise RuntimeError(last)
 
 
@@ -614,7 +629,9 @@ def send(subject, html_body, text_body, recipients, from_addr, app_password):
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = f"WONTECH 영업전략팀 <{from_addr}>"
-    msg["To"] = from_addr  # 수신자 목록 비공개: 실제 수신자는 BCC
+    # 받는사람(To)에 수신자를 그대로 표시. "이름 <주소>" 형식이면 이름도 함께 표시
+    pairs = [(n, a) for n, a in getaddresses(recipients) if a]
+    msg["To"] = ", ".join(formataddr((str(Header(n, "utf-8")), a)) if n else a for n, a in pairs)
     reply_to = os.environ.get("SALES_EMAIL_REPLY_TO")
     if reply_to:  # 답장은 회사 메일로 받기
         msg["Reply-To"] = reply_to
@@ -622,7 +639,7 @@ def send(subject, html_body, text_body, recipients, from_addr, app_password):
     msg.attach(MIMEText(html_body, "html", "utf-8"))
     host = os.environ.get("SMTP_HOST") or "smtp.gmail.com"
     port = int(os.environ.get("SMTP_PORT") or 587)
-    rcpts = [from_addr] + recipients
+    rcpts = list(dict.fromkeys([a for _, a in pairs] + [from_addr]))  # 보낸 계정에도 1부
     errors = []
     # 회사 메일 서버는 오래된 보안 방식을 쓰는 경우가 있어, 안 되면 순서대로 다른 방식으로 재시도
     attempts = [(port, False)] + [(p, True) for p in (port, 465, 587, 25)]

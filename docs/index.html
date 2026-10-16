@@ -184,6 +184,35 @@
   line-height:1;
 }
 
+.market-metrics .trend-card:nth-child(4) .label{
+  text-align:center;
+  font-weight:700;
+}
+.market-metrics .trend-card:nth-child(4) .metric-unit{
+  text-align:right;
+  margin-top:8px;
+}
+.comp-sales{
+  margin-top:8px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.cs-row{
+  display:grid;
+  grid-template-columns:44px 1fr 36px 38px;
+  align-items:center;
+  gap:6px;
+  font-size:10px;
+}
+.cs-name{color:var(--sub);white-space:nowrap}
+.cs-track{height:10px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.cs-track i{display:block;height:100%;background:var(--muted);border-radius:3px}
+.cs-val{text-align:right;font-weight:800;color:var(--text)}
+.cs-yoy{text-align:right;font-weight:700;color:var(--accent)}
+.cs-row.own .cs-name{color:var(--accent);font-weight:800}
+.cs-row.own .cs-track i{background:var(--accent)}
+
 .market-metrics .trend-card:nth-child(-n+3) .label{
   text-align:center;
   font-weight:700;
@@ -388,10 +417,11 @@
   </div>
 
   <div class="trend-card">
-    <div class="label">에스테틱 의료기기 인허가 추이 (2023 기준)</div>
-    <div class="big" id="metricApproval">연동 준비중</div>
-    <div class="sub">식약처 · 허가·인증</div>
-    <div class="spark" id="sparkApproval"></div>
+    <div class="label">주요 경쟁사 매출 비교</div>
+    <div class="metric-unit">[단위: 억 원 · 2025년]</div>
+    <div class="comp-sales" id="sparkCompetitor"></div>
+    <div class="metric-scope">* 제이시스 별도, 그 외 연결 기준</div>
+    <div class="metric-source">출처: 금융감독원 DART</div>
   </div>
 
   <div class="trend-card">
@@ -523,6 +553,25 @@ async function load(){
   loadPatent();
   loadMarketMetrics();
 }
+function renderCompetitors(x){
+  const box=document.getElementById('sparkCompetitor');
+  if(!box || !x || !Array.isArray(x.items)) return;
+  const rows=x.items.map(it=>{
+    const h=it.history||[];
+    const last=h[h.length-1]||{}, prev=h[h.length-2];
+    const v=Number(last.value)||0;
+    const yoy=prev&&Number(prev.value)>0?((v-Number(prev.value))/Number(prev.value)*100):null;
+    return {name:it.name,own:!!it.own,v,yoy,h};
+  }).sort((a,b)=>b.v-a.v);
+  const max=Math.max(...rows.map(r=>r.v),1);
+  box.innerHTML=rows.map(r=>`
+    <div class="cs-row${r.own?' own':''}" title="${r.h.map(y=>y.year+': '+Number(y.value).toLocaleString()+'억').join(' / ')}">
+      <span class="cs-name">${r.name}</span>
+      <span class="cs-track"><i style="width:${Math.max(4,r.v/max*100)}%"></i></span>
+      <span class="cs-val">${r.v.toLocaleString()}</span>
+      <span class="cs-yoy">${r.yoy!==null?(r.yoy>=0?'+':'')+r.yoy.toFixed(1)+'%':''}</span>
+    </div>`).join('');
+}
 async function loadMarketMetrics(){
   let d={};
 
@@ -615,7 +664,7 @@ async function loadMarketMetrics(){
   renderMarket('production','metricProduction','sparkProduction');
   renderMarket('export','metricExport','sparkExport');
   renderMarket('market','metricMarket','sparkMarket');
-  renderMarket('approval','metricApproval','sparkApproval');
+  renderCompetitors(d.competitors);
   renderMarket('clinic','metricClinic','sparkClinic');
 }
 let cy,cm;function fmt(d){return `${d.getMonth()+1}.${String(d.getDate()).padStart(2,'0')}`}

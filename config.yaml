@@ -214,7 +214,7 @@ sales_email:
   per_group: 3                  # 경쟁사별 최대 기사 수
   max_own: 5                    # 원텍 언급 최대 기사 수
   max_overseas: 8               # 해외 소식 최대 기사 수 (국가당 2건)
-  event_days: 21                # 학회·전시회 표시 기간(일)
+  event_days: 28                # 학회·전시회 표시 기간(일)
   ai:
     enabled: true               # GitHub Models 무료 한도 사용 (별도 키·비용 없음)
     models: ["openai/gpt-4.1-mini", "openai/gpt-4o-mini"]

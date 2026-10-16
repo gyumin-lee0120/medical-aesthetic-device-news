@@ -3,17 +3,10 @@ name: Medical Aesthetic Device News 수집
 on:
   schedule:
     - cron: "30 22 * * 0-4"   # 평일 KST 07:30
-  workflow_dispatch:
-    inputs:
-      send_mode:
-        description: "영업 메일 발송 (none=수집만 / test=테스트 수신자 / all=영업부문 전체)"
-        type: choice
-        options: [none, test, all]
-        default: none
+  workflow_dispatch: {}
 
 permissions:
   contents: write
-  models: read
 
 jobs:
   collect:
@@ -57,15 +50,3 @@ jobs:
           git add data/*.json docs/data/*.json
           git diff --quiet --cached || git commit -m "chore: device news update $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
-
-      - name: 영업부문 아침 브리핑 메일
-        if: github.event_name == 'schedule' || inputs.send_mode == 'test' || inputs.send_mode == 'all'
-        continue-on-error: true
-        env:
-          SEND_MODE: ${{ inputs.send_mode || 'all' }}
-          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          SALES_EMAIL_TO: ${{ secrets.SALES_EMAIL_TO }}
-          SALES_EMAIL_TEST_TO: ${{ secrets.SALES_EMAIL_TEST_TO }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python send_sales_brief.py

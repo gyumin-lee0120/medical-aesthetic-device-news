@@ -1,4 +1,5 @@
 """WONTECH Sales Morning Brief - 영업부문 평일 아침 메일.
+기사는 직전 아침 이후(월요일은 금요일 아침 이후), 상단 숫자 카드는 최근 7일(대시보드 '주간'과 같은 기준).
 
 구성
   ① 오늘의 영업 포인트 3줄
@@ -9,9 +10,11 @@
   ⑥ 이번 주·다음 주 학회·전시회
 
 환경변수 (GitHub Secrets)
-  GMAIL_ADDRESS, GMAIL_APP_PASSWORD  : 발송 계정 (Gmail 앱 비밀번호)
+  SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD : 회사 메일 발송 계정 (있으면 우선 사용)
+  GMAIL_ADDRESS, GMAIL_APP_PASSWORD  : 회사 메일 설정이 없을 때 쓰는 Gmail 계정
   SALES_EMAIL_TO                     : 영업부문 수신자 (쉼표로 구분)
   SALES_EMAIL_TEST_TO                : 테스트 수신자 (쉼표로 구분)
+  SALES_EMAIL_REPLY_TO               : (선택) 답장 받을 회사 메일
   GITHUB_TOKEN                       : (자동 제공) GitHub Models 무료 AI로 요약·영업 포인트 작성
   SEND_MODE                          : all(기본) / test / preview(발송 없이 미리보기 파일만)
 """
@@ -77,9 +80,10 @@ def pub_dt(item):
         return None
 
 
-def window_items(items, now):
-    # 월요일은 금요일 아침 이후(약 74시간), 그 외는 직전 아침 이후(약 26시간)
-    hours = 74 if now.weekday() == 0 else 26
+def window_items(items, now, hours=None):
+    # 기사: 월요일은 금요일 아침 이후(약 74시간), 그 외는 직전 아침 이후(약 26시간)
+    if hours is None:
+        hours = 74 if now.weekday() == 0 else 26
     since = now - timedelta(hours=hours)
     return [i for i in items if (pub_dt(i) or since) > since], hours
 
@@ -350,7 +354,7 @@ def competitor_card(x):
                  f'<td width="100%" style="padding:3px 4px"><div style="background:{LINE};height:8px;line-height:8px;font-size:0"><div style="width:{w}%;background:{OR if own else "#9A9A94"};height:8px;line-height:8px;font-size:0">&nbsp;</div></div></td>'
                  f'<td align="right" style="font:700 11px {FONT};color:{INK};padding:3px 0;white-space:nowrap">{v:,.0f}</td>'
                  f'<td align="right" style="font:700 10px {FONT};color:{OR};padding:3px 0 3px 5px;white-space:nowrap">{((v - p) / p * 100):+.1f}%</td></tr>' if p else '')
-    return (f'<td width="33%" valign="top" style="padding:6px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fff;border:1px solid {LINE}"><tr><td style="padding:12px 10px">'
+    return (f'<td width="66%" colspan="2" valign="top" style="padding:6px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fff;border:1px solid {LINE}"><tr><td style="padding:12px 14px">'
             f'<div style="font:700 11px {FONT};color:{SUB}">주요 경쟁사 매출 (2025, 억원)</div>'
             f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:8px">{rows}</table>'
             f'<div style="font:400 9px {FONT};color:{MUTED};margin-top:6px">DART · 제이시스 별도, 그 외 연결</div>'
@@ -364,6 +368,13 @@ def build(cfg, now):
     metrics = load_json("market_metrics.json", {})
     events = load_json("exhibitions.json", [])
     items, hours = window_items(news, now)
+    # 상단 숫자 카드: 최근 7일 (대시보드 '주간'과 같은 기준)
+    wk_since = now - timedelta(days=7)
+    week = [i for i in news if pub_dt(i) is None or pub_dt(i) >= wk_since]  # 대시보드와 동일 기준
+    k_total = len(week)
+    k_comp = sum(1 for i in week if i.get("competitor_mentions") or i.get("competitor_company_mentions") or i.get("competitor_product_mentions"))
+    k_own = sum(1 for i in week if i.get("own_brand_mentions") or i.get("own_company_mentions") or i.get("own_product_mentions"))
+    k_ov = sum(1 for i in week if i.get("is_overseas"))
     items = dedupe(items)
     domestic = [i for i in items if not i.get("is_overseas")]
     overseas = [i for i in items if i.get("is_overseas")]
@@ -374,6 +385,7 @@ def build(cfg, now):
     own = [i for i in items if i.get("own_brand_mentions") or i.get("own_company_mentions")]
     used_links = set(used_links) | {i["link"] for i in own}
     own.sort(key=lambda i: pub_dt(i) or now, reverse=True)
+    own_total = len(own)
     own = own[: int(se.get("max_own", 5))]
     DEVICE = re.compile(r"hifu|ultherapy|thermage|xerf|inmode|morpheus|potenza|sofwave|laser|radiofrequency|"
                         r"ultrasound|microneedl|aesthetic device|energy-based|ウルセラ|サーマ|ハイフ|レーザー|"
@@ -420,10 +432,10 @@ def build(cfg, now):
  <div style="font:400 12px {FONT};color:#fff;opacity:.9;margin-top:4px">미용의료기기 시장 · 경쟁사 · 해외 동향 &nbsp;|&nbsp; 영업전략팀</div>
 </td></tr>""")
     rows.append(kpi_strip([
-        (f"수집 기사 ({span})", f"{len(items)}건", False),
-        ("경쟁사 언급", f"{comp_cnt}건", False),
-        ("원텍 언급", f"{len(own)}건", True),
-        ("해외 기사", f"{overseas_total}건", False),
+        ("수집 기사 · 최근 7일", f"{k_total:,}건", False),
+        ("경쟁사 언급 · 7일", f"{k_comp:,}건", False),
+        ("원텍 언급 · 7일", f"{k_own:,}건", True),
+        ("해외 기사 · 7일", f"{k_ov:,}건", False),
     ]))
 
     # ① 이슈
@@ -451,7 +463,7 @@ def build(cfg, now):
         rows.append(empty("최근 경쟁사 관련 기사가 없습니다."))
 
     # ③ 원텍
-    rows.append(section("03", "원텍 언급 기사", f"{len(own)}건"))
+    rows.append(section("03", "원텍 언급 기사", f"{own_total}건 중 {len(own)}건"))
     if own:
         for i in own:
             rows.append(article(i, info.get(i["link"]), accent=True))
@@ -471,7 +483,7 @@ def build(cfg, now):
     rows.append(f"""
 <tr><td style="padding:0 26px 6px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">
  <tr>{metric_card("피부개선 의료기기 생산", "억원", metrics.get("production"))}{metric_card("수출", "백만$", metrics.get("export"))}{metric_card("수입", "백만$", metrics.get("market"))}</tr>
- <tr>{competitor_card(metrics.get("competitors"))}{metric_card("피부과·성형외과 의원", "개소", metrics.get("clinic"))}<td width="33%"></td></tr>
+ <tr>{competitor_card(metrics.get("competitors"))}{metric_card("피부과·성형외과 의원", "개소", metrics.get("clinic"))}</tr>
 </table></td></tr>""")
 
     # ⑥ 학회
@@ -494,7 +506,7 @@ def build(cfg, now):
             for s, t, ev in upcoming)
         rows.append(f'<tr><td style="padding:0 32px 6px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fff;border:1px solid {LINE}">{trs}</table></td></tr>')
     else:
-        rows.append(empty("향후 3주 내 등록된 행사가 없습니다."))
+        rows.append(empty("표시 기간 내 등록된 행사가 없습니다."))
 
     # 대시보드 버튼 + 푸터
     rows.append(f"""
@@ -504,7 +516,7 @@ def build(cfg, now):
  </td></tr></table>
 </td></tr>
 <tr><td style="padding:18px 32px 28px;font:400 11px/1.7 {FONT};color:{MUTED}">
- 영업전략팀 발행 · 평일 오전 자동 발송 · 수집 범위: 네이버 뉴스, Google News 22개국판, DART, 식약처, 건강보험심사평가원<br>
+ 영업전략팀 발행 · 평일 오전 9시 자동 발송 · 기사: {span} · 숫자 카드: 최근 7일 · 수집 범위: 네이버 뉴스, Google News 22개국판, DART, 식약처, 건강보험심사평가원<br>
  {'요약·영업 포인트는 원문 기사를 바탕으로 AI(GitHub Models)가 작성했습니다. 정확한 내용은 원문을 확인해 주세요.<br>' if ai else ''}
  문의·수신 변경: 영업전략팀
 </td></tr>""")
@@ -530,12 +542,22 @@ def send(subject, html_body, text_body, recipients, from_addr, app_password):
     msg["Subject"] = subject
     msg["From"] = f"WONTECH 영업전략팀 <{from_addr}>"
     msg["To"] = from_addr  # 수신자 목록 비공개: 실제 수신자는 BCC
+    reply_to = os.environ.get("SALES_EMAIL_REPLY_TO")
+    if reply_to:  # 답장은 회사 메일로 받기
+        msg["Reply-To"] = reply_to
     msg.attach(MIMEText(text_body, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
-    with smtplib.SMTP("smtp.gmail.com", 587) as s:
-        s.starttls()
-        s.login(from_addr, app_password)
-        s.sendmail(from_addr, [from_addr] + recipients, msg.as_string())
+    host = os.environ.get("SMTP_HOST") or "smtp.gmail.com"
+    port = int(os.environ.get("SMTP_PORT") or 587)
+    if port == 465:  # SSL 방식 (하이웍스 등)
+        with smtplib.SMTP_SSL(host, port, timeout=30) as s:
+            s.login(from_addr, app_password)
+            s.sendmail(from_addr, [from_addr] + recipients, msg.as_string())
+    else:            # STARTTLS 방식 (Gmail, Outlook 등)
+        with smtplib.SMTP(host, port, timeout=30) as s:
+            s.starttls()
+            s.login(from_addr, app_password)
+            s.sendmail(from_addr, [from_addr] + recipients, msg.as_string())
 
 
 def run():
@@ -558,7 +580,9 @@ def run():
         return
     env_key = "SALES_EMAIL_TEST_TO" if mode == "test" else "SALES_EMAIL_TO"
     recipients = [a.strip() for a in (os.environ.get(env_key) or "").split(",") if a.strip()]
-    from_addr, pw = os.environ.get("GMAIL_ADDRESS"), os.environ.get("GMAIL_APP_PASSWORD")
+    # 회사 메일(SMTP_*) 시크릿이 있으면 우선 사용, 없으면 Gmail(GMAIL_*) 사용
+    from_addr = os.environ.get("SMTP_USER") or os.environ.get("GMAIL_ADDRESS")
+    pw = os.environ.get("SMTP_PASSWORD") or os.environ.get("GMAIL_APP_PASSWORD")
     if not recipients or not from_addr or not pw:
         print(f"[오류] {env_key} / GMAIL_ADDRESS / GMAIL_APP_PASSWORD 시크릿을 확인하세요.", file=sys.stderr)
         sys.exit(1)

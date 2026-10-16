@@ -1,0 +1,43 @@
+name: 영업부문 아침 메일
+
+on:
+  schedule:
+    - cron: "50 23 * * 0-4"   # 평일 KST 08:50 시작 → 보통 9시 전후 도착 (GitHub 사정으로 지연될 수 있음)
+  workflow_dispatch:
+    inputs:
+      send_mode:
+        description: "test=테스트 수신자에게만 / all=영업부문 전체"
+        type: choice
+        options: [test, all]
+        default: test
+
+permissions:
+  contents: read
+  models: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+      - name: Python 설정
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 의존성 설치
+        run: pip install -r requirements.txt
+      - name: 영업부문 아침 브리핑 메일 발송
+        env:
+          SEND_MODE: ${{ inputs.send_mode || 'all' }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SALES_EMAIL_TO: ${{ secrets.SALES_EMAIL_TO }}
+          SALES_EMAIL_TEST_TO: ${{ secrets.SALES_EMAIL_TEST_TO }}
+          SALES_EMAIL_REPLY_TO: ${{ secrets.SALES_EMAIL_REPLY_TO }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python send_sales_brief.py

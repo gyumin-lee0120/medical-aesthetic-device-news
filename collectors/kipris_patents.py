@@ -23,6 +23,12 @@ OUTS = [
     BASE / "docs" / "data" / "patent_trend.json",
 ]
 
+# 키워드별 연도 건수 (대시보드 특허 카드 하단 상세용)
+KW_OUTS = [
+    BASE / "data" / "patent_keywords.json",
+    BASE / "docs" / "data" / "patent_keywords.json",
+]
+
 
 def fetch_keyword(keyword, api_key):
     page = 1
@@ -95,11 +101,26 @@ def run():
 
     # 출원번호 기준 중복 제거
     patents = {}
+    kw_rows = []
 
     for keyword in keywords:
         print(f"[수집] {keyword}")
 
         rows = fetch_keyword(keyword, api_key)
+
+        # 키워드 안에서만 출원번호 중복 제거 후 연도별 건수
+        kw_yearly = defaultdict(int)
+        seen = set()
+        for item in rows:
+            app_no = item["applicationNumber"]
+            dt = item["applicationDate"]
+            if not app_no or app_no in seen:
+                continue
+            seen.add(app_no)
+            if len(dt) >= 4 and dt[:4].isdigit():
+                kw_yearly[int(dt[:4])] += 1
+        for year in range(2021, 2027):
+            kw_rows.append({"keyword": keyword, "year": year, "count": kw_yearly.get(year, 0)})
 
         for item in rows:
             app_no = item["applicationNumber"]
@@ -131,6 +152,12 @@ def run():
     for path in OUTS:
         path.write_text(
             json.dumps(output, ensure_ascii=False, indent=2),
+            encoding="utf-8"
+        )
+
+    for path in KW_OUTS:
+        path.write_text(
+            json.dumps(kw_rows, ensure_ascii=False, indent=2),
             encoding="utf-8"
         )
 

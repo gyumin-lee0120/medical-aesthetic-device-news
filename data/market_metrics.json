@@ -39,20 +39,29 @@
       {"year": 2025, "value": 307}
     ]
   },
-  "approval": {
-    "label": "에스테틱 의료기기 인허가 추이",
-    "unit": "건",
-    "latest_year": null,
-    "latest_value": null,
-    "source": "식약처",
-    "history": []
+  "competitors": {
+    "label": "주요 경쟁사 매출 비교",
+    "unit": "억 원",
+    "source": "금융감독원 전자공시(DART)",
+    "note": "제이시스 별도, 그 외 연결 기준. 제이시스 2025년은 감사보고서 주석32 수치",
+    "items": [
+      {"name": "클래시스", "basis": "연결", "history": [{"year": 2023, "value": 1801}, {"year": 2024, "value": 2429}, {"year": 2025, "value": 3368}]},
+      {"name": "루트로닉", "basis": "연결", "history": [{"year": 2023, "value": 2705}, {"year": 2024, "value": 2880}, {"year": 2025, "value": 3184}]},
+      {"name": "제이시스", "basis": "별도", "history": [{"year": 2023, "value": 1344}, {"year": 2024, "value": 1842}, {"year": 2025, "value": 2209}]},
+      {"name": "원텍", "basis": "연결", "own": true, "history": [{"year": 2023, "value": 1156}, {"year": 2024, "value": 1153}, {"year": 2025, "value": 1568}]}
+    ]
   },
   "clinic": {
-    "label": "국내 에스테틱 영업 타깃 시장",
-    "unit": "",
-    "latest_year": null,
-    "latest_value": null,
-    "source": "",
-    "history": []
+    "label": "국내 피부과·성형외과 의원 수 추이",
+    "unit": "개소",
+    "latest_year": 2026,
+    "latest_value": 2777,
+    "source": "건강보험심사평가원",
+    "history": [
+      {"year": 2023, "value": 2601},
+      {"year": 2024, "value": 2676},
+      {"year": 2025, "value": 2740},
+      {"year": 2026, "value": 2777}
+    ]
   }
 }

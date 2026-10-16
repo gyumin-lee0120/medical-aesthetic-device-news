@@ -15,7 +15,7 @@
   SALES_EMAIL_TO                     : 영업부문 수신자 (쉼표로 구분)
   SALES_EMAIL_TEST_TO                : 테스트 수신자 (쉼표로 구분)
   SALES_EMAIL_REPLY_TO               : (선택) 답장 받을 회사 메일
-  GITHUB_TOKEN                       : (자동 제공) GitHub Models 무료 AI로 요약·영업 포인트 작성
+  GEMINI_API_KEY                     : (선택) Google AI Studio 무료 키 → 요약·영업 포인트 작성
   SEND_MODE                          : all(기본) / test / preview(발송 없이 미리보기 파일만)
 """
 import html
@@ -25,6 +25,7 @@ import re
 import smtplib
 import ssl
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -165,46 +166,38 @@ def pick_groups(items, groups, per_group=3):
     return out, used
 
 
-# ───────────────────────── AI 요약 (GitHub Models, 무료) ─────────────────────────
-# GitHub Models 주소 (신규 → 구 주소 순으로 시도)
-GH_ENDPOINTS = [
-    ("https://models.github.ai/inference/chat/completions", True),   # 모델명: openai/gpt-4.1-mini
-    ("https://models.inference.ai.azure.com/chat/completions", False),  # 모델명: gpt-4.1-mini
-]
+# ───────────────────────── AI 요약 (Google Gemini 무료 등급) ─────────────────────────
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 
-def _post(url, payload, token):
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json",
-               "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"}
-    # 리다이렉트 시 POST가 GET으로 바뀌어 'OK'만 오는 문제를 막기 위해 직접 따라감
-    for _ in range(3):
-        r = requests.post(url, headers=headers, json=payload, timeout=90, allow_redirects=False)
-        if r.status_code in (301, 302, 303, 307, 308) and r.headers.get("location"):
-            url = requests.compat.urljoin(url, r.headers["location"])
-            continue
-        return r
-    return r
-
-
-def _chat(prompt, models, token):
-    """GitHub Models(무료 한도) 호출. 주소·모델을 바꿔가며 재시도."""
+def _chat(prompt, models, key):
+    """Gemini API 무료 등급 호출. 모델을 바꿔가며 재시도."""
     last = None
-    for url, prefixed in GH_ENDPOINTS:
-        for model in models:
-            name = model if prefixed else model.split("/", 1)[-1]
+    for model in models:
+        for attempt in range(2):
             try:
-                r = _post(url, {"model": name, "temperature": 0.2, "max_tokens": 2500,
-                                "messages": [{"role": "system", "content": SYSTEM},
-                                             {"role": "user", "content": prompt}]}, token)
-                if r.status_code != 200 or "json" not in r.headers.get("content-type", ""):
-                    raise RuntimeError(f"HTTP {r.status_code} {r.headers.get('content-type')} {r.text[:200]!r}")
-                text = r.json()["choices"][0]["message"]["content"]
+                r = requests.post(
+                    GEMINI_URL.format(model=model),
+                    headers={"x-goog-api-key": key, "Content-Type": "application/json"},
+                    json={"systemInstruction": {"parts": [{"text": SYSTEM}]},
+                          "contents": [{"role": "user", "parts": [{"text": prompt}]}],
+                          "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json"}},
+                    timeout=90,
+                )
+                if r.status_code == 429 and attempt == 0:  # 무료 한도(분당 요청 수) 초과 → 잠시 대기
+                    time.sleep(30)
+                    continue
+                if r.status_code != 200:
+                    raise RuntimeError(f"HTTP {r.status_code} {r.text[:200]!r}")
+                text = "".join(p.get("text", "") for p in r.json()["candidates"][0]["content"]["parts"])
                 m = re.search(r"\{.*\}", text, re.S)
-                print(f"  [AI] 성공: {url.split('/')[2]} / {name}")
+                print(f"  [AI] 성공: {model}")
+                time.sleep(5)  # 무료 등급 분당 한도 보호
                 return json.loads(m.group(0)) if m else None
             except Exception as e:
                 last = e
-                print(f"  [AI] {url.split('/')[2]} / {name} 실패: {e}", file=sys.stderr)
+                print(f"  [AI] {model} 실패: {e}", file=sys.stderr)
+                break
     raise RuntimeError(last)
 
 
@@ -214,11 +207,11 @@ SYSTEM = ("당신은 한국 미용의료기기 회사 원텍(WONTECH, 제품: �
 
 
 def ai_enrich(cfg, comp_groups, own_items, overseas):
-    token = os.environ.get("GITHUB_TOKEN")
+    token = os.environ.get("GEMINI_API_KEY")
     ai_cfg = cfg.get("sales_email", {}).get("ai", {})
     if not token or not ai_cfg.get("enabled", True):
         return None
-    models = ai_cfg.get("models") or ["openai/gpt-4.1-mini", "openai/gpt-4o-mini"]
+    models = [m for m in (ai_cfg.get("models") or []) if m.startswith("gemini")] or ["gemini-flash-latest", "gemini-flash-lite-latest"]
     catalog = [(g, i) for g, its, _ in comp_groups for i in its]
     catalog += [("원텍", i) for i in own_items] + [(f"해외·{i.get('country', '')}", i) for i in overseas]
     if not catalog:
@@ -459,7 +452,9 @@ def build(cfg, now):
     ]))
 
     # ① 이슈
-    rows.append(section("01", "오늘의 영업 포인트", "AI 요약" if ai else "주요 기사 기준"))
+    use_ai_issues = bool(ai and len(ai.get("issues") or []) >= 2)
+    rows.append(section("01", "Today’s Top 3",
+                        "AI 요약" if use_ai_issues else "회사별 대표 기사"))
     for n, it in enumerate(issues[:3], 1):
         link = f'<a href="{e(it.get("link"))}" style="font:400 11px {FONT};color:{OR};text-decoration:none;white-space:nowrap">&nbsp;원문 →</a>' if it.get("link") else ""
         rows.append(f"""
@@ -537,7 +532,7 @@ def build(cfg, now):
 </td></tr>
 <tr><td style="padding:18px 32px 28px;font:400 11px/1.7 {FONT};color:{MUTED}">
  영업전략팀 발행 · 평일 오전 9시 자동 발송 · 기사: {span} · 숫자 카드: 최근 7일 · 수집 범위: 네이버 뉴스, Google News 22개국판, DART, 식약처, 건강보험심사평가원<br>
- {'요약·영업 포인트는 원문 기사를 바탕으로 AI(GitHub Models)가 작성했습니다. 정확한 내용은 원문을 확인해 주세요.<br>' if ai else ''}
+ {'요약·영업 포인트는 원문 기사를 바탕으로 AI(Google Gemini)가 작성했습니다. 정확한 내용은 원문을 확인해 주세요.<br>' if ai else ''}
  문의·수신 변경: 영업전략팀
 </td></tr>""")
 

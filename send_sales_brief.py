@@ -427,9 +427,13 @@ def build(cfg, now):
     if ai and len(ai.get("issues") or []) >= 2:
         issues = ai["issues"]
     else:
-        pool = [i for _, its, _ in comp_groups for i in its] + own
-        pool.sort(key=lambda i: score(i, i.get("competitor_mentions", []) + i.get("own_brand_mentions", [])), reverse=True)
-        issues = [{"text": i["title"], "link": i["link"]} for i in pool[:3]]
+        # 규칙 기반: 원텍 1건 + 경쟁사는 회사마다 대표 기사 1건씩, 점수 높은 순으로 3건
+        cands = [(score(i, i.get("own_brand_mentions", [])) + 2, "원텍", i) for i in own[:1]]
+        for g, its, _ in comp_groups:
+            if g != "기타 경쟁사" and its:
+                cands.append((score(its[0], groups.get(g, [])) - (2 if its[0].get("local_lang") else 0), g, its[0]))
+        cands.sort(key=lambda x: x[0], reverse=True)
+        issues = [{"text": f"[{g}] {i['title']}", "link": i["link"]} for _, g, i in cands[:3]]
 
     date_s = f"{now:%Y.%m.%d}({WEEKDAY[now.weekday()]})"
     span = "금요일 아침 이후" if hours > 30 else "최근 24시간"

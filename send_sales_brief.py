@@ -206,12 +206,53 @@ SYSTEM = ("당신은 한국 미용의료기기 회사 원텍(WONTECH, 제품: �
           "한국어, 간결한 존댓말. 반드시 JSON만 출력하세요.")
 
 
-def ai_enrich(cfg, comp_groups, own_items, overseas):
-    token = os.environ.get("GEMINI_API_KEY")
+def _ai_models(cfg):
     ai_cfg = cfg.get("sales_email", {}).get("ai", {})
-    if not token or not ai_cfg.get("enabled", True):
-        return None
+    key = os.environ.get("GEMINI_API_KEY")
+    if not key or not ai_cfg.get("enabled", True):
+        return None, None
     models = [m for m in (ai_cfg.get("models") or []) if m.startswith("gemini")] or ["gemini-flash-latest", "gemini-flash-lite-latest"]
+    return models, key
+
+
+def ai_dedupe(cfg, comp_groups, per_group):
+    """같은 회사 안에서 같은 사건을 다룬 기사를 AI로 묶어 1건만 남김. 실패하면 앞에서부터 per_group건."""
+    models, key = _ai_models(cfg)
+    flat = [(gi, i) for gi, (_, its, _) in enumerate(comp_groups) for i in its]
+    drop = set()
+    if models and flat:
+        rows = [{"id": n, "group": comp_groups[gi][0], "title": i.get("title", ""), "summary": i.get("summary", "")[:100]}
+                for n, (gi, i) in enumerate(flat)]
+        try:
+            data = _chat(
+                "아래 기사들 중 같은 group 안에서 '같은 사건·같은 발표'를 다룬 기사끼리 묶으세요. "
+                "제목이 달라도 내용이 같은 소식이면 같은 묶음입니다. 각 묶음의 첫 id는 정보가 가장 충실한 기사로 하세요. "
+                "혼자인 기사는 쓰지 마세요.\n"
+                '형식: {"same":[[id,id,...], ...]}\n기사:\n' + json.dumps(rows, ensure_ascii=False), models, key) or {}
+            for grp in data.get("same") or []:
+                ids = [k for k in grp if isinstance(k, int) and 0 <= k < len(flat)]
+                if len(ids) < 2:
+                    continue
+                keep = flat[ids[0]][1]
+                for k in ids[1:]:
+                    if flat[k][0] == flat[ids[0]][0] and flat[k][1] is not keep:
+                        drop.add(id(flat[k][1]))
+                        keep["_dup"] = keep.get("_dup", 0) + 1 + flat[k][1].get("_dup", 0)
+            print(f"  [AI] 중복 묶음으로 {len(drop)}건 제외")
+        except Exception as ex:
+            print(f"[경고] AI 중복 묶기 실패 → 기존 방식 사용: {ex}", file=sys.stderr)
+    out = []
+    for name, its, total in comp_groups:
+        keep = [i for i in its if id(i) not in drop][:(4 if name == "기타 경쟁사" else per_group)]
+        if keep:
+            out.append((name, keep, total))
+    return out
+
+
+def ai_enrich(cfg, comp_groups, own_items, overseas):
+    models, token = _ai_models(cfg)
+    if not models:
+        return None
     catalog = [(g, i) for g, its, _ in comp_groups for i in its]
     catalog += [("원텍", i) for i in own_items] + [(f"해외·{i.get('country', '')}", i) for i in overseas]
     if not catalog:
@@ -224,8 +265,14 @@ def ai_enrich(cfg, comp_groups, own_items, overseas):
             rows = [{"id": k, "group": g, "title": i.get("title", ""), "summary": i.get("summary", "")[:160]}
                     for k, (g, i) in enumerate(chunk)]
             data = _chat(
-                "각 기사에 대해 영업사원용 요약과 영업 활용 포인트를 쓰세요.\n"
-                '형식: {"items":{"<id>":{"summary":"핵심 1~2문장","point":"원텍 영업에 활용할 1문장(관련 없으면 빈 문자열)"}}}\n'
+                "각 기사에 대해 영업사원용 요약과 영업 포인트를 쓰세요.\n"
+                "[요약] 기사의 핵심 사실(누가·무엇을·숫자)을 1~2문장으로.\n"
+                "[영업 포인트] 원텍 영업사원이 병원 원장님 상담이나 경쟁 대응에서 바로 쓸 수 있는 구체적인 1문장만 쓰세요. "
+                "기사 속 사실(제품명·숫자·시장·시술명)을 반드시 근거로 하고, 원텍 제품(올리지오·타이탄·피코케어·라비앙 등)과 연결될 때만 쓰세요. "
+                "예: '포텐자 팁 누적 400만 개 → 소모품 비용을 묻는 원장님께 장비별 시술당 소모품 비용 비교 자료로 대응'. "
+                "'참고해야', '모니터링', '대응해야 할 것으로 보입니다', '강조하는 방향으로' 같은 일반론은 금지합니다. "
+                "구체적으로 쓸 내용이 없으면 반드시 빈 문자열로 두세요(대부분의 기사는 빈 문자열이어도 됩니다).\n"
+                '형식: {"items":{"<id>":{"summary":"...","point":"..."}}}\n'
                 "해외 기사(영문 등)도 요약은 한국어로 쓰되 제목은 번역하지 마세요.\n기사:\n"
                 + json.dumps(rows, ensure_ascii=False), models, token) or {}
             for k, (g, i) in enumerate(chunk):
@@ -390,7 +437,10 @@ def build(cfg, now):
     overseas_total = len(overseas)
 
     groups = se.get("competitor_groups") or DEFAULT_GROUPS
-    comp_groups, used_links = pick_groups(items, groups, per_group=int(se.get("per_group", 3)))
+    per_group = int(se.get("per_group", 3))
+    comp_groups, _ = pick_groups(items, groups, per_group=per_group + 3)  # 후보 넉넉히
+    comp_groups = ai_dedupe(cfg, comp_groups, per_group)
+    used_links = [i["link"] for _, its, _ in comp_groups for i in its]
     own = [i for i in items if i.get("own_brand_mentions") or i.get("own_company_mentions")]
     used_links = set(used_links) | {i["link"] for i in own}
     own.sort(key=lambda i: pub_dt(i) or now, reverse=True)

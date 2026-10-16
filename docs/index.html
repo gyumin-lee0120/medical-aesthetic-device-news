@@ -192,11 +192,17 @@
   text-align:right;
   margin-top:8px;
 }
-.comp-sales{
-  margin-top:8px;
+.market-metrics .trend-card:nth-child(4){
   display:flex;
   flex-direction:column;
-  gap:9px;
+}
+.comp-sales{
+  flex:1;
+  margin:6px 0 10px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:11px;
 }
 .cs-row{
   display:grid;
@@ -496,10 +502,12 @@ const DATA_URL='data/news.json',
       PATENT_URL='data/patent_trend.json',
       MARKET_URL='data/market_metrics.json';
 const productAliases={
-'슈링크':['슈링크','Shurink','Ultraformer'],'인모드':['인모드','InMode'],'온다':['온다','Onda'],'볼뉴머':['볼뉴머','Volnewmer'],'덴서티':['덴서티','Density'],
-'울쎄라':['울쎄라','Ultherapy'],'써마지':['써마지','Thermage'],'티타늄':['티타늄','Titanium'],'세르프':['세르프','XERF'],'리프테라':['리프테라','Liftera'],'소프웨이브':['소프웨이브','Sofwave']
+'슈링크':['슈링크','Shurink','울트라포머','Ultraformer'],'인모드':['인모드','InMode'],'온다':['온다 리프팅','온다리프팅','Onda lifting'],
+'볼뉴머':['볼뉴머','Volnewmer'],'덴서티':['덴서티','Jeisys Density'],'울쎄라':['울쎄라','Ultherapy'],'써마지':['써마지','Thermage'],
+'티타늄':['티타늄 리프팅','티타늄리프팅','하이퍼 티타늄','Alma Titanium'],'세르프':['세르프','XERF'],'리프테라':['리프테라','Liftera'],'소프웨이브':['소프웨이브','Sofwave']
 };
-const competitorOrder=['슈링크','인모드','온다','볼뉴머','덴서티','울쎄라','써마지','티타늄','세르프','리프테라','소프웨이브'];
+// 버튼 추가/삭제: 위 목록에 '표시명':['국문','영문'] 한 줄을 넣거나 빼면 됩니다.
+const competitorOrder=Object.keys(productAliases);
 let allNews=[],events=[],state={days:1,segment:'전체',category:'전체',product:'전체',q:'',kpi:null,origin:'all'};
 const A=v=>Array.isArray(v)?v:[]; const D=s=>{const d=new Date(s);return isNaN(d)?null:d};
 function own(i){return A(i.own_company_mentions).length+A(i.own_product_mentions).length+A(i.own_brand_mentions).length>0}

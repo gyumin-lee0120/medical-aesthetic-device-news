@@ -1,11 +1,11 @@
 # WONTECH Medical Aesthetic Device News Clipping
-# V1.3: UI/UX 고도화 + 해외 RSS/KIPRIS 연동 준비
+# V1.4: 해외 뉴스(Google News RSS) 연결 + 관련도 필터(엉뚱한 기사 제외)
 
 brand:
   own_company: ["원텍","WONTECH"]
-  own_products: ["Oligio","올리지오","Oligio X","올리지오 X","Oligio XM","올리지오 XM","PicoCare","피코케어","Lavieen","라비앙","Tightan","타이탄","V-Laser","브이레이저"]
-  competitor_companies: ["클래시스","Classys","사이노슈어 루트로닉","Cynosure Lutronic","루트로닉","제이시스메디칼","Jeisys","인모드","InMode","멀츠","Merz Aesthetics","비올","VIOL","캔델라","Candela","큐테라","Cutera"]
-  competitor_products: ["슈링크","Shurink","인모드","InMode","온다","Onda","볼뉴머","Volnewmer","덴서티","Density","울쎄라","Ultherapy","써마지","Thermage","티타늄","Titanium","세르프","XERF","리프테라","Liftera","소프웨이브","Sofwave","PicoSure","피코슈어","PicoWay","피코웨이","Clarity II","클라리티 II"]
+  own_products: ["Oligio","올리지오","Oligio X","올리지오 X","Oligio XM","올리지오 XM","PicoCare","피코케어","Lavieen","라비앙 레이저","라비앙레이저","Tightan","울트라스킨 타이탄","타이탄 리프팅","V-Laser","브이레이저"]
+  competitor_companies: ["클래시스","Classys","사이노슈어 루트로닉","Cynosure Lutronic","루트로닉","제이시스메디칼","Jeisys","인모드","InMode","멀츠","Merz Aesthetics","비올","VIOL","비올메디컬","쉬엔비","SHENB","하이로닉","Hironic","아스테라시스","Asterasys","레이저옵텍","Laseroptek","텐텍","Tentech","일루다","유니온메디칼","디노나","솔타메디칼","Solta Medical","알마레이저","Alma Lasers","포토나","Fotona","루메니스","Lumenis","캔델라","Candela Medical","큐테라","Cutera"]
+  competitor_products: ["슈링크","Shurink","Ultraformer","인모드","InMode","온다 리프팅","온다리프팅","Onda lifting","볼뉴머","Volnewmer","덴서티","울쎄라","Ultherapy","써마지","Thermage","티타늄 리프팅","티타늄리프팅","하이퍼 티타늄","세르프","XERF","리프테라","Liftera","소프웨이브","Sofwave","PicoSure","피코슈어","PicoWay","피코웨이","Clarity II","클라리티 II","실펌","Sylfirm","셀리뉴","더블로","Doublo","쿨페이즈","Coolfase","쿨소닉","포텐자","Potenza","리니어지","LinearZ","텐써마","10Therma","피코로","PicoLO","버츄RF","Virtue RF"]
 
 search_keywords:
   - "미용의료기기"
@@ -39,25 +39,56 @@ search_keywords:
   - "PicoSure"
   - "PicoWay"
   - "Clarity II 레이저"
+  # 경쟁사 회사명 (국내)
+  - "클래시스"
+  - "제이시스메디칼"
+  - "사이노슈어 루트로닉"
+  - "비올메디컬"
+  - "쉬엔비"
+  - "하이로닉"
+  - "아스테라시스"
+  - "레이저옵텍"
+  - "텐텍"
+  - "일루다"
+  - "유니온메디칼"
+  - "디노나"
+  # 경쟁사 회사명 (해외, 한국 기사)
+  - "솔타메디칼"
+  - "멀츠"
+  - "큐테라"
+  - "캔델라"
+  - "알마레이저"
+  - "포토나"
+  - "루메니스"
+  # 경쟁 제품
+  - "실펌"
+  - "셀리뉴"
+  - "더블로"
+  - "쿨페이즈"
+  - "포텐자"
+  - "리니어지"
+  - "텐써마"
+  - "피코로"
+  - "버츄RF"
   - "써지컬 의료기기"
   - "수술용 의료기기"
   - "수술용 레이저"
 
 segments:
-  에스테틱: ["미용의료","피부미용","에스테틱","리프팅","고주파","RF","HIFU","하이푸","집속초음파","레이저","피코","picosecond","올리지오","타이탄","슈링크","울쎄라","써마지","볼뉴머","세르프","덴서티","리프테라","소프웨이브","인모드","온다","피코케어","라비앙"]
+  에스테틱: ["미용의료","피부미용","에스테틱","리프팅","고주파","RF","HIFU","하이푸","집속초음파","레이저","피코","picosecond","올리지오","타이탄","슈링크","울쎄라","써마지","볼뉴머","세르프","덴서티","리프테라","소프웨이브","인모드","온다 리프팅","온다리프팅","피코케어","라비앙 레이저"]
   써지컬: ["써지컬","surgical","수술용","수술 장비","수술기기","외과","절개","지혈","coagulation","ablation"]
 
 categories:
-  RF: ["고주파","RF 리프팅","모노폴라","멀티폴라","써마지","볼뉴머","세르프","덴서티","올리지오","인모드","온다"]
-  HIFU: ["HIFU","하이푸","집속초음파","울쎄라","울트라포머","슈링크","리프테라","소프웨이브"]
-  Laser·Pico: ["레이저","피코","picosecond","PicoSure","PicoWay","피코케어","라비앙","Clarity"]
+  RF: ["고주파","RF 리프팅","모노폴라","멀티폴라","써마지","볼뉴머","세르프","덴서티","올리지오","인모드","온다 리프팅","온다리프팅","radiofrequency","Thermage","Oligio","XERF"]
+  HIFU: ["HIFU","하이푸","집속초음파","울쎄라","울트라포머","슈링크","리프테라","소프웨이브","focused ultrasound","Ultherapy","Sofwave","Ultraformer"]
+  Laser·Pico: ["레이저","피코","picosecond","PicoSure","PicoWay","피코케어","라비앙 레이저","Clarity","laser"]
   RF Microneedling: ["마이크로니들","microneedling","Morpheus8","모피어스","포텐자"]
   Surgical: ["써지컬","surgical","수술용","수술 장비","외과","ablation","coagulation"]
-  시장동향: ["시장","수출","매출","성장","점유율","전망","투자","인수","합병"]
-  신제품·출시: ["신제품","출시","론칭","런칭","공개","선보"]
-  인허가·규제: ["식약처","MFDS","FDA","NMPA","PMDA","CE MDR","허가","승인","인증","규제"]
-  학회·임상: ["학회","임상","논문","연구","KOL","심포지엄","워크숍","congress"]
-  글로벌사업: ["해외","글로벌","수출","총판","대리점","distributor","파트너십","업무협약","MOU"]
+  시장동향: ["시장","수출","매출","성장","점유율","전망","투자","인수","합병","market","revenue","earnings","acquisition","investment"]
+  신제품·출시: ["신제품","출시","론칭","런칭","공개","선보","launch","introduces","unveil"]
+  인허가·규제: ["식약처","MFDS","FDA","NMPA","PMDA","CE MDR","허가","승인","인증","규제","clearance","approval","cleared"]
+  학회·임상: ["학회","임상","논문","연구","KOL","심포지엄","워크숍","congress","clinical","study","conference"]
+  글로벌사업: ["해외","글로벌","수출","총판","대리점","distributor","파트너십","업무협약","MOU","partnership","expansion"]
 
 sources:
   naver_news:
@@ -67,15 +98,30 @@ sources:
     sort: date
   overseas_rss:
     enabled: true
-    feeds:
-      - name: "Global Cosmetics News"
-        url: "https://www.globalcosmeticsnews.com/regions/?format=feed&type=rss"
-        segment: "에스테틱"
+    # Google News RSS 검색 (영문, 최근 7일). query만 바꾸면 수집 대상이 바뀝니다.
+    google_news:
+      - name: "경쟁사·브랜드"
+        query: '(InMode OR Ultherapy OR Thermage OR Sofwave OR Classys OR Jeisys OR Lutronic OR "Cynosure Lutronic" OR "Candela Medical" OR Cutera OR "Solta Medical" OR "Merz Aesthetics" OR Hironic OR Asterasys OR Laseroptek OR SHENB OR "Alma Lasers" OR Fotona OR Lumenis OR "VIOL Co") when:7d'
+      - name: "기술 트렌드"
+        query: '("radiofrequency microneedling" OR "focused ultrasound" skin OR "picosecond laser" OR "energy-based device" OR "aesthetic laser" OR "skin tightening device") when:7d'
+      - name: "시장·규제"
+        query: '("medical aesthetics" OR "aesthetic medical device" OR "aesthetic device") (FDA OR market OR launch OR approval) when:7d'
+      - name: "원텍"
+        query: '(WONTECH OR Oligio OR Lavieen OR PicoCare) when:30d'
+
   kipris_patents:
     enabled: true   # KIPRIS Plus API 키 발급 후 true
     keywords: ["고주파 리프팅","집속초음파","피코 레이저","의료용 레이저","수술용 레이저"]
   exhibitions:
     enabled: true
+
+
+# 관련도 필터: 아래 '주제어'가 하나도 없거나 '제외어'가 들어간 기사는 수집·표시하지 않습니다.
+relevance:
+  context_terms: ["의료","피부","시술","리프팅","레이저","미용","병원","의원","피부과","성형","탄력","주름","고주파","초음파","하이푸","HIFU","의료기기","에스테틱","안티에이징","더마","클래시스","원텍","제이시스","루트로닉","사이노슈어","비올","하이로닉","멀츠","인모드","솔타","아스테라시스","레이저옵텍","쉬엔비","텐텍","일루다","유니온메디칼","디노나","실펌","포텐자",
+                  "aesthetic","skin","dermatolog","laser","radiofrequency","ultrasound","microneedling","lifting","tightening","wrinkle","med spa","medspa","cosmetic","InMode","Sofwave","Ultherapy","Thermage","Cutera","Candela Medical","Lutronic","Classys","Jeisys","Solta","Merz"]
+  exclude_terms: ["슈링크플레이션","스킴프플레이션","프렌드플레이션","히트플레이션","치킨값","외식물가","식품물가","청룡시리즈어워즈","[WT포토]",
+                  "prostate","cancer","tumor","fibroid","Cynosure Group","Lapmaster"]
 
 telegram:
   enabled: false

@@ -174,7 +174,7 @@ def _chat(prompt, models, key):
     """Gemini API 무료 등급 호출. 모델을 바꿔가며 재시도."""
     last = None
     for model in models:
-        for attempt in range(2):
+        for attempt in range(4):
             try:
                 r = requests.post(
                     GEMINI_URL.format(model=model),
@@ -184,8 +184,16 @@ def _chat(prompt, models, key):
                           "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json"}},
                     timeout=90,
                 )
-                if r.status_code == 429 and attempt == 0:  # 무료 한도(분당 요청 수) 초과 → 잠시 대기
-                    time.sleep(30)
+                if r.status_code in (500, 503) and attempt < 3:  # 구글 서버 혼잡(일시적) → 20·40·60초 대기 후 재시도
+                    wait = 20 * (attempt + 1)
+                    print(f"  [AI] {model} 서버 혼잡({r.status_code}) → {wait}초 후 재시도", file=sys.stderr)
+                    time.sleep(wait)
+                    continue
+                if r.status_code == 429 and attempt < 3:  # 무료 한도 초과 → 안내된 시간만큼 대기 후 재시도
+                    wait = re.search(r'"retryDelay":\s*"(\d+)', r.text)
+                    wait = min(int(wait.group(1)) + 2, 65) if wait else 35
+                    print(f"  [AI] {model} 한도 초과(429) → {wait}초 대기: {r.text[:160]!r}", file=sys.stderr)
+                    time.sleep(wait)
                     continue
                 if r.status_code != 200:
                     raise RuntimeError(f"HTTP {r.status_code} {r.text[:200]!r}")
@@ -259,9 +267,9 @@ def ai_enrich(cfg, comp_groups, own_items, overseas):
         return None
     by_link = {}
     try:
-        # 1) 기사별 요약·영업 포인트 (무료 한도: 요청당 입력 8천 토큰 → 7건씩 나눠 호출)
-        for start in range(0, len(catalog), 7):
-            chunk = catalog[start:start + 7]
+        # 1) 기사별 요약·영업 포인트 (무료 등급 일일 호출 수를 아끼려고 한 번에 처리)
+        for start in range(0, len(catalog), 60):
+            chunk = catalog[start:start + 60]
             rows = [{"id": k, "group": g, "title": i.get("title", ""), "summary": i.get("summary", "")[:160]}
                     for k, (g, i) in enumerate(chunk)]
             data = _chat(

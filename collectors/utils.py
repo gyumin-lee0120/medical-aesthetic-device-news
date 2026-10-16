@@ -13,6 +13,7 @@ CONFIG_PATH = os.path.join(BASE_DIR, "config.yaml")
 DATA_PATH = os.path.join(BASE_DIR, "data", "news.json")
 DOCS_DATA_PATH = os.path.join(BASE_DIR, "docs", "data", "news.json")
 RETENTION_DAYS = 120
+OVERSEAS_RETENTION_DAYS = 45  # 해외 기사는 양이 많아 45일만 보관
 
 
 def load_config():
@@ -58,13 +59,16 @@ def find_mentions(text, cfg):
     }
 
 
-def is_relevant(text, cfg):
-    """관련도 필터: 주제어가 하나 이상 있고, 제외어가 없어야 통과."""
+def is_relevant(text, cfg, local=False):
+    """관련도 필터: 주제어가 하나 이상 있고, 제외어가 없어야 통과.
+    local=True(현지어 해외기사)는 주제어 검사를 생략하고 제외어만 적용."""
     rel = cfg.get("relevance", {})
     lowered = (text or "").lower()
     excludes = [t.lower() for t in rel.get("exclude_terms", []) if t]
     if any(t in lowered for t in excludes):
         return False
+    if local:
+        return True
     contexts = [t.lower() for t in rel.get("context_terms", []) if t]
     if contexts and not any(t in lowered for t in contexts):
         return False
@@ -98,9 +102,12 @@ def save_news(items):
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=RETENTION_DAYS)
 
+    cutoff_overseas = datetime.now(timezone.utc) - timedelta(days=OVERSEAS_RETENTION_DAYS)
+
     def is_recent(item):
         try:
-            return parsedate_to_datetime(item["pub_date"]) >= cutoff
+            limit = cutoff_overseas if item.get("is_overseas") else cutoff
+            return parsedate_to_datetime(item["pub_date"]) >= limit
         except (KeyError, TypeError, ValueError):
             return True
 
@@ -116,7 +123,7 @@ def save_news(items):
     # 기간 내 + 관련도 통과 기사만 남기고, 최신 기준으로 태그 재계산
     merged = sorted(
         (retag(v, cfg) for v in by_link.values()
-         if is_recent(v) and is_relevant(f"{v.get('title', '')} {v.get('summary', '')}", cfg)),
+         if is_recent(v) and is_relevant(f"{v.get('title', '')} {v.get('summary', '')}", cfg, local=v.get("local_lang", False))),
         key=sort_key,
         reverse=True,
     )

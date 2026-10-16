@@ -4,8 +4,8 @@
 brand:
   own_company: ["원텍","WONTECH"]
   own_products: ["Oligio","올리지오","Oligio X","올리지오 X","Oligio XM","올리지오 XM","PicoCare","피코케어","Lavieen","라비앙 레이저","라비앙레이저","Tightan","울트라스킨 타이탄","타이탄 리프팅","V-Laser","브이레이저"]
-  competitor_companies: ["클래시스","Classys","사이노슈어 루트로닉","Cynosure Lutronic","루트로닉","제이시스메디칼","Jeisys","인모드","InMode","멀츠","Merz Aesthetics","비올","VIOL","비올메디컬","쉬엔비","SHENB","하이로닉","Hironic","아스테라시스","Asterasys","레이저옵텍","Laseroptek","텐텍","Tentech","일루다","유니온메디칼","디노나","솔타메디칼","Solta Medical","알마레이저","Alma Lasers","포토나","Fotona","루메니스","Lumenis","캔델라","Candela Medical","큐테라","Cutera"]
-  competitor_products: ["슈링크","Shurink","Ultraformer","인모드","InMode","온다 리프팅","온다리프팅","Onda lifting","볼뉴머","Volnewmer","덴서티","울쎄라","Ultherapy","써마지","Thermage","티타늄 리프팅","티타늄리프팅","하이퍼 티타늄","세르프","XERF","리프테라","Liftera","소프웨이브","Sofwave","PicoSure","피코슈어","PicoWay","피코웨이","Clarity II","클라리티 II","실펌","Sylfirm","셀리뉴","더블로","Doublo","쿨페이즈","Coolfase","쿨소닉","포텐자","Potenza","리니어지","LinearZ","텐써마","10Therma","피코로","PicoLO","버츄RF","Virtue RF"]
+  competitor_companies: ["클래시스","Classys","CLASSYS","제이시스메디칼","제이시스","Jeisys","루트로닉","Lutronic","사이노슈어 루트로닉","Cynosure Lutronic","사이노슈어","Cynosure","비올메디컬","비올","VIOL","쉬엔비","SHENB","하이로닉","Hironic","아스테라시스","Asterasys","레이저옵텍","Laseroptek","텐텍","Tentech","일루다","ilooda","유니온메디칼","Union Medical","디노나","Dinona","인모드","InMode","멀츠","Merz Aesthetics","솔타메디칼","Solta Medical","캔델라","Candela Medical","큐테라","Cutera","알마레이저","Alma Lasers","포토나","Fotona","루메니스","Lumenis","콴타시스템","Quanta System","데카","DEKA Laser","소프웨이브","Sofwave","비티엘","BTL Aesthetics","Venus Concept","Sciton","Allergan Aesthetics","Galderma","Bausch Health"]
+  competitor_products: ["슈링크","Shurink","울트라포머","Ultraformer","슈링크 유니버스","Shurink Universe","볼뉴머","Volnewmer","쿼드세이","Quadessy","덴서티","Jeisys Density","포텐자","Potenza","리니어지","LinearZ","리니어펌","LinearFirm","인트라셀","Intracel","세르프","XERF","피코플러스","PicoPlus","라셈드","LaseMD","루트로닉 지니어스","Lutronic Genius","클라리티","Clarity II","더마V","Derma V","헐리우드 스펙트라","Hollywood Spectra","울쎄라","Ultherapy","울쎄라 프라임","Ultherapy Prime","써마지","Thermage","프락셀","Fraxel","클리어앤브릴리언트","Clear + Brilliant","인모드 FX","인모드 포르마","InMode Forma","모피어스8","모피어스","Morpheus8","티타늄 리프팅","티타늄리프팅","하이퍼 티타늄","Alma Titanium","온다 리프팅","온다리프팅","Onda lifting","소프웨이브","Sofwave","리프테라","Liftera","쿨페이즈","Coolfase","쿨소닉","CoolSoniq","퓨테라","Futera","더블로","Doublo","브이로","V-RO","실펌","Sylfirm","셀리뉴","듀오타이트","버츄RF","버츄 RF","Virtue RF","텐써마","10Therma","텐쎄라","10Thera","피코로","PicoLO","피코웨이","PicoWay","브이빔","Vbeam","젠틀맥스","GentleMax","프로파운드","Profound Matrix","피코슈어","PicoSure","레블라이트","RevLite","엑셀V","Excel V","시크릿RF","Secret RF","포토나 4D","Fotona 4D","디스커버리 피코","Discovery Pico","엠스컬프트","Emsculpt","엑시온","Exion","엠셀라","Emsella","쿨스컬프팅","CoolSculpting","InMode Evolve","Sciton Moxi"]
 
 search_keywords:
   - "미용의료기기"
@@ -39,10 +39,27 @@ search_keywords:
   - "PicoSure"
   - "PicoWay"
   - "Clarity II 레이저"
+  # 업계 동향
+  - "미용의료기기 시장"
+  - "미용의료기기 수출"
+  - "K-미용의료기기"
+  - "에너지 기반 의료기기"
+  - "EBD 장비"
+  - "피부과 장비"
+  - "리프팅 장비"
+  - "레이저 장비"
+  - "미용기기 수출"
+  - "피부미용 시장"
+  - "의료관광 피부과"
+  - "외국인 환자 피부과"
+  - "홈뷰티 디바이스"
+  - "뷰티 디바이스 시장"
+  - "미용의료 규제"
   # 경쟁사 회사명 (국내)
   - "클래시스"
   - "제이시스메디칼"
-  - "사이노슈어 루트로닉"
+  - "루트로닉"
+  - "사이노슈어"
   - "비올메디컬"
   - "쉬엔비"
   - "하이로닉"
@@ -60,16 +77,34 @@ search_keywords:
   - "알마레이저"
   - "포토나"
   - "루메니스"
+  - "콴타시스템"
   # 경쟁 제품
-  - "실펌"
-  - "셀리뉴"
-  - "더블로"
-  - "쿨페이즈"
+  - "울트라포머"
+  - "쿼드세이"
   - "포텐자"
   - "리니어지"
-  - "텐써마"
-  - "피코로"
+  - "리니어펌"
+  - "피코플러스"
+  - "라셈드"
+  - "프락셀"
+  - "모피어스8"
+  - "쿨페이즈"
+  - "쿨소닉"
+  - "더블로"
+  - "브이로"
+  - "실펌"
+  - "셀리뉴"
+  - "듀오타이트"
   - "버츄RF"
+  - "텐써마"
+  - "텐쎄라"
+  - "피코로"
+  - "피코웨이"
+  - "브이빔"
+  - "젠틀맥스"
+  - "엑셀V"
+  - "시크릿RF"
+  - "디스커버리 피코"
   - "써지컬 의료기기"
   - "수술용 의료기기"
   - "수술용 레이저"
@@ -99,27 +134,68 @@ sources:
   overseas_rss:
     enabled: true
     # Google News RSS 검색 (영문, 최근 7일). query만 바꾸면 수집 대상이 바뀝니다.
+    # Google News RSS 검색. edition = 국가판(언어/국가), country = 대시보드 표시 국가명
+    # local: true 인 검색은 현지어 기사라 '주제어' 검사를 생략하고 제외어만 적용합니다.
+    per_query_limit: 40
     google_news:
+      # ── 글로벌(영문) ──
       - name: "경쟁사·브랜드"
-        query: '(InMode OR Ultherapy OR Thermage OR Sofwave OR Classys OR Jeisys OR Lutronic OR "Cynosure Lutronic" OR "Candela Medical" OR Cutera OR "Solta Medical" OR "Merz Aesthetics" OR Hironic OR Asterasys OR Laseroptek OR SHENB OR "Alma Lasers" OR Fotona OR Lumenis OR "VIOL Co") when:7d'
+        edition: "en-US|US|US:en"
+        country: "글로벌"
+        query: '(InMode OR Ultherapy OR Thermage OR Sofwave OR Classys OR Jeisys OR Lutronic OR "Cynosure Lutronic" OR "Candela Medical" OR Cutera OR "Solta Medical" OR "Merz Aesthetics" OR Hironic OR Asterasys OR Laseroptek OR SHENB OR "Alma Lasers" OR Fotona OR Lumenis OR "VIOL Co" OR Morpheus8 OR Potenza OR Sylfirm OR Ultraformer OR Fraxel OR PicoWay OR PicoSure) when:7d'
       - name: "기술 트렌드"
+        edition: "en-US|US|US:en"
+        country: "글로벌"
         query: '("radiofrequency microneedling" OR "focused ultrasound" skin OR "picosecond laser" OR "energy-based device" OR "aesthetic laser" OR "skin tightening device") when:7d'
       - name: "시장·규제"
+        edition: "en-US|US|US:en"
+        country: "글로벌"
         query: '("medical aesthetics" OR "aesthetic medical device" OR "aesthetic device") (FDA OR market OR launch OR approval) when:7d'
+      - name: "글로벌 기업·M&A"
+        edition: "en-US|US|US:en"
+        country: "글로벌"
+        query: '("BTL Aesthetics" OR "Venus Concept" OR Sciton OR "Allergan Aesthetics" OR Galderma OR "Bausch Health" Solta OR "Alma Lasers" OR Sisram OR "El.En" OR Lumenis OR "Candela Medical") (aesthetic OR device OR laser OR revenue OR acquisition) when:7d'
+      - name: "업계 동향"
+        edition: "en-US|US|US:en"
+        country: "글로벌"
+        query: '("medical aesthetics" OR "aesthetic industry" OR "med spa industry" OR "aesthetic device market" OR "body contouring device" OR "skin rejuvenation device" OR "home beauty device") when:7d'
       - name: "원텍"
+        edition: "en-US|US|US:en"
+        country: "글로벌"
         query: '(WONTECH OR Oligio OR Lavieen OR PicoCare) when:30d'
-
+      # ── 국가별 영문판 ──
+      - {name: "영국", edition: "en-GB|GB|GB:en", country: "영국", query: '("aesthetic clinic" OR "medical aesthetics" OR HIFU OR Ultherapy OR Thermage OR InMode OR Morpheus8 OR "skin tightening" OR "laser skin") when:7d'}
+      - {name: "호주", edition: "en-AU|AU|AU:en", country: "호주", query: '("cosmetic clinic" OR "medical aesthetics" OR HIFU OR Ultherapy OR Thermage OR Morpheus8 OR "skin tightening" OR "laser skin") when:7d'}
+      - {name: "인도", edition: "en-IN|IN|IN:en", country: "인도", query: '("aesthetic clinic" OR "aesthetic dermatology" OR HIFU OR Ultherapy OR Thermage OR "laser skin" OR "skin tightening") when:7d'}
+      - {name: "싱가포르", edition: "en-SG|SG|SG:en", country: "싱가포르", query: '("aesthetic clinic" OR "aesthetic doctor" OR HIFU OR Ultherapy OR Thermage OR "skin tightening" OR "laser skin") when:7d'}
+      - {name: "말레이시아", edition: "en-MY|MY|MY:en", country: "말레이시아", query: '("aesthetic clinic" OR "medical aesthetics" OR HIFU OR Ultherapy OR Thermage OR "skin tightening" OR "laser skin") when:7d'}
+      - {name: "필리핀", edition: "en-PH|PH|PH:en", country: "필리핀", query: '("aesthetic clinic" OR "derma clinic" OR HIFU OR Ultherapy OR Thermage OR "skin tightening" OR "laser skin") when:7d'}
+      - {name: "중동(영문)", edition: "en-AE|AE|AE:en", country: "중동", query: '("aesthetic clinic" OR "medical aesthetics" OR "Dubai Derma" OR HIFU OR Ultherapy OR Thermage OR "laser skin") when:7d'}
+      # ── 현지어판 (제목이 현지어로 수집됩니다) ──
+      - {name: "일본", edition: "ja|JP|JP:ja", country: "일본", local: true, query: '(美容医療機器 OR 医療ハイフ OR ハイフ OR サーマクール OR ウルセラ OR ポテンツァ OR ピコレーザー OR 美容皮膚科 レーザー) when:7d'}
+      - {name: "대만", edition: "zh-TW|TW|TW:zh-Hant", country: "대만", local: true, query: '(醫美儀器 OR 海芙 OR 電波拉提 OR 鳳凰電波 OR 音波拉提 OR 皮秒雷射 OR 醫美雷射) when:7d'}
+      - {name: "홍콩", edition: "zh-HK|HK|HK:zh-Hant", country: "홍콩", local: true, query: '(醫學美容 儀器 OR 海扶 OR 熱瑪吉 OR 皮秒激光 OR 醫美 激光) when:7d'}
+      - {name: "태국", edition: "th|TH|TH:th", country: "태국", local: true, query: '(HIFU OR Ultherapy OR Thermage OR "เลเซอร์ความงาม" OR "เครื่องมือแพทย์ความงาม" OR "คลินิกความงาม" เลเซอร์) when:7d'}
+      - {name: "베트남", edition: "vi|VN|VN:vi", country: "베트남", local: true, query: '("máy thẩm mỹ" OR HIFU OR Ultherapy OR Thermage OR "laser thẩm mỹ" OR "nâng cơ" OR "trẻ hóa da") when:7d'}
+      - {name: "인도네시아", edition: "id|ID|ID:id", country: "인도네시아", local: true, query: '(HIFU OR Ultherapy OR Thermage OR "klinik kecantikan" laser OR "laser wajah" OR "alat estetika") when:7d'}
+      - {name: "브라질", edition: "pt-BR|BR|BR:pt-419", country: "브라질", local: true, query: '("medicina estética" OR HIFU OR Ultherapy OR Thermage OR "laser estético" OR "aparelho de estética") when:7d'}
+      - {name: "멕시코·중남미", edition: "es-419|MX|MX:es-419", country: "중남미", local: true, query: '("medicina estética" OR HIFU OR Ultherapy OR Thermage OR "láser estético" OR aparatología) when:7d'}
+      - {name: "스페인", edition: "es|ES|ES:es", country: "스페인", local: true, query: '("medicina estética" OR HIFU OR Ultherapy OR Thermage OR "láser estético" OR aparatología) when:7d'}
+      - {name: "독일", edition: "de|DE|DE:de", country: "독일", local: true, query: '("ästhetische Medizin" OR HIFU OR Ultherapy OR Thermage OR "ästhetischer Laser" OR "Hautstraffung") when:7d'}
+      - {name: "프랑스", edition: "fr|FR|FR:fr", country: "프랑스", local: true, query: '("médecine esthétique" OR HIFU OR Ultherapy OR Thermage OR "laser esthétique" OR "appareil esthétique") when:7d'}
+      - {name: "이탈리아", edition: "it|IT|IT:it", country: "이탈리아", local: true, query: '("medicina estetica" OR HIFU OR Ultherapy OR Thermage OR "laser estetico" OR "apparecchiature estetiche") when:7d'}
+      - {name: "튀르키예", edition: "tr|TR|TR:tr", country: "튀르키예", local: true, query: '("estetik cihaz" OR "medikal estetik" OR HIFU OR Ultherapy OR Thermage OR "lazer epilasyon") when:7d'}
+      - {name: "중동(아랍어)", edition: "ar|AE|AE:ar", country: "중동", local: true, query: '(HIFU OR Ultherapy OR Thermage OR "طب تجميلي" OR "ليزر تجميلي" OR "أجهزة التجميل") when:7d'}
   kipris_patents:
     enabled: true   # KIPRIS Plus API 키 발급 후 true
     keywords: ["고주파 리프팅","집속초음파","피코 레이저","의료용 레이저","수술용 레이저"]
   exhibitions:
     enabled: true
 
-
 # 관련도 필터: 아래 '주제어'가 하나도 없거나 '제외어'가 들어간 기사는 수집·표시하지 않습니다.
 relevance:
-  context_terms: ["의료","피부","시술","리프팅","레이저","미용","병원","의원","피부과","성형","탄력","주름","고주파","초음파","하이푸","HIFU","의료기기","에스테틱","안티에이징","더마","클래시스","원텍","제이시스","루트로닉","사이노슈어","비올","하이로닉","멀츠","인모드","솔타","아스테라시스","레이저옵텍","쉬엔비","텐텍","일루다","유니온메디칼","디노나","실펌","포텐자",
-                  "aesthetic","skin","dermatolog","laser","radiofrequency","ultrasound","microneedling","lifting","tightening","wrinkle","med spa","medspa","cosmetic","InMode","Sofwave","Ultherapy","Thermage","Cutera","Candela Medical","Lutronic","Classys","Jeisys","Solta","Merz"]
+  context_terms: ["의료","피부","시술","리프팅","레이저","미용","병원","의원","피부과","성형","탄력","주름","고주파","초음파","하이푸","HIFU","의료기기","에스테틱","안티에이징","더마","클래시스","원텍","제이시스","루트로닉","사이노슈어","비올","하이로닉","멀츠","인모드","솔타","아스테라시스","레이저옵텍","쉬엔비","텐텍","일루다","유니온메디칼","디노나","실펌","포텐자","더블로","브이로","울트라포머","모피어스","프락셀","피코웨이","피코슈어","써마지","울쎄라","슈링크",
+                  "aesthetic","skin","dermatolog","laser","radiofrequency","ultrasound","microneedling","lifting","tightening","wrinkle","med spa","medspa","cosmetic","InMode","Sofwave","Ultherapy","Thermage","Cutera","Candela Medical","Lutronic","Classys","Jeisys","Solta","Merz","Emsculpt","CoolSculpting","body contouring","Venus Concept","Sciton","BTL Aesthetics"]
   exclude_terms: ["슈링크플레이션","스킴프플레이션","프렌드플레이션","히트플레이션","치킨값","외식물가","식품물가","청룡시리즈어워즈","[WT포토]",
                   "prostate","cancer","tumor","fibroid","Cynosure Group","Lapmaster"]
 

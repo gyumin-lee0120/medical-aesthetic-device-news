@@ -1,18 +1,36 @@
-"""해외 뉴스 수집기 (Google News RSS 검색).
+"""해외 뉴스 수집기 (Google News RSS 검색, 국가별 판).
 
-config.yaml > sources.overseas_rss.google_news 의 영문 검색식으로 최근 기사를 가져옵니다.
+config.yaml > sources.overseas_rss.google_news 의 검색식을 국가판(edition)별로 조회합니다.
 - 별도 API 키가 필요 없습니다.
-- 관련도 필터(config.yaml > relevance)를 통과한 기사만 저장됩니다.
-- 기존 feeds(일반 RSS 주소) 설정도 그대로 지원합니다.
+- 영문 기사: 관련도 필터(주제어+제외어) 적용
+- 현지어 기사(local: true): 제외어만 적용 (주제어 목록이 한·영 위주라서)
+- 국가명(country)이 기사에 기록되어 대시보드에 표시됩니다.
 """
 import re
+import sys
 import time
 from urllib.parse import quote
 
 import feedparser
+import requests
 from utils import is_relevant, load_config, retag, save_news, strip_html
 
-GOOGLE_NEWS = "https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
+URL = "https://news.google.com/rss/search?q={q}&hl={hl}&gl={gl}&ceid={ceid}"
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                         "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"}
+
+
+def fetch(url, tries=3):
+    for i in range(tries):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=20)
+            if r.status_code == 200 and "<rss" in r.text[:500]:
+                return r.text
+            print(f"  [재시도 {i + 1}] 응답 {r.status_code}", file=sys.stderr)
+        except requests.RequestException as e:
+            print(f"  [재시도 {i + 1}] {e}", file=sys.stderr)
+        time.sleep(3 * (i + 1))
+    return ""
 
 
 def clean_title(title, publisher):
@@ -22,8 +40,8 @@ def clean_title(title, publisher):
     return re.sub(r"\s+-\s+[^-]{2,60}$", "", title).strip()
 
 
-def collect(url, label, cfg, limit=60):
-    d = feedparser.parse(url)
+def collect(text, label, country, local, cfg, limit):
+    d = feedparser.parse(text)
     out = []
     for e in d.entries[:limit]:
         publisher = ""
@@ -36,7 +54,7 @@ def collect(url, label, cfg, limit=60):
         link = e.get("link")
         if not title or not link:
             continue
-        if not is_relevant(f"{title} {summary}", cfg):
+        if not is_relevant(f"{title} {summary}", cfg, local=local):
             continue
         item = {
             "title": title,
@@ -46,6 +64,8 @@ def collect(url, label, cfg, limit=60):
             "pub_date": e.get("published") or e.get("updated") or "",
             "matched_keyword": label,
             "is_overseas": True,
+            "country": country,
+            "local_lang": bool(local),
         }
         out.append(retag(item, cfg))
     return out
@@ -57,29 +77,30 @@ def run():
     if not src.get("enabled", False):
         print("overseas_rss 비활성화")
         return
+    limit = int(src.get("per_query_limit", 40))
 
     items = {}
+    ok = 0
     for q in src.get("google_news", []):
-        url = GOOGLE_NEWS.format(q=quote(q["query"]))
-        got = collect(url, f"해외: {q.get('name', '')}", cfg)
-        print(f"Google News [{q.get('name')}]: {len(got)}건")
+        hl, gl, ceid = (q.get("edition") or "en-US|US|US:en").split("|")
+        url = URL.format(q=quote(q["query"]), hl=hl, gl=gl, ceid=ceid)
+        text = fetch(url)
+        if text:
+            ok += 1
+        got = collect(text, f"해외: {q.get('name', '')}", q.get("country", "글로벌"),
+                      q.get("local", False), cfg, limit) if text else []
+        print(f"Google News [{q.get('name')}/{gl}]: {len(got)}건")
         for it in got:
-            items[it["link"]] = it
-        time.sleep(1)
+            items.setdefault(it["link"], it)
+        time.sleep(2)
 
-    for feed in src.get("feeds", []) or []:
-        got = collect(feed["url"], feed.get("name", "해외 RSS"), cfg)
-        print(f"RSS [{feed.get('name')}]: {len(got)}건")
-        for it in got:
-            items[it["link"]] = it
-
-    # 같은 기사가 여러 매체로 중복되면 제목 기준으로 1건만
+    # 같은 기사가 여러 매체·국가로 중복되면 제목 기준 1건만
     by_title = {}
     for it in items.values():
         by_title.setdefault(it["title"].lower(), it)
 
     merged = save_news(list(by_title.values()))
-    print(f"완료: 해외 {len(by_title)}건 / 누적 {len(merged)}건")
+    print(f"완료: 해외 {len(by_title)}건 (성공 검색 {ok}/{len(src.get('google_news', []))}) / 누적 {len(merged)}건")
 
 
 if __name__ == "__main__":

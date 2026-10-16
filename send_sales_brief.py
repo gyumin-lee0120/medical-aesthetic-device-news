@@ -166,31 +166,45 @@ def pick_groups(items, groups, per_group=3):
 
 
 # ───────────────────────── AI 요약 (GitHub Models, 무료) ─────────────────────────
-GH_URL = "https://models.github.ai/inference/chat/completions"
+# GitHub Models 주소 (신규 → 구 주소 순으로 시도)
+GH_ENDPOINTS = [
+    ("https://models.github.ai/inference/chat/completions", True),   # 모델명: openai/gpt-4.1-mini
+    ("https://models.inference.ai.azure.com/chat/completions", False),  # 모델명: gpt-4.1-mini
+]
+
+
+def _post(url, payload, token):
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json",
+               "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"}
+    # 리다이렉트 시 POST가 GET으로 바뀌어 'OK'만 오는 문제를 막기 위해 직접 따라감
+    for _ in range(3):
+        r = requests.post(url, headers=headers, json=payload, timeout=90, allow_redirects=False)
+        if r.status_code in (301, 302, 303, 307, 308) and r.headers.get("location"):
+            url = requests.compat.urljoin(url, r.headers["location"])
+            continue
+        return r
+    return r
 
 
 def _chat(prompt, models, token):
-    """GitHub Models(무료 한도) 호출. 첫 모델 실패 시 다음 모델로 재시도."""
+    """GitHub Models(무료 한도) 호출. 주소·모델을 바꿔가며 재시도."""
     last = None
-    for model in models:
-        try:
-            r = requests.post(
-                GH_URL,
-                headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
-                         "Accept": "application/json", "X-GitHub-Api-Version": "2022-11-28"},
-                json={"model": model, "temperature": 0.2, "max_tokens": 2500,
-                      "messages": [{"role": "system", "content": SYSTEM},
-                                   {"role": "user", "content": prompt}]},
-                timeout=90,
-            )
-            if r.status_code != 200 or "json" not in r.headers.get("content-type", ""):
-                raise RuntimeError(f"HTTP {r.status_code} {r.headers.get('content-type')} {r.text[:300]!r}")
-            text = r.json()["choices"][0]["message"]["content"]
-            m = re.search(r"\{.*\}", text, re.S)
-            return json.loads(m.group(0)) if m else None
-        except Exception as e:
-            last = e
-            print(f"  [AI] {model} 실패: {e}", file=sys.stderr)
+    for url, prefixed in GH_ENDPOINTS:
+        for model in models:
+            name = model if prefixed else model.split("/", 1)[-1]
+            try:
+                r = _post(url, {"model": name, "temperature": 0.2, "max_tokens": 2500,
+                                "messages": [{"role": "system", "content": SYSTEM},
+                                             {"role": "user", "content": prompt}]}, token)
+                if r.status_code != 200 or "json" not in r.headers.get("content-type", ""):
+                    raise RuntimeError(f"HTTP {r.status_code} {r.headers.get('content-type')} {r.text[:200]!r}")
+                text = r.json()["choices"][0]["message"]["content"]
+                m = re.search(r"\{.*\}", text, re.S)
+                print(f"  [AI] 성공: {url.split('/')[2]} / {name}")
+                return json.loads(m.group(0)) if m else None
+            except Exception as e:
+                last = e
+                print(f"  [AI] {url.split('/')[2]} / {name} 실패: {e}", file=sys.stderr)
     raise RuntimeError(last)
 
 
@@ -563,7 +577,10 @@ def send(subject, html_body, text_body, recipients, from_addr, app_password):
         ctx = ssl.create_default_context()
         if legacy:
             ctx.set_ciphers("DEFAULT:@SECLEVEL=0")
-            ctx.minimum_version = ssl.TLSVersion.TLSv1
+            try:
+                ctx.minimum_version = ssl.TLSVersion.TLSv1
+            except (ValueError, AttributeError):
+                pass
             if os.environ.get("SMTP_INSECURE") == "1":
                 ctx.check_hostname = False
                 ctx.verify_mode = ssl.CERT_NONE

@@ -1,8 +1,11 @@
 name: 영업부문 아침 메일
+run-name: "영업부문 아침 메일 (${{ github.event_name == 'schedule' && 'all' || inputs.send_mode }})"
 
 on:
   schedule:
-    - cron: "50 23 * * 0-4"   # 평일 KST 08:50 시작 → 보통 9시 전후 도착 (GitHub 사정으로 지연될 수 있음)
+    # GitHub 예약 실행은 수십 분~몇 시간 늦게 시작될 수 있어 일찍 시작해 두고, 09시 직전까지 기다렸다가 발송
+    - cron: "17 21 * * 0-4"   # 평일 KST 06:17 시작 (1차)
+    - cron: "43 22 * * 0-4"   # 평일 KST 07:43 시작 (예비) — 이미 발송했으면 자동으로 건너뜀
   workflow_dispatch:
     inputs:
       send_mode:
@@ -13,10 +16,16 @@ on:
 
 permissions:
   contents: read
+  actions: read
+
+concurrency:            # 동시에 2개가 돌지 않도록 순서대로 실행
+  group: sales-brief
+  cancel-in-progress: false
 
 jobs:
   send:
     runs-on: ubuntu-latest
+    timeout-minutes: 300
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v4
@@ -26,9 +35,43 @@ jobs:
           python-version: "3.11"
       - name: 의존성 설치
         run: pip install -r requirements.txt
-      - name: 영업부문 아침 브리핑 메일 발송
+
+      - name: 08:50(KST)까지 대기
+        if: github.event_name == 'schedule'
+        run: |
+          target=$(TZ=Asia/Seoul date -d "today 08:50" +%s); now=$(date +%s)
+          if [ "$now" -lt "$target" ]; then echo "$(( (target-now)/60 ))분 대기"; sleep $((target-now)); else echo "이미 지남 → 바로 진행"; fi
+
+      - name: 최신 뉴스 수집 (네이버)
+        if: github.event_name == 'schedule'
+        continue-on-error: true
+        working-directory: collectors
         env:
-          SEND_MODE: ${{ inputs.send_mode || 'all' }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: python naver_news.py
+      - name: 최신 뉴스 수집 (해외)
+        if: github.event_name == 'schedule'
+        continue-on-error: true
+        working-directory: collectors
+        run: python overseas_rss.py
+
+      - name: 오늘 이미 발송했는지 확인
+        id: guard
+        if: github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          today=$(TZ=Asia/Seoul date +%Y-%m-%d)
+          n=$(gh run list -R "$GITHUB_REPOSITORY" -w sales_brief.yml -L 40 --json databaseId,displayTitle,conclusion,createdAt \
+            | jq --arg t "$today" --arg me "$GITHUB_RUN_ID" '[.[] | select(.conclusion=="success" and ((.databaseId|tostring)!=$me) and ((.displayTitle|test("test"))|not) and (((.createdAt|sub("\\.[0-9]+Z$";"Z")|fromdateiso8601)+32400|strftime("%Y-%m-%d"))==$t))] | length')
+          echo "오늘($today) 이미 발송된 횟수: $n"
+          echo "already=$n" >> "$GITHUB_OUTPUT"
+
+      - name: 영업부문 아침 브리핑 메일 발송
+        if: github.event_name != 'schedule' || steps.guard.outputs.already == '0'
+        env:
+          SEND_MODE: ${{ github.event_name == 'schedule' && 'all' || inputs.send_mode }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}

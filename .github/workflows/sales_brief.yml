@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       send_mode:
-        description: "test=테스트 수신자에게만 / all=영업부문 전체"
+        description: "test=테스트 수신자에게만 / all=영업부문 전체 / auto=자동발송용"
         type: choice
-        options: [test, all]
+        options: [test, all, auto]   # auto = 외부 예약(cron-job.org)용: 수집 → 중복확인 → 발송
         default: test
 
 permissions:
@@ -37,13 +37,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: 08:50(KST)까지 대기
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.send_mode == 'auto')
         run: |
           target=$(TZ=Asia/Seoul date -d "today 08:50" +%s); now=$(date +%s)
           if [ "$now" -lt "$target" ]; then echo "$(( (target-now)/60 ))분 대기"; sleep $((target-now)); else echo "이미 지남 → 바로 진행"; fi
 
       - name: 최신 뉴스 수집 (네이버)
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.send_mode == 'auto')
         continue-on-error: true
         working-directory: collectors
         env:
@@ -51,14 +51,14 @@ jobs:
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: python naver_news.py
       - name: 최신 뉴스 수집 (해외)
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.send_mode == 'auto')
         continue-on-error: true
         working-directory: collectors
         run: python overseas_rss.py
 
       - name: 오늘 이미 발송했는지 확인
         id: guard
-        if: github.event_name == 'schedule'
+        if: (github.event_name == 'schedule' || inputs.send_mode == 'auto')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -69,9 +69,9 @@ jobs:
           echo "already=$n" >> "$GITHUB_OUTPUT"
 
       - name: 영업부문 아침 브리핑 메일 발송
-        if: github.event_name != 'schedule' || steps.guard.outputs.already == '0'
+        if: ${{ !(github.event_name == 'schedule' || inputs.send_mode == 'auto') || steps.guard.outputs.already == '0' }}
         env:
-          SEND_MODE: ${{ github.event_name == 'schedule' && 'all' || inputs.send_mode }}
+          SEND_MODE: ${{ (github.event_name == 'schedule' || inputs.send_mode == 'auto') && 'all' || inputs.send_mode }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}

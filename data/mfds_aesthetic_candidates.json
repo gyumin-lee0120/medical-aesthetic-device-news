@@ -2291,28 +2291,6 @@
     },
     {
       "category": "LASER",
-      "query_product": "레이저수술기",
-      "permit_date": "20220128",
-      "permit_no": "",
-      "product": "반도체레이저수술기",
-      "company": "(주)엘레시스",
-      "raw": {
-        "ENTRPS": "(주)엘레시스",
-        "PRDUCT": "반도체레이저수술기",
-        "PRMISN_STTEMNT": "1",
-        "PRDUCT_PRMISN_NO": "제허 22-69 호",
-        "PRMISN_DT": "20220128",
-        "RTRCN_DSCTN_DIVS_CD": "",
-        "RTRCN_DSCTN_DT": "",
-        "MDEQ_PRDLST_SN": "2022000473",
-        "TRCK_MNG_TRGT_YN": "N",
-        "MNFT_CLNT_NM": "",
-        "MANUF_NM": "",
-        "CHG_DT": "2026-10-15"
-      }
-    },
-    {
-      "category": "LASER",
       "query_product": "탄산가스레이저수술기",
       "permit_date": "20220125",
       "permit_no": "",
@@ -2441,28 +2419,6 @@
         "MNFT_CLNT_NM": "",
         "MANUF_NM": "",
         "CHG_DT": "2024-04-09"
-      }
-    },
-    {
-      "category": "LASER",
-      "query_product": "레이저수술기",
-      "permit_date": "20211228",
-      "permit_no": "",
-      "product": "알렉산드라이트레이저수술기",
-      "company": "(주)에코라",
-      "raw": {
-        "ENTRPS": "(주)에코라",
-        "PRDUCT": "알렉산드라이트레이저수술기",
-        "PRMISN_STTEMNT": "1",
-        "PRDUCT_PRMISN_NO": "수허 21-318 호",
-        "PRMISN_DT": "20211228",
-        "RTRCN_DSCTN_DIVS_CD": "",
-        "RTRCN_DSCTN_DT": "",
-        "MDEQ_PRDLST_SN": "2021006969",
-        "TRCK_MNG_TRGT_YN": "N",
-        "MNFT_CLNT_NM": "",
-        "MANUF_NM": "Quanta System S.p.A",
-        "CHG_DT": "2024-10-21"
       }
     },
     {
@@ -21739,28 +21695,6 @@
     },
     {
       "category": "LASER",
-      "query_product": "레이저수술기",
-      "permit_date": "20100818",
-      "permit_no": "",
-      "product": "레이저수술기",
-      "company": "메디텍(주)",
-      "raw": {
-        "ENTRPS": "메디텍(주)",
-        "PRDUCT": "레이저수술기",
-        "PRMISN_STTEMNT": "1",
-        "PRDUCT_PRMISN_NO": "제허 10-837 호",
-        "PRMISN_DT": "20100818",
-        "RTRCN_DSCTN_DIVS_CD": "",
-        "RTRCN_DSCTN_DT": "",
-        "MDEQ_PRDLST_SN": "2010004626",
-        "TRCK_MNG_TRGT_YN": "N",
-        "MNFT_CLNT_NM": "",
-        "MANUF_NM": "",
-        "CHG_DT": "2026-10-14"
-      }
-    },
-    {
-      "category": "LASER",
       "query_product": "엔디야그레이저수술기",
       "permit_date": "20100817",
       "permit_no": "",
@@ -22307,28 +22241,6 @@
         "MNFT_CLNT_NM": "",
         "MANUF_NM": "",
         "CHG_DT": "2015-01-22"
-      }
-    },
-    {
-      "category": "LASER",
-      "query_product": "레이저수술기",
-      "permit_date": "20100506",
-      "permit_no": "",
-      "product": "반도체레이저수술기",
-      "company": "(주)썸텍",
-      "raw": {
-        "ENTRPS": "(주)썸텍",
-        "PRDUCT": "반도체레이저수술기",
-        "PRMISN_STTEMNT": "1",
-        "PRDUCT_PRMISN_NO": "제허 10-437 호",
-        "PRMISN_DT": "20100506",
-        "RTRCN_DSCTN_DIVS_CD": "",
-        "RTRCN_DSCTN_DT": "",
-        "MDEQ_PRDLST_SN": "2010002486",
-        "TRCK_MNG_TRGT_YN": "N",
-        "MNFT_CLNT_NM": "",
-        "MANUF_NM": "",
-        "CHG_DT": "2025-04-14"
       }
     },
     {
